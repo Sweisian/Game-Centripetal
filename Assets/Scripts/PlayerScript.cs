@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private float appliedForce;
     [SerializeField] private float forcePerFrame;
     [SerializeField] private float maxSpeed;
+	private GameController gc;
 
     private Vector2 direction;
 
@@ -17,6 +18,7 @@ public class PlayerScript : MonoBehaviour {
 	void Start () {
 	    rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * appliedForce);
+		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
     }
 	
 	// Update is called once per frame
@@ -44,4 +46,10 @@ public class PlayerScript : MonoBehaviour {
         // Draw a debug line (transform.position = character position)
         Debug.DrawRay(transform.position, playerToMouse , Color.red, 0f);
     }
+
+	void OnCollisionEnter2D(Collision2D c)
+	{
+		Debug.Log("Ouch! You hit "+c.gameObject.name);
+		gc.BroadcastMessage ("restartGame");
+	}
 }
