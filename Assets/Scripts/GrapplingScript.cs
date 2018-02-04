@@ -11,6 +11,7 @@ public class GrapplingScript : MonoBehaviour
     [SerializeField] private float distance;
     [SerializeField] private LayerMask myMask;
     [SerializeField] private LineRenderer myLine;
+	private bool canLasso;
 
     // Use this for initialization
     void Start ()
@@ -18,6 +19,7 @@ public class GrapplingScript : MonoBehaviour
 	    joint = GetComponent<DistanceJoint2D>();
 	    joint.enabled = false;
 	    myLine.enabled = false;
+		canLasso = true;
 	}
 	
 	// Update is called once per frame
@@ -29,16 +31,16 @@ public class GrapplingScript : MonoBehaviour
     {
         //this might be bad for performance
 
-
-        if (Input.GetMouseButtonDown(0))
+        if (canLasso && Input.GetMouseButtonDown(0))
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
 
             hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, myMask);
 
-            if (hit.collider != null)
+			if (hit.collider != null && hit.collider.gameObject.tag=="Post")
             {
+				canLasso = false;
                 joint.enabled = true;
                 joint.connectedBody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
                 //joint.connectedAnchor = hit.point - new Vector2(hit.collider.transform.position.x, hit.collider.transform.position.y);
@@ -58,7 +60,8 @@ public class GrapplingScript : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             joint.enabled = false;
-            myLine.enabled = false;
+			myLine.enabled = false;
+			canLasso = true;
         }
     }
 }
