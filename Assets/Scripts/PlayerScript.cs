@@ -52,7 +52,10 @@ public class PlayerScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		Debug.Log("Ouch! You hit "+c.gameObject.name);
-		gc.BroadcastMessage ("restartGame");
+		if (c.gameObject.tag != "Lasso") 
+		{
+			Debug.Log ("Ouch! You hit " + c.gameObject.name);
+			gc.BroadcastMessage ("restartGame");
+		}
 	}
 }

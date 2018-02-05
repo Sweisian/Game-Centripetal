@@ -11,6 +11,7 @@ public class GrapplingScript : MonoBehaviour
     [SerializeField] private float distance;
     [SerializeField] private LayerMask myMask;
     [SerializeField] private LineRenderer myLine;
+	[SerializeField] private GameObject lassoPrefab;
 	private bool canLasso;
 
     // Use this for initialization
@@ -32,10 +33,17 @@ public class GrapplingScript : MonoBehaviour
         //this might be bad for performance
 
         if (canLasso && Input.GetMouseButtonDown(0))
-        {
+		{
+			
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
 
+			Debug.Log ("Lasso-ing");
+			GameObject lasso = GameObject.Instantiate (lassoPrefab);
+			Vector3 directionToHead = targetPos - this.transform.position;
+			lasso.GetComponent<LassoScript> ().Initialize (this.transform.position, directionToHead, 50f);
+			canLasso = false;
+			/*
             hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, myMask);
 
 			if (hit.collider != null && hit.collider.gameObject.tag=="Post")
@@ -49,6 +57,7 @@ public class GrapplingScript : MonoBehaviour
                 //makes the line render show
                 myLine.enabled = true;
             }
+            */
         }
 
         if (myLine.enabled == true)
@@ -64,4 +73,13 @@ public class GrapplingScript : MonoBehaviour
 			canLasso = true;
         }
     }
+
+	public void connectGrapple(GameObject postHit)
+	{
+		canLasso = false;
+		joint.enabled = true;
+		joint.connectedBody = postHit.GetComponent<Rigidbody2D>();
+		joint.connectedAnchor = postHit.transform.position;
+		myLine.enabled=true;
+	}
 }
