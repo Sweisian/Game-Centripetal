@@ -14,6 +14,7 @@ public class GrapplingScript : MonoBehaviour
 	[SerializeField] private GameObject lassoPrefab;
 	private GameObject postAttached; //Used in drawing the line. We can probably find a better method.
 	private bool canLasso;
+	private bool grappleConnected;
 
     // Use this for initialization
     void Start ()
@@ -22,6 +23,7 @@ public class GrapplingScript : MonoBehaviour
 	    joint.enabled = false;
 	    myLine.enabled = false;
 		canLasso = true;
+		grappleConnected = false;
 	}
 	
 	// Update is called once per frame
@@ -41,7 +43,7 @@ public class GrapplingScript : MonoBehaviour
 
 			GameObject lasso = GameObject.Instantiate (lassoPrefab);
 			Vector3 directionToHead = targetPos - this.transform.position;
-			lasso.GetComponent<LassoScript> ().Initialize (this.transform.position, directionToHead, 50f);
+			lasso.GetComponent<LassoScript> ().Initialize (this.transform.position, directionToHead, 25f);
 			canLasso = false;
 			/*
             hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, myMask);
@@ -68,17 +70,19 @@ public class GrapplingScript : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButtonDown(1))
+		if (grappleConnected && Input.GetMouseButtonDown(1))
         {
             joint.enabled = false;
 			myLine.enabled = false;
 			canLasso = true;
+			grappleConnected = false;
         }
     }
 
 	public void connectGrapple(GameObject postHit)
 	{
 		canLasso = false;
+		grappleConnected = true;
 		joint.enabled = true;
 		joint.connectedBody = postHit.GetComponent<Rigidbody2D>();
 		//joint.anchor = this.transform.position;
@@ -87,4 +91,11 @@ public class GrapplingScript : MonoBehaviour
 		postAttached = postHit;
 		myLine.enabled=true;
 	}
+
+	public void resetGrapple()
+	{
+		canLasso = true;
+		myLine.enabled = false;
+	}
+		
 }

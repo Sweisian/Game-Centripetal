@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962e893f651e54ecf898395bd6668744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flySpeed: 1.5
-  returnSpeed: 2
+  flySpeed: 2
+  returnSpeed: 25
   lassoLine: {fileID: 0}
 --- !u!212 &212685616757108466
 SpriteRenderer:

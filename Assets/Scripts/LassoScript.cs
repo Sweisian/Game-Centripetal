@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LassoScript : MonoBehaviour {
 	private Vector3 direction; //The direction the lasso was thrown
+	private Vector3 startLocation; //Where the lasso was thrown from
 	private float distanceToMove; //The distance the lasso can move before returning
 	private bool flying = true; //Whether the lasso is still seeking a post
 	private GameObject player; //Reference to the player
@@ -22,9 +23,11 @@ public class LassoScript : MonoBehaviour {
 	//Called by PlayerScript to set the initial values on this instance
 	public void Initialize(Vector3 startLoc, Vector3 dir, float distToMove)
 	{
+		startLocation = startLoc;
 		this.transform.position = startLoc;
 		direction = dir;
 		distanceToMove = distToMove;
+		flying = true;
 	}
 
 	// Update is called once per frame
@@ -32,10 +35,13 @@ public class LassoScript : MonoBehaviour {
 		if (flying)
 		{
 			this.transform.Translate (direction * flySpeed * Time.deltaTime);
-			
+			if (Vector3.Distance (this.transform.position, startLocation) > distanceToMove)
+				flying = false;
 		} 
 		else //Returning to player
 		{ 
+			float step = flySpeed;
+			this.transform.position = Vector3.MoveTowards (this.transform.position, player.transform.position, step);
 		}
 
 		if (lassoLine.enabled == true)
@@ -47,11 +53,16 @@ public class LassoScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c)
 	{
-		//Debug.Log ("Lasso collided with " + c.gameObject.name);
-		if (c.gameObject.tag == "Post") {
+		if (flying && c.gameObject.tag == "Post") {
 			player.GetComponent<GrapplingScript> ().connectGrapple (c.gameObject);
 			lassoLine.enabled = false;
 			GameObject.Destroy (this.gameObject);
+		}
+		else if (!flying && c.gameObject.tag=="Player")
+		{
+			lassoLine.enabled = false;
+			GameObject.Destroy (this.gameObject);
+			player.GetComponent<GrapplingScript> ().resetGrapple ();
 		}
 	}
 }
