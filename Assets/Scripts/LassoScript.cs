@@ -32,10 +32,12 @@ public class LassoScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
+		lassoLine.SetPosition(0, player.transform.position);
+		lassoLine.SetPosition(1, this.transform.position);
 		if (flying)
 		{
 			this.transform.Translate (direction * flySpeed * Time.deltaTime);
-			if (Vector3.Distance (this.transform.position, startLocation) > distanceToMove)
+			if (Vector3.Distance (this.transform.position, player.transform.position) > distanceToMove)
 				flying = false;
 		} 
 		else //Returning to player
