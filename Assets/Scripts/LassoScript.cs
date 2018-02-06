@@ -28,7 +28,7 @@ public class LassoScript : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (flying)
 		{
 			this.transform.Translate (direction * flySpeed * Time.deltaTime);
@@ -47,7 +47,7 @@ public class LassoScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c)
 	{
-		Debug.Log ("Lasso collided with " + c.gameObject.name);
+		//Debug.Log ("Lasso collided with " + c.gameObject.name);
 		if (c.gameObject.tag == "Post") {
 			player.GetComponent<GrapplingScript> ().connectGrapple (c.gameObject);
 			lassoLine.enabled = false;
