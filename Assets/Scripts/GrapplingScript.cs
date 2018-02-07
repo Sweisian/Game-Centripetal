@@ -84,6 +84,7 @@ public class GrapplingScript : MonoBehaviour
 			lasso.GetComponent<LassoScript> ().Initialize (this.transform.position, directionToHead, (chargePercent/100f)*maxDistance);
 			canLasso = false;
 			chargePercent = 0f;
+			arrow.GetComponent<SpriteRenderer> ().color=new Color(1f, 1f, 1f, 0.0f);
 		}
 
 
@@ -100,6 +101,7 @@ public class GrapplingScript : MonoBehaviour
 			myLine.enabled = false;
 			canLasso = true;
 			grappleConnected = false;
+			arrow.GetComponent<SpriteRenderer> ().color=new Color(1f, 1f, 1f, 0.3f);
         }
     }
 
@@ -120,6 +122,7 @@ public class GrapplingScript : MonoBehaviour
 	{
 		canLasso = true;
 		myLine.enabled = false;
+		arrow.GetComponent<SpriteRenderer> ().color=new Color(1f, 1f, 1f, 0.3f);
 	}
 		
 }
