@@ -6,19 +6,16 @@ using UnityEngine.UI;
 public class GrapplingScript : MonoBehaviour
 {
 
-    [SerializeField] private DistanceJoint2D joint;
-    private Vector3 targetPos;
-    private RaycastHit2D hit;
+    [SerializeField] private DistanceJoint2D joint; //The joint representing the lasso
 	[SerializeField] private float maxDistance; //Maximum distance the lasso can travel
 	[SerializeField] private float chargeRate; //How fast the lasso charges
-    [SerializeField] private LayerMask myMask;
     [SerializeField] private LineRenderer myLine;
 	[SerializeField] private GameObject lassoPrefab;
 	[SerializeField] private GameObject arrow;
 	[SerializeField] private Text chargeDisplay; //UI Element for Displaying Charge
 	private GameObject postAttached; //Used in drawing the line. We can probably find a better method.
-	private bool canLasso;
-	private bool grappleConnected;
+	private bool canLasso; //Whether we can throw a lasso or not
+	private bool lassoConnected; //Whether the lasso is connected or not
 	private float chargePercent; //Current charge
 
     // Use this for initialization
@@ -28,16 +25,16 @@ public class GrapplingScript : MonoBehaviour
 	    joint.enabled = false;
 	    myLine.enabled = false;
 		canLasso = true;
-		grappleConnected = false;
+		lassoConnected = false;
 		chargePercent = 0f;
 		arrow.GetComponent<SpriteRenderer> ().color=new Color(1f, 1f, 1f, 0.3f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		shootHook();
+		throwLasso();
 		chargeDisplay.text = "Charge: " + Mathf.Floor (chargePercent) + "%";
-		//Following solution adapted from 
+		//Update the arrow. Following solution adapted from 
 		//https://answers.unity.com/questions/599271/rotating-a-sprite-to-face-mouse-target.html
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Vector3 arrowPos = arrow.transform.position;
@@ -46,16 +43,20 @@ public class GrapplingScript : MonoBehaviour
 		arrow.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
 	}
 
-    private void shootHook()
+	/// <summary>
+	/// Handles lots of things to do with throwing the lasso.
+	/// </summary>
+    private void throwLasso()
     {
-        //this might be bad for performance
-
 		if (canLasso && Input.GetMouseButton(0))
 		{
 			if (chargePercent <= 100) {
 				chargePercent += (chargeRate * Time.deltaTime);
 			}
 			Debug.Log (chargePercent);
+
+			//Original grapple script- Delete when ready
+
 			/*
             hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, myMask);
 
@@ -72,8 +73,9 @@ public class GrapplingScript : MonoBehaviour
             }
             */
         }
+
 		if (canLasso && Input.GetMouseButtonUp (0)) {
-			targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			targetPos.z = 0;
 
 			if (chargePercent < 20)
@@ -95,30 +97,34 @@ public class GrapplingScript : MonoBehaviour
         }
 
 
-		if (grappleConnected && Input.GetMouseButtonDown(1))
+		if (lassoConnected && Input.GetMouseButtonDown(1))
         {
             joint.enabled = false;
 			myLine.enabled = false;
 			canLasso = true;
-			grappleConnected = false;
+			lassoConnected = false;
 			arrow.GetComponent<SpriteRenderer> ().color=new Color(1f, 1f, 1f, 0.3f);
         }
     }
 
-	public void connectGrapple(GameObject postHit)
+	/// <summary>
+	/// Attaches player and post to lasso. Called externally by an instance of LassoScript.
+	/// </summary>
+	/// <param name="postHit">The post that we wish to attach to.</param>
+	public void connectLasso(GameObject postHit)
 	{
 		canLasso = false;
-		grappleConnected = true;
+		lassoConnected = true;
 		joint.enabled = true;
 		joint.connectedBody = postHit.GetComponent<Rigidbody2D>();
-		//joint.anchor = this.transform.position;
-		//joint.connectedAnchor = postHit.transform.position;
-		//joint.distance = Vector2.Distance (this.transform.position, postHit.transform.position);
 		postAttached = postHit;
 		myLine.enabled=true;
 	}
 
-	public void resetGrapple()
+	/// <summary>
+	/// Resets the lasso throwing process. Called externally by an instance of LassoScript.
+	/// </summary>
+	public void resetLasso()
 	{
 		canLasso = true;
 		myLine.enabled = false;

@@ -18,6 +18,9 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Restarts the game by reloading this scene.
+	/// </summary>
 	void restartGame()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene ().buildIndex);

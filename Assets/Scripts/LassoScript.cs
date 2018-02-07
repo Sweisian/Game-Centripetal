@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class LassoScript : MonoBehaviour {
 	private Vector3 direction; //The direction the lasso was thrown
-	private Vector3 startLocation; //Where the lasso was thrown from
 	private float distanceToMove; //The distance the lasso can move before returning
 	private bool flying = true; //Whether the lasso is still seeking a post
 	private GameObject player; //Reference to the player
 	[SerializeField] private float flySpeed; //How fast the lasso flies midair
 	[SerializeField] private float returnSpeed; //How fast the lasso returns to the player
-	[SerializeField] private LineRenderer lassoLine; 
+	[SerializeField] private LineRenderer lassoLine; //The visual representation of the lasso
 
 
 	// Use this for initialization
@@ -20,17 +19,20 @@ public class LassoScript : MonoBehaviour {
 		lassoLine.enabled = true;
 	}
 
-	//Called by PlayerScript to set the initial values on this instance
+	/// <summary>
+	/// Called externally by PlayerScript to set the initial values on this instance.
+	/// </summary>
+	/// <param name="startLoc">Where the lasso was thrown from.</param>
+	/// <param name="dir">Vector representing the direction the lasso was thrown.</param>
+	/// <param name="distToMove">How far the lasso can move before returning.</param>
 	public void Initialize(Vector3 startLoc, Vector3 dir, float distToMove)
 	{
-		startLocation = startLoc;
 		this.transform.position = startLoc;
 		direction = dir;
 		distanceToMove = distToMove;
 		flying = true;
 	}
-
-	// Update is called once per frame
+		
 	void FixedUpdate () {
 		lassoLine.SetPosition(0, player.transform.position);
 		lassoLine.SetPosition(1, this.transform.position);
@@ -55,8 +57,8 @@ public class LassoScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c)
 	{
-		if (flying && c.gameObject.tag == "Post") {
-			player.GetComponent<GrapplingScript> ().connectGrapple (c.gameObject);
+		if (c.gameObject.tag == "Post") {
+			player.GetComponent<GrapplingScript> ().connectLasso (c.gameObject);
 			lassoLine.enabled = false;
 			GameObject.Destroy (this.gameObject);
 		}
@@ -64,7 +66,7 @@ public class LassoScript : MonoBehaviour {
 		{
 			lassoLine.enabled = false;
 			GameObject.Destroy (this.gameObject);
-			player.GetComponent<GrapplingScript> ().resetGrapple ();
+			player.GetComponent<GrapplingScript> ().resetLasso ();
 		}
 	}
 }

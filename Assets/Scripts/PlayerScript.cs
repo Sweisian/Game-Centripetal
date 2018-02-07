@@ -31,6 +31,9 @@ public class PlayerScript : MonoBehaviour {
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
+	/// <summary>
+	/// Applies force to the player when necessary.
+	/// </summary>
     void applyMoarForce()
     {
         if (rb.velocity.magnitude < maxSpeed)

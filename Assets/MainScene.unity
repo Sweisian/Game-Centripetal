@@ -338,7 +338,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &126966444
 Prefab:
@@ -714,7 +714,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &284032420
 LineRenderer:
@@ -1719,9 +1719,6 @@ MonoBehaviour:
   joint: {fileID: 0}
   maxDistance: 45
   chargeRate: 70
-  myMask:
-    serializedVersion: 2
-    m_Bits: 4294967007
   myLine: {fileID: 86488347}
   lassoPrefab: {fileID: 1414112954749430, guid: 5c1ce494dbf0640ef894910eac28e612,
     type: 2}
