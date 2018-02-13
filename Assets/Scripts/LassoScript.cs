@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LassoScript : MonoBehaviour {
-	private Vector3 direction; //The direction the lasso was thrown
+	private Vector3 direction; //The unit vector representing direction the lasso was thrown
 	private float distanceToMove; //The distance the lasso can move before returning
 	private bool flying = true; //Whether the lasso is still seeking a post
 	private GameObject player; //Reference to the player
@@ -38,13 +38,14 @@ public class LassoScript : MonoBehaviour {
 		lassoLine.SetPosition(1, this.transform.position);
 		if (flying)
 		{
-			this.transform.Translate (direction * flySpeed * Time.deltaTime);
+            if (Input.GetMouseButtonDown(0)) {flying = false;}
+            this.transform.Translate (direction * flySpeed * Time.deltaTime, Space.World);
 			if (Vector3.Distance (this.transform.position, player.transform.position) > distanceToMove)
 				flying = false;
 		} 
 		else //Returning to player
-		{ 
-			float step = flySpeed;
+		{
+            float step = returnSpeed;
 			this.transform.position = Vector3.MoveTowards (this.transform.position, player.transform.position, step);
 		}
 

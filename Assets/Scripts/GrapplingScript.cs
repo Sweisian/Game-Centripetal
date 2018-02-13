@@ -38,7 +38,7 @@ public class GrapplingScript : MonoBehaviour
 		//https://answers.unity.com/questions/599271/rotating-a-sprite-to-face-mouse-target.html
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Vector3 arrowPos = arrow.transform.position;
-		Vector3 direction = mousePos - arrowPos;
+        Vector3 direction = mousePos - arrowPos;
 		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 		arrow.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
 	}
@@ -48,6 +48,7 @@ public class GrapplingScript : MonoBehaviour
 	/// </summary>
     private void throwLasso()
     {
+        /*
 		if (canLasso && Input.GetMouseButton(0))
 		{
 			if (chargePercent <= 100) {
@@ -57,7 +58,6 @@ public class GrapplingScript : MonoBehaviour
 
 			//Original grapple script- Delete when ready
 
-			/*
             hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, myMask);
 
 			if (hit.collider != null && hit.collider.gameObject.tag=="Post")
@@ -71,10 +71,10 @@ public class GrapplingScript : MonoBehaviour
                 //makes the line render show
                 myLine.enabled = true;
             }
-            */
         }
+        */
 
-		if (canLasso && Input.GetMouseButtonUp (0)) {
+        if (canLasso && Input.GetMouseButtonDown (0)) {
 			Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			targetPos.z = 0;
 
@@ -83,7 +83,7 @@ public class GrapplingScript : MonoBehaviour
 
 			GameObject lasso = GameObject.Instantiate (lassoPrefab);
 			Vector3 directionToHead = targetPos - this.transform.position;
-			lasso.GetComponent<LassoScript> ().Initialize (this.transform.position, directionToHead, (chargePercent/100f)*maxDistance);
+            lasso.GetComponent<LassoScript> ().Initialize (this.transform.position, Vector3.Normalize(directionToHead), maxDistance);
 			canLasso = false;
 			chargePercent = 0f;
 			arrow.GetComponent<SpriteRenderer> ().color=new Color(1f, 1f, 1f, 0.0f);
@@ -97,7 +97,7 @@ public class GrapplingScript : MonoBehaviour
         }
 
 
-		if (lassoConnected && Input.GetMouseButtonDown(1))
+		if (lassoConnected && Input.GetMouseButtonDown(0))
         {
             joint.enabled = false;
 			myLine.enabled = false;
