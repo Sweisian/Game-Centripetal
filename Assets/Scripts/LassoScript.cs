@@ -69,5 +69,9 @@ public class LassoScript : MonoBehaviour {
 			GameObject.Destroy (this.gameObject);
 			player.GetComponent<GrapplingScript> ().resetLasso ();
 		}
+        else if (flying && c.gameObject.tag!="Player")
+        {
+            flying = false;
+        }
 	}
 }
