@@ -53,7 +53,7 @@ public class GrapplingScript : MonoBehaviour
 			if (chargePercent <= 100) {
 				chargePercent += (chargeRate * Time.deltaTime);
 			}
-			Debug.Log (chargePercent);
+			//Debug.Log (chargePercent);
 
 			//Original grapple script- Delete when ready
 
