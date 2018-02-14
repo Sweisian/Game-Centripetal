@@ -26,9 +26,16 @@ public class ProceduralGenScript : MonoBehaviour
     public int nummOfPostsPerArea = 50;
     public int maxNumOfPostsTotal = 2000;
 
+    private int numberOfZones = 9;
+    private GameObject[] zones;
+    private Collider2D[] colliders;
+
     // Use this for initialization
     void Start ()
     {
+
+        zones = new GameObject[numberOfZones];
+        colliders = new Collider2D[numberOfZones];
         rb = player.GetComponent<Rigidbody2D>();
 
 	    cam = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -43,67 +50,94 @@ public class ProceduralGenScript : MonoBehaviour
 	        numOfPosts++;
 	        lastPosition = randomPosition;
 	    }
+
+        // Find all existing zones and their colliders
+        zones = GameObject.FindGameObjectsWithTag("Zone");
+        for (int i = 0; i < zones.Length; i++)
+        {
+            colliders[i] = zones[i].GetComponent<Collider2D>();
+        }
     }
 	
 	// Update is called once per frame
 	void Update ()
 	{
-        /*
-	    
-	    //fieldOfView = cam.fieldOfView;
-	    //Debug.Log(fieldOfView);
+        // check if player has entered any other existing zone
+	    for (int i  = 0; i < zones.Length; i++)
+	    {
+	        OnTriggerEnter2D(colliders[i]);
+	    }
+	    /*
+        
+        //fieldOfView = cam.fieldOfView;
+        //Debug.Log(fieldOfView);
 
         // very basic post generation
 
         
         // check if max number of posts has been reached and if player is past the position of the last post spawned + an amount
-	    if (numOfPosts < maxNumOfPostsTotal && Mathf.Abs(player.transform.position.x + DistanceFromLastPost) > Mathf.Abs(lastPosition.x) 
+        if (numOfPosts < maxNumOfPostsTotal && Mathf.Abs(player.transform.position.x + DistanceFromLastPost) > Mathf.Abs(lastPosition.x) 
             && Mathf.Abs(player.transform.position.y + DistanceFromLastPost) > Mathf.Abs(lastPosition.y))
-	    {   // based on direction
-	        //if (rb.velocity.y > 0) // if player is moving up the screen
-	        //{
-	           Debug.Log("rb x velocity is positive!");
-	            while (postParent.childCount < nummOfPostsPerArea)
-	            {
-	                newXPos = Random.Range(player.transform.position.x + DistanceFromLastPost,
-	                    maxRange + DistanceFromLastPost);
-	                newYPos = Random.Range(player.transform.position.y + DistanceFromLastPost,
-	                    maxRange + DistanceFromLastPost);
-	                randomPosition = new Vector2(newXPos, newYPos);
-	                Object.Instantiate(post, randomPosition, Quaternion.identity,
-	                    postParent); //Quaternion.identity is no rotation
-	                numOfPosts++;
-	            }
+        {   // based on direction
+            //if (rb.velocity.y > 0) // if player is moving up the screen
+            //{
+               Debug.Log("rb x velocity is positive!");
+                while (postParent.childCount < nummOfPostsPerArea)
+                {
+                    newXPos = Random.Range(player.transform.position.x + DistanceFromLastPost,
+                        maxRange + DistanceFromLastPost);
+                    newYPos = Random.Range(player.transform.position.y + DistanceFromLastPost,
+                        maxRange + DistanceFromLastPost);
+                    randomPosition = new Vector2(newXPos, newYPos);
+                    Object.Instantiate(post, randomPosition, Quaternion.identity,
+                        postParent); //Quaternion.identity is no rotation
+                    numOfPosts++;
+                }
 
-	        while (postParent.childCount < nummOfPostsPerArea)
-	        {
-	            newXPos = Random.Range(player.transform.position.x + DistanceFromLastPost,
-	                maxRange + DistanceFromLastPost);
-	            newYPos = Random.Range(player.transform.position.y,
-	                maxRange + DistanceFromLastPost);
-	            randomPosition = new Vector2(newXPos, newYPos);
-	            Object.Instantiate(post, randomPosition, Quaternion.identity,
-	                postParent); //Quaternion.identity is no rotation
-	            numOfPosts++;
-	        }
+            while (postParent.childCount < nummOfPostsPerArea)
+            {
+                newXPos = Random.Range(player.transform.position.x + DistanceFromLastPost,
+                    maxRange + DistanceFromLastPost);
+                newYPos = Random.Range(player.transform.position.y,
+                    maxRange + DistanceFromLastPost);
+                randomPosition = new Vector2(newXPos, newYPos);
+                Object.Instantiate(post, randomPosition, Quaternion.identity,
+                    postParent); //Quaternion.identity is no rotation
+                numOfPosts++;
+            }
 
-	        while (postParent.childCount < nummOfPostsPerArea)
-	        {
-	            newXPos = Random.Range(player.transform.position.x,
-	                maxRange + DistanceFromLastPost);
-	            newYPos = Random.Range(player.transform.position.y + DistanceFromLastPost,
-	                maxRange + DistanceFromLastPost);
-	            randomPosition = new Vector2(newXPos, newYPos);
-	            Object.Instantiate(post, randomPosition, Quaternion.identity,
-	                postParent); //Quaternion.identity is no rotation
-	            numOfPosts++;
-	        } 
+            while (postParent.childCount < nummOfPostsPerArea)
+            {
+                newXPos = Random.Range(player.transform.position.x,
+                    maxRange + DistanceFromLastPost);
+                newYPos = Random.Range(player.transform.position.y + DistanceFromLastPost,
+                    maxRange + DistanceFromLastPost);
+                randomPosition = new Vector2(newXPos, newYPos);
+                Object.Instantiate(post, randomPosition, Quaternion.identity,
+                    postParent); //Quaternion.identity is no rotation
+                numOfPosts++;
+            } 
             */
-            //}
-        //} 
-	       
-            
+	    //}
+	    //} 
+
+
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("New Zone entered!");
+        //Create a new zone
+
+        // but where??
+
+        // Get new zones
+        zones = GameObject.FindGameObjectsWithTag("Zone");
+        for (int i = 0; i < zones.Length; i++)
+        {
+            colliders[i] = zones[i].GetComponent<Collider2D>();
+        }
+    }
         
 
         /* next:
