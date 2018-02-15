@@ -43,6 +43,17 @@ public class GrapplingScript : MonoBehaviour
 		arrow.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
 	}
 
+    void FixedUpdate()
+    {
+        //makes sure the lasso distance can get smaller but not bigger
+        if (lassoConnected)
+        {
+            this.joint.distance = Mathf.Min( joint.distance,
+                Vector3.Distance(joint.connectedBody.position, transform.position)
+                );
+        }
+    }
+
 	/// <summary>
 	/// Handles lots of things to do with throwing the lasso.
 	/// </summary>

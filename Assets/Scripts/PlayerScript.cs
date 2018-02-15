@@ -55,10 +55,16 @@ public class PlayerScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		if (c.gameObject.tag != "Lasso") 
+		if (c.gameObject.tag != "Lasso" && c.gameObject.tag != "Post") 
 		{
 			Debug.Log ("Ouch! You hit " + c.gameObject.name);
 			gc.BroadcastMessage ("restartGame");
 		}
-	}
+
+	    //if (c.gameObject.tag == "DustStorm")
+	    //{
+	    //    Debug.Log("You were consumed by the dust storm ");
+	    //    gc.BroadcastMessage ("restartGame");
+	    //}
+    }
 }

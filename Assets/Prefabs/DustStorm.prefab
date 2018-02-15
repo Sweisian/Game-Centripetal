@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114513892363668420}
   m_Layer: 0
   m_Name: DustStorm
-  m_TagString: Untagged
+  m_TagString: DustStorm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977686668180922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.7, y: -52.3, z: -0.97161}
+  m_LocalPosition: {x: -14.1, y: -48.60565, z: -0.97161}
   m_LocalScale: {x: 300, y: 8.65, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,11 +78,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1e9db45e10e8c459190127af8e2bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveRate: 10
+  moveRate: 12
   thePlayer: {fileID: 0}
   myGameController: {fileID: 0}
-  maxDistance: 40
-  startDistFromPlayer: 10
+  maxDistance: 60
+  startDistFromPlayer: 8
 --- !u!212 &212373889756758616
 SpriteRenderer:
   m_ObjectHideFlags: 1
