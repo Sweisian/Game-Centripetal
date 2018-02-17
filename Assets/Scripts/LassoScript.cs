@@ -7,6 +7,7 @@ public class LassoScript : MonoBehaviour {
 	private float distanceToMove; //The distance the lasso can move before returning
 	private bool flying = true; //Whether the lasso is still seeking a post
 	private GameObject player; //Reference to the player
+    private GameController gc; 
 	[SerializeField] private float flySpeed; //How fast the lasso flies midair
 	[SerializeField] private float returnSpeed; //How fast the lasso returns to the player
 	[SerializeField] private LineRenderer lassoLine; //The visual representation of the lasso
@@ -17,6 +18,7 @@ public class LassoScript : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		lassoLine = GameObject.FindGameObjectWithTag ("Lasso Line").GetComponent<LineRenderer> ();
 		lassoLine.enabled = true;
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
 
 	/// <summary>
@@ -59,6 +61,7 @@ public class LassoScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c)
 	{
 		if (c.gameObject.tag == "Post") {
+            gc.playSound("attach");
 			player.GetComponent<GrapplingScript> ().connectLasso (c.gameObject);
 			lassoLine.enabled = false;
 			GameObject.Destroy (this.gameObject);
