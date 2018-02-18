@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
         sounds.Add("attach", clips[0]);
         sounds.Add("detach", clips[1]);
         sounds.Add("throw", clips[2]);
+        sounds.Add("snap", clips[3]);
 	}
 	
 	// Update is called once per frame
