@@ -46,6 +46,10 @@ public class PlayerScript : MonoBehaviour {
         {
             rb.AddForce(rb.velocity * forcePerFrame);
         }
+        else if (rb.velocity.magnitude>maxSpeed)
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+        }
     }
 
     void DrawShotLine() //mostly for debugging purposes
