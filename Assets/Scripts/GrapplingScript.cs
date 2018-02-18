@@ -17,6 +17,7 @@ public class GrapplingScript : MonoBehaviour
 	private bool canLasso; //Whether we can throw a lasso or not
 	private bool lassoConnected; //Whether the lasso is connected or not
 	private float chargePercent; //Current charge
+    private GameController gc;
 
     // Use this for initialization
     void Start ()
@@ -28,6 +29,7 @@ public class GrapplingScript : MonoBehaviour
 		lassoConnected = false;
 		chargePercent = 0f;
 		arrow.GetComponent<SpriteRenderer> ().color=new Color(1f, 1f, 1f, 0.3f);
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +44,17 @@ public class GrapplingScript : MonoBehaviour
 		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 		arrow.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
 	}
+
+    void FixedUpdate()
+    {
+        //makes sure the lasso distance can get smaller but not bigger
+        if (lassoConnected)
+        {
+            this.joint.distance = Mathf.Min( joint.distance,
+                Vector3.Distance(joint.connectedBody.position, transform.position)
+                );
+        }
+    }
 
 	/// <summary>
 	/// Handles lots of things to do with throwing the lasso.
@@ -82,6 +95,7 @@ public class GrapplingScript : MonoBehaviour
 				chargePercent = 20f;
 
 			GameObject lasso = GameObject.Instantiate (lassoPrefab);
+            gc.playSound("throw");
 			Vector3 directionToHead = targetPos - this.transform.position;
             lasso.GetComponent<LassoScript> ().Initialize (this.transform.position, Vector3.Normalize(directionToHead), maxDistance);
 			canLasso = false;
@@ -99,6 +113,7 @@ public class GrapplingScript : MonoBehaviour
 
 		if (lassoConnected && Input.GetMouseButtonDown(0))
         {
+            gc.playSound("detach");
             joint.enabled = false;
 			myLine.enabled = false;
 			canLasso = true;
