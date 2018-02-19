@@ -7,7 +7,7 @@ public class ScoringScript : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI scoreText;
-    private int score;
+    private float score;
     [SerializeField] private float scoreIncreaseRate;
 
     // Use this for initialization
@@ -24,7 +24,7 @@ public class ScoringScript : MonoBehaviour
     public void updateScore ()
     {
         Debug.Log(score);
-        score = score + (int)Time.time;
-        scoreText.SetText("SCORE: " + score);
+        score = score + Time.deltaTime;
+        scoreText.SetText("SCORE: " + (int) score);
     }
 }
