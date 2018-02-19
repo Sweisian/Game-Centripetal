@@ -58,7 +58,8 @@ public class PlayerScript : MonoBehaviour {
 		if (c.gameObject.tag != "Lasso" && c.gameObject.tag != "Post") 
 		{
 			Debug.Log ("Ouch! You hit " + c.gameObject.name);
-			gc.BroadcastMessage ("restartGame");
+			gc.BroadcastMessage ("gameOver");
+            Destroy(gameObject);
 		}
 
 	    //if (c.gameObject.tag == "DustStorm")

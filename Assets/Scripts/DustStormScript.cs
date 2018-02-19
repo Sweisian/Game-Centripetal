@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class DustStormScript : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class DustStormScript : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            myGameController.restartGame();
+            myGameController.BroadcastMessage("gameOver");
         }
     }
 }
