@@ -62,6 +62,8 @@ public class LassoScript : MonoBehaviour {
 	{
 		if (c.gameObject.tag == "Post") {
             gc.playSound("attach");
+            if (c.gameObject.GetComponent<CattleScript>())
+                c.gameObject.GetComponent<CattleScript>().run();
 			player.GetComponent<GrapplingScript> ().connectLasso (c.gameObject);
 			lassoLine.enabled = false;
 			GameObject.Destroy (this.gameObject);

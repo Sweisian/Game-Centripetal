@@ -21,12 +21,15 @@ public class DustStormScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
 	{
+        if (myGameController.gameover == false)
+        {
 
-	    transform.position = new Vector3(thePlayer.transform.position.x, transform.position.y, transform.position.z);
-	    transform.Translate(moveRate * Vector3.up * Time.deltaTime, Space.World);
+            transform.position = new Vector3(thePlayer.transform.position.x, transform.position.y, transform.position.z);
+            transform.Translate(moveRate * Vector3.up * Time.deltaTime, Space.World);
 
-        if (thePlayer.transform.position.y - transform.position.y > maxDistance)
-            transform.position = new Vector3(thePlayer.transform.position.x, thePlayer.transform.position.y - maxDistance, transform.position.z);
+            if (thePlayer.transform.position.y - transform.position.y > maxDistance)
+                transform.position = new Vector3(thePlayer.transform.position.x, thePlayer.transform.position.y - maxDistance, transform.position.z);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -35,6 +38,7 @@ public class DustStormScript : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
+            myGameController.playSound("gameOver");
             myGameController.BroadcastMessage("gameOver");
         }
     }

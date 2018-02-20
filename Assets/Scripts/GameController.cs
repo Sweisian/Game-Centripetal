@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour {
         sounds.Add("detach", clips[1]);
         sounds.Add("throw", clips[2]);
         sounds.Add("snap", clips[3]);
+        sounds.Add("gameOver", clips[4]);
+        sounds.Add("moo", clips[5]);
         gameoverText.SetActive(false);
 	}
 
@@ -36,8 +38,10 @@ public class GameController : MonoBehaviour {
 
     public void gameOver()
     {
-            //Debug.Log("Game over state is true");
+        //Debug.Log("Game over state is true");
+            gameover = true;
             gameoverText.SetActive(true);
+            playSound("gameOver");
             Time.timeScale = 0f;
 
             if (Input.GetKey(KeyCode.R))

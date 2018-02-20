@@ -18,6 +18,9 @@ public class GrapplingScript : MonoBehaviour
     private bool lassoConnected; //Whether the lasso is connected or not.
     private float chargePercent; //Current charge
     private GameController gc;
+    private Vector3 rotationLine; //Line drawn to detect if player has completed a rotation
+    private Vector3 originalPoint;
+    private PlayerScript ps;
 
     // Use this for initialization
     void Start()
@@ -30,6 +33,7 @@ public class GrapplingScript : MonoBehaviour
         chargePercent = 0f;
         arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.3f);
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        ps = this.GetComponent<PlayerScript>();
     }
 
     // Update is called once per frame
@@ -51,6 +55,12 @@ public class GrapplingScript : MonoBehaviour
         //makes sure the lasso distance can get smaller but not bigger
         if (lassoConnected)
         {
+            Debug.DrawRay(postAttached.transform.position,rotationLine, Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(postAttached.transform.position, rotationLine, Mathf.Infinity, 1<<LayerMask.NameToLayer("Player"));
+            if (hit)
+            {
+                Debug.Log("Full Rotation!");
+            }
             this.joint.distance = Mathf.Min(joint.distance,
                 Vector3.Distance(joint.connectedBody.position, transform.position)
                 );
@@ -131,6 +141,8 @@ public class GrapplingScript : MonoBehaviour
         joint.connectedBody = postHit.GetComponent<Rigidbody2D>();
         postAttached = postHit;
         myLine.enabled = true;
+        originalPoint = this.transform.position;
+        rotationLine = this.transform.position - postAttached.transform.position;
     }
 
     /// <summary>
@@ -147,6 +159,8 @@ public class GrapplingScript : MonoBehaviour
     {
         if (didItSnap) gc.playSound("snap");
         else gc.playSound("detach");
+        if (postAttached.GetComponent<CattleScript>())
+            postAttached.GetComponent<CattleScript>().calmDown();
         joint.enabled = false;
         myLine.enabled = false;
         canLasso = true;

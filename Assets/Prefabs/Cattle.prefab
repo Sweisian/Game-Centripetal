@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4072194251300568}
   - component: {fileID: 212614893167362586}
   - component: {fileID: 50775271607081966}
-  - component: {fileID: 114215028464727668}
   - component: {fileID: 61315653351507464}
+  - component: {fileID: 114058165430679566}
   m_Layer: 0
   m_Name: Cattle
   m_TagString: Post
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 1.4354148}
   m_EdgeRadius: 0
---- !u!114 &114215028464727668
+--- !u!114 &114058165430679566
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541e4a0541a1645b987eb301fb7067d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 6
 --- !u!212 &212614893167362586
 SpriteRenderer:
   m_ObjectHideFlags: 1

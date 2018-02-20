@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour {
 	[SerializeField] private float minSpeed;
     [SerializeField] private float appliedForce;
-    [SerializeField] private float forcePerFrame;
+    [SerializeField] public float forcePerFrame;
     [SerializeField] private float maxSpeed;
 	private GameController gc;
     private GrapplingScript grappleScript;

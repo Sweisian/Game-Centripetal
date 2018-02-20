@@ -23,7 +23,7 @@ public class ScoringScript : MonoBehaviour
 
     public void updateScore ()
     {
-        Debug.Log(score);
+        //Debug.Log(score);
         score = score + Time.deltaTime;
         scoreText.SetText("SCORE: " + (int) score);
     }
