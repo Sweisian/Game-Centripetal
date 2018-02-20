@@ -13,6 +13,7 @@ public class GrapplingScript : MonoBehaviour
     [SerializeField] private GameObject lassoPrefab;
     [SerializeField] private GameObject arrow;
     [SerializeField] private Text chargeDisplay; //UI Element for Displaying Charge
+    [SerializeField] private float speedUpStep; //Approximately how much to speed up by per rotation on post
     private GameObject postAttached; //Used in drawing the line. We can probably find a better method.
     private bool canLasso; //Whether we can throw a lasso or not
     private bool lassoConnected; //Whether the lasso is connected or not.
@@ -21,6 +22,7 @@ public class GrapplingScript : MonoBehaviour
     private Vector3 rotationLine; //Line drawn to detect if player has completed a rotation
     private Vector3 originalPoint;
     private PlayerScript ps;
+    private bool beingAlerted=false; //Temporary way of showing a rotation
 
     // Use this for initialization
     void Start()
@@ -59,12 +61,28 @@ public class GrapplingScript : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(postAttached.transform.position, rotationLine, Mathf.Infinity, 1<<LayerMask.NameToLayer("Player"));
             if (hit)
             {
-                Debug.Log("Full Rotation!");
+                Debug.Log("Speed Up!");
+                ps.maxSpeed += speedUpStep;
+                if (!beingAlerted)
+                {
+                    beingAlerted = true;
+                    StartCoroutine(speedUp());
+                }
             }
             this.joint.distance = Mathf.Min(joint.distance,
                 Vector3.Distance(joint.connectedBody.position, transform.position)
                 );
         }
+    }
+
+    private IEnumerator speedUp()
+    {
+        myLine.startColor = Color.yellow;
+        myLine.endColor = Color.yellow;
+        yield return new WaitForSeconds(0.5f);
+        myLine.startColor = Color.green;
+        myLine.endColor = Color.green;
+        beingAlerted = false;
     }
 
     /// <summary>

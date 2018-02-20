@@ -1564,6 +1564,7 @@ MonoBehaviour:
     type: 2}
   arrow: {fileID: 554487846}
   chargeDisplay: {fileID: 0}
+  speedUpStep: 0.3
 --- !u!232 &415104540
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -8535,7 +8536,7 @@ Prefab:
       objectReference: {fileID: 1568214500}
     - target: {fileID: 1977686668180922, guid: b799d9e57184c5d41a51f65a7e18e949, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114513892363668420, guid: b799d9e57184c5d41a51f65a7e18e949,
         type: 2}
