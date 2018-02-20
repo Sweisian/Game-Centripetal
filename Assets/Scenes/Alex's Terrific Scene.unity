@@ -1328,7 +1328,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -809113939
+  randomSeed: 185003091
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -1336,7 +1336,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 2
-      minScalar: 0.5
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1929,7 +1929,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4661,6 +4661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e201708df54924c699410a21460a6ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameover: 0
+  gameoverText: {fileID: 0}
 --- !u!4 &1568214501
 Transform:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour {
         {
             rb.AddForce(rb.velocity * forcePerFrame);
         }
-        else if (rb.velocity.magnitude>maxSpeed)
+        else if (rb.velocity.magnitude > maxSpeed)
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
         }
@@ -69,6 +69,7 @@ public class PlayerScript : MonoBehaviour {
         {
             if (grappleScript.isLassoConnected())
             {
+                Debug.Log("Rope has snapped");
                 grappleScript.disconnectLasso(true);
             }
         }

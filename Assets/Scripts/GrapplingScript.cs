@@ -36,7 +36,7 @@ public class GrapplingScript : MonoBehaviour
     void Update()
     {
         throwLasso();
-        chargeDisplay.text = "Charge: " + Mathf.Floor(chargePercent) + "%";
+        //chargeDisplay.text = "Charge: " + Mathf.Floor(chargePercent) + "%";
         //Update the arrow. Following solution adapted from 
         //https://answers.unity.com/questions/599271/rotating-a-sprite-to-face-mouse-target.html
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
