@@ -1563,8 +1563,9 @@ MonoBehaviour:
   lassoPrefab: {fileID: 1414112954749430, guid: 5c1ce494dbf0640ef894910eac28e612,
     type: 2}
   arrow: {fileID: 554487846}
+  alert: {fileID: 1229083029075374, guid: b5ebfe146a7914b1f9a7587621908b78, type: 2}
   chargeDisplay: {fileID: 0}
-  speedUpStep: 0.3
+  speedUpStep: 4
 --- !u!232 &415104540
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -7552,6 +7553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameover: 0
   gameoverText: {fileID: 1291802824}
+  alertPrefab: {fileID: 1229083029075374, guid: b5ebfe146a7914b1f9a7587621908b78,
+    type: 2}
 --- !u!4 &1568214501
 Transform:
   m_ObjectHideFlags: 0

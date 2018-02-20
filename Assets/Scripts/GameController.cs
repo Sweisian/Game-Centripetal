@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
     private Dictionary<string, AudioSource> sounds;
     public bool gameover = false;
     public GameObject gameoverText;
+    [SerializeField] private GameObject alertPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -69,6 +70,14 @@ public class GameController : MonoBehaviour {
         {
             a.Play();
         }
+    }
+
+    public void sendAlert(string wannaSay, Color col)
+    {
+        GameObject alertMessage = GameObject.Instantiate(alertPrefab, GameObject.FindGameObjectWithTag("MainCamera").transform);
+        AlertScript alertMessageScript = alertMessage.GetComponent<AlertScript>();
+        alertMessageScript.message = wannaSay;
+        alertMessageScript.c = col;
     }
 		
 }
