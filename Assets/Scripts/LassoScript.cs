@@ -7,7 +7,8 @@ public class LassoScript : MonoBehaviour {
 	private float distanceToMove; //The distance the lasso can move before returning
 	private bool flying = true; //Whether the lasso is still seeking a post
 	private GameObject player; //Reference to the player
-    private GameController gc; 
+    private GameController gc;
+    private ScoringScript s;
 	[SerializeField] private float flySpeed; //How fast the lasso flies midair
 	[SerializeField] private float returnSpeed; //How fast the lasso returns to the player
 	[SerializeField] private LineRenderer lassoLine; //The visual representation of the lasso
@@ -19,6 +20,7 @@ public class LassoScript : MonoBehaviour {
 		lassoLine = GameObject.FindGameObjectWithTag ("Lasso Line").GetComponent<LineRenderer> ();
 		lassoLine.enabled = true;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        s=GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
 	}
 
 	/// <summary>
@@ -63,7 +65,11 @@ public class LassoScript : MonoBehaviour {
 		if (c.gameObject.tag == "Post") {
             gc.playSound("attach");
             if (c.gameObject.GetComponent<CattleScript>())
+            {
+                gc.sendAlert("Yee Haw! +5 Points", Color.green);
+                s.addPoints(5);
                 c.gameObject.GetComponent<CattleScript>().run();
+            }
 			player.GetComponent<GrapplingScript> ().connectLasso (c.gameObject);
 			lassoLine.enabled = false;
 			GameObject.Destroy (this.gameObject);

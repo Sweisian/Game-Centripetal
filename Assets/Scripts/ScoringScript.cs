@@ -27,4 +27,9 @@ public class ScoringScript : MonoBehaviour
         score = score + Time.deltaTime;
         scoreText.SetText("SCORE: " + (int) score);
     }
+
+    public void addPoints(int points)
+    {
+        score += points;
+    }
 }
