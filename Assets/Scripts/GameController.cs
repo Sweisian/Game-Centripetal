@@ -5,7 +5,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
+
+    public ProceduralGenManager proceduralGenScript;
+    private int difficulty = 15;
+
+    void Awake()
+    {
+        proceduralGenScript = GetComponent<ProceduralGenManager>();
+        InitGame();
+    }
+
+    void InitGame()
+    {
+        proceduralGenScript.SetupScene(difficulty);
+    }
 
     /* Unity is stupid and won't serialize dictionaries
      * So we'll just have to add the things manually to here.
