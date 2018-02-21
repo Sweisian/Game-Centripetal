@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 212284797814382448}
   - component: {fileID: 61194272028153222}
   m_Layer: 0
-  m_Name: BlueZone
+  m_Name: Zone
   m_TagString: Zone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -835,7 +835,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 158.4, y: 158.4}
+  m_Size: {x: 200, y: 500}
   m_EdgeRadius: 0
 --- !u!61 &61331168326656080
 BoxCollider2D:

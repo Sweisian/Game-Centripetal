@@ -355,7 +355,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 285274455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13, y: -28, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.3637476, y: 4.6244135, z: 1}
   m_Children:
   - {fileID: 247886361}
@@ -437,11 +437,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e034d89d9fb3e2940bd9ccbf952fb684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 8
-  rows: 8
+  columns: 10
+  rows: 25
+  ZonePrefab: {fileID: 1908182893010420, guid: 60801a7109efb7a4886c61914db40376, type: 2}
+  startPosition: {x: 0, y: 0, z: 0}
   postCount:
-    minimum: 10
-    maximum: 20
+    minimum: 20
+    maximum: 30
   obstacles:
   - {fileID: 1411833080708982, guid: 4ceac09e72cc8402eb7802d06a01acb3, type: 2}
   - {fileID: 1356737157218598, guid: 52dabcad39248496fb2de9b07b29fe6d, type: 2}
@@ -1591,6 +1593,16 @@ Prefab:
     - target: {fileID: 4031197366025756, guid: 0d9f84ae304e74844b950eeeecb24b58, type: 2}
       propertyPath: m_RootOrder
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 61194272028153222, guid: 0d9f84ae304e74844b950eeeecb24b58,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 158.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 61194272028153222, guid: 0d9f84ae304e74844b950eeeecb24b58,
+        type: 2}
+      propertyPath: m_UsedByComposite
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d9f84ae304e74844b950eeeecb24b58, type: 2}
