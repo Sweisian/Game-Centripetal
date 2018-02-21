@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
-	[SerializeField] private float speed;
+	[SerializeField] private float minSpeed;
     [SerializeField] private float appliedForce;
     [SerializeField] private float forcePerFrame;
-    [SerializeField] private float maxSpeed;
+    [SerializeField] public float maxSpeed;
 	private GameController gc;
-
+    private GrapplingScript grappleScript;
     private Vector2 direction;
 
     private Rigidbody2D rb;
@@ -19,6 +19,7 @@ public class PlayerScript : MonoBehaviour {
 	    rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * appliedForce);
 		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+        grappleScript = this.GetComponent<GrapplingScript>();
     }
 	
 	// Update is called once per frame
@@ -36,9 +37,18 @@ public class PlayerScript : MonoBehaviour {
 	/// </summary>
     void applyMoarForce()
     {
-        if (rb.velocity.magnitude < maxSpeed)
+        if (rb.velocity.magnitude < minSpeed)
+        {
+            rb.velocity.Normalize();
+            rb.velocity *= minSpeed;
+        }
+        else if (rb.velocity.magnitude < maxSpeed)
         {
             rb.AddForce(rb.velocity * forcePerFrame);
+        }
+        else if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
         }
     }
 
@@ -55,10 +65,20 @@ public class PlayerScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
+        if (c.gameObject.tag == "Post")
+        {
+            if (grappleScript.isLassoConnected())
+            {
+                Debug.Log("Rope has snapped");
+                grappleScript.disconnectLasso(true);
+            }
+        }
+
 		if (c.gameObject.tag != "Lasso" && c.gameObject.tag != "Post") 
 		{
 			Debug.Log ("Ouch! You hit " + c.gameObject.name);
-			gc.BroadcastMessage ("restartGame");
+			gc.BroadcastMessage ("gameOver");
+            Destroy(gameObject);
 		}
 
 	    //if (c.gameObject.tag == "DustStorm")

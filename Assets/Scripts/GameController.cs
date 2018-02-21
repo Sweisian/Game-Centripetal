@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +26,9 @@ public class GameController : MonoBehaviour
      * So we'll just have to add the things manually to here.
     */
     private Dictionary<string, AudioSource> sounds;
+    public bool gameover = false;
+    public GameObject gameoverText;
+    [SerializeField] private GameObject alertPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +37,12 @@ public class GameController : MonoBehaviour
         sounds.Add("attach", clips[0]);
         sounds.Add("detach", clips[1]);
         sounds.Add("throw", clips[2]);
+        sounds.Add("snap", clips[3]);
+        sounds.Add("gameOver", clips[4]);
+        sounds.Add("moo", clips[5]);
+        gameoverText.SetActive(false);
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -42,13 +52,30 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+    public void gameOver()
+    {
+        //Debug.Log("Game over state is true");
+            gameover = true;
+            gameoverText.SetActive(true);
+            playSound("gameOver");
+            Time.timeScale = 0f;
+
+            if (Input.GetKey(KeyCode.R))
+            {
+                Debug.Log("Game over state is true and R is pressed");
+                gameover = false;
+                restartGame();
+            }
+    }
+
 	/// <summary>
 	/// Restarts the game by reloading this scene.
 	/// </summary>
 	public void restartGame()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene ().buildIndex);
-		Debug.Log ("Game Reset");
+	    Time.timeScale = 1f;
+        Debug.Log ("Game Reset");
 	}
 
     public void playSound(string key)
@@ -58,6 +85,14 @@ public class GameController : MonoBehaviour
         {
             a.Play();
         }
+    }
+
+    public void sendAlert(string wannaSay, Color col)
+    {
+        GameObject alertMessage = GameObject.Instantiate(alertPrefab, GameObject.FindGameObjectWithTag("MainCamera").transform);
+        AlertScript alertMessageScript = alertMessage.GetComponent<AlertScript>();
+        alertMessageScript.message = wannaSay;
+        alertMessageScript.c = col;
     }
 		
 }
