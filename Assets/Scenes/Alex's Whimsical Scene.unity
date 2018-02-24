@@ -1563,7 +1563,6 @@ MonoBehaviour:
   lassoPrefab: {fileID: 1414112954749430, guid: 5c1ce494dbf0640ef894910eac28e612,
     type: 2}
   arrow: {fileID: 554487846}
-  alert: {fileID: 1229083029075374, guid: b5ebfe146a7914b1f9a7587621908b78, type: 2}
   chargeDisplay: {fileID: 0}
   speedUpStep: 4
 --- !u!232 &415104540
@@ -1643,7 +1642,9 @@ MonoBehaviour:
   minSpeed: 5
   appliedForce: 1000
   forcePerFrame: 1
-  maxSpeed: 30
+  currentSpeed: 30
+  maxSpeed: 50
+  speedIncreasePerSecond: 0.5
 --- !u!212 &415104544
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6565,11 +6566,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4072194251300568, guid: 52dabcad39248496fb2de9b07b29fe6d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -25.108265
+      value: -84.7
       objectReference: {fileID: 0}
     - target: {fileID: 4072194251300568, guid: 52dabcad39248496fb2de9b07b29fe6d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 49.3
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 4072194251300568, guid: 52dabcad39248496fb2de9b07b29fe6d, type: 2}
       propertyPath: m_LocalPosition.z

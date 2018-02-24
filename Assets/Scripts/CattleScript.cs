@@ -18,7 +18,7 @@ public class CattleScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         int multiplier = 1;
-        if (lassoed) multiplier = 2;
+        if (lassoed) multiplier = 4;
         transform.Translate(direction*multiplier*speed*Time.deltaTime);
 	}
 

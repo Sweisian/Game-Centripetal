@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114058165430679566}
   m_Layer: 0
   m_Name: Cattle
-  m_TagString: Post
+  m_TagString: Cattle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

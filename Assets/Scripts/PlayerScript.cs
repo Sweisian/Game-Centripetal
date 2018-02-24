@@ -6,7 +6,9 @@ public class PlayerScript : MonoBehaviour {
 	[SerializeField] private float minSpeed;
     [SerializeField] private float appliedForce;
     [SerializeField] private float forcePerFrame;
+    [SerializeField] public float currentSpeed;
     [SerializeField] public float maxSpeed;
+    [SerializeField] public float speedIncreasePerSecond;
 	private GameController gc;
     private GrapplingScript grappleScript;
     private Vector2 direction;
@@ -20,6 +22,7 @@ public class PlayerScript : MonoBehaviour {
         rb.AddForce(transform.up * appliedForce);
 		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
         grappleScript = this.GetComponent<GrapplingScript>();
+        StartCoroutine(speedUp());
     }
 	
 	// Update is called once per frame
@@ -27,6 +30,7 @@ public class PlayerScript : MonoBehaviour {
         DrawShotLine();
         applyMoarForce();
 		//Solution adapted from https://answers.unity.com/questions/757118/rotate-towards-velocity-2d.html
+
 		Vector2 dir = rb.velocity;
 		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg-90f;
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -37,18 +41,31 @@ public class PlayerScript : MonoBehaviour {
 	/// </summary>
     void applyMoarForce()
     {
-        if (rb.velocity.magnitude < minSpeed)
+        if (currentSpeed>maxSpeed)
+        {
+            currentSpeed = maxSpeed;
+        }
+        else  if (rb.velocity.magnitude < minSpeed)
         {
             rb.velocity.Normalize();
             rb.velocity *= minSpeed;
         }
-        else if (rb.velocity.magnitude < maxSpeed)
+        else if (rb.velocity.magnitude < currentSpeed)
         {
             rb.AddForce(rb.velocity * forcePerFrame);
         }
-        else if (rb.velocity.magnitude > maxSpeed)
+        else if (rb.velocity.magnitude > currentSpeed)
         {
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentSpeed);
+        }
+    }
+
+    IEnumerator speedUp()
+    {
+        while (true)
+        {
+            currentSpeed += speedIncreasePerSecond;
+            yield return new WaitForSeconds(1f);
         }
     }
 
