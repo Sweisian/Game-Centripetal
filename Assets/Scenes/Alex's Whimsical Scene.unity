@@ -1644,7 +1644,7 @@ MonoBehaviour:
   forcePerFrame: 1
   currentSpeed: 30
   maxSpeed: 50
-  speedIncreasePerSecond: 0.5
+  speedIncreasePerSecond: 0.25
 --- !u!212 &415104544
 SpriteRenderer:
   m_ObjectHideFlags: 0
