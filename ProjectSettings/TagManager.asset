@@ -9,6 +9,7 @@ TagManager:
   - Lasso Line
   - DustStorm
   - Cattle
+  - Zone
   layers:
   - Default
   - TransparentFX
