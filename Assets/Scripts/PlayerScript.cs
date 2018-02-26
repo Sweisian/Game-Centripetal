@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour {
 	private GameController gc;
     private MainCamScript m;
     private GrapplingScript grappleScript;
+    private ScoringScript s;
     private Vector2 direction;
 
     private Rigidbody2D rb;
@@ -23,6 +24,7 @@ public class PlayerScript : MonoBehaviour {
         rb.AddForce(transform.up * appliedForce);
 		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
         m = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamScript>();
+        s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
         grappleScript = this.GetComponent<GrapplingScript>();
         StartCoroutine(speedUp());
     }
@@ -87,6 +89,7 @@ public class PlayerScript : MonoBehaviour {
         if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle")
         {
             m.shake();
+            s.addPoints(-2);
             if (grappleScript.isLassoConnected())
             {
                 Debug.Log("Rope has snapped");
