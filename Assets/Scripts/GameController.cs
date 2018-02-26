@@ -1,11 +1,40 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
+
+    public ProceduralGenManager proceduralGenScript;
+    public int difficulty = 15;
+    private Collider2D[] colliders = new Collider2D[3];
+    private Collider2D playerCollider;
+    public static ProceduralGenManager.Zone currZone;
+    
+    void Awake()
+    {
+        //colliders = new Collider2D[proceduralGenScript.Zones.Length];
+        proceduralGenScript = GetComponent<ProceduralGenManager>();
+        InitGame();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerCollider = player.GetComponent<Collider2D>();
+    }
+
+    void InitGame()
+    {
+        proceduralGenScript.SetupScene(difficulty);
+        for (int i = 0; i < proceduralGenScript.Zones.Count; i++) 
+        {
+            // get collider objects
+            colliders[i] = proceduralGenScript.Zones[i].collider;
+        }
+
+        currZone = proceduralGenScript.Zones[0]; //player must always start in the first zone
+    }
 
     /* Unity is stupid and won't serialize dictionaries
      * So we'll just have to add the things manually to here.
@@ -36,7 +65,8 @@ public class GameController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R)) {
 			restartGame ();
 		}
-	}
+    }
+
 
     public void gameOver()
     {

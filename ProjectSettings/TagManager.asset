@@ -9,8 +9,12 @@ TagManager:
   - Lasso Line
   - DustStorm
   - Cattle
+<<<<<<< HEAD
   - Missile
   - Chaser
+=======
+  - Zone
+>>>>>>> 0e1b47a42a63f040c29957b24c214fb348d166bc
   layers:
   - Default
   - TransparentFX
