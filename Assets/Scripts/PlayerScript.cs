@@ -86,6 +86,13 @@ public class PlayerScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
+	    if (c.gameObject.tag == "Chaser")
+	    {
+	        Debug.Log("Ouch! You hit " + c.gameObject.name);
+	        gc.BroadcastMessage("gameOver");
+	        Destroy(gameObject);
+        }
+
         if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle")
         {
             m.shake();

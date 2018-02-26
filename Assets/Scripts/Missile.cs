@@ -12,11 +12,17 @@ public class Missile : MonoBehaviour {
 	float m_targetSpeed;
 	GameObject playerTarget;
 
-	const float ACCELERATION = 0.5f;
-	const float CHASE_TOLERANCE = 0.2f;
-	const float PURSUE_DISTANCE = 200f;
 
-	SpriteRenderer m_sprite;
+
+    [SerializeField] private float ACCELERATION = 0.5f;
+    [SerializeField] private float CHASE_TOLERANCE = 0.2f;
+    [SerializeField] private float PURSUE_DISTANCE = 200f;
+    //this extra variable is declared to allow return to original acceleration
+    private float tempACCELERATION;
+
+    private GrapplingScript MyGrapplingScript;
+
+    SpriteRenderer m_sprite;
 	TrailRenderer trail;
 
 	float timeOut = 0f;
@@ -25,11 +31,15 @@ public class Missile : MonoBehaviour {
 	[SerializeField] private float m_spawnSpeed;
 
 	void Start () {
-		m_sprite = GetComponent<SpriteRenderer> ();
+
+	    MyGrapplingScript = GameObject.FindGameObjectWithTag("Player").GetComponent<GrapplingScript>();
+        m_sprite = GetComponent<SpriteRenderer> ();
 		m_currentTarget = new Vector2 ();
 		m_speed = new Vector2 ();
 
-		trail = GetComponent<TrailRenderer> ();
+	    tempACCELERATION = ACCELERATION;
+
+        trail = GetComponent<TrailRenderer> ();
 		if (GameObject.FindWithTag("Player")) {
 			playerTarget = GameObject.FindWithTag("Player").gameObject;
 		}
@@ -47,8 +57,8 @@ public class Missile : MonoBehaviour {
 
 	void chaseTarget() {
 		if (Vector3.Distance (transform.position, m_currentTarget) > CHASE_TOLERANCE) {
-			m_speed.x += ACCELERATION * Time.deltaTime * Mathf.Sign (m_currentTarget.x - transform.position.x);
-			m_speed.y += ACCELERATION * Time.deltaTime * Mathf.Sign (m_currentTarget.y - transform.position.y);
+            m_speed.x += tempACCELERATION * Time.deltaTime * Mathf.Sign (m_currentTarget.x - transform.position.x);
+			m_speed.y += tempACCELERATION * Time.deltaTime * Mathf.Sign (m_currentTarget.y - transform.position.y);
 		} else {
 			m_targetingPoint = false;
 		}
@@ -64,4 +74,28 @@ public class Missile : MonoBehaviour {
 	void orientToSpeed(Vector2 speed) {
 		m_sprite.transform.rotation = Quaternion.Euler (new Vector3(0f,0f,Mathf.Rad2Deg * Mathf.Atan2 (speed.y, speed.x)));
 	}
+
+    void OnCollisionEnter2D(Collision2D c)
+    {
+        //need to make this so the player detaches first or something
+        if (c.gameObject.tag != "Post")
+        {
+            Destroy(c.gameObject);
+        }
+
+        if (c.gameObject.tag != "Player")
+        {
+            Destroy(c.gameObject);
+        }
+    }
+
+    void OnBecameInvisible()
+    {
+        tempACCELERATION *= 2;
+    }
+
+    void OnBecameVisible()
+    {
+        tempACCELERATION = ACCELERATION;
+    }
 }

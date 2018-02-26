@@ -9,6 +9,8 @@ TagManager:
   - Lasso Line
   - DustStorm
   - Cattle
+  - Missile
+  - Chaser
   layers:
   - Default
   - TransparentFX
