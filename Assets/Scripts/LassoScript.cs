@@ -69,8 +69,6 @@ public class LassoScript : MonoBehaviour
             gc.playSound("attach");
             if (c.gameObject.GetComponent<CattleScript>())
             {
-                gc.sendAlert("Yee Haw! +5 Points", Color.green);
-                s.addPoints(5);
                 c.gameObject.GetComponent<CattleScript>().run();
             }
 			player.GetComponent<GrapplingScript> ().connectLasso (c.gameObject);

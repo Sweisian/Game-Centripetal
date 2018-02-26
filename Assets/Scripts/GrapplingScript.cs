@@ -14,6 +14,7 @@ public class GrapplingScript : MonoBehaviour
     [SerializeField] private GameObject arrow;
     [SerializeField] private Text chargeDisplay; //UI Element for Displaying Charge
     [SerializeField] private float speedUpStep; //Approximately how much to speed up by per rotation on post
+    [SerializeField] private float secondsAttatchedBeforePostDelete; //How long the player must be attached to a post before detaching deletes it.
     private GameObject postAttached; //Used in drawing the line. We can probably find a better method.
     private bool canLasso; //Whether we can throw a lasso or not
     private bool lassoConnected; //Whether the lasso is connected or not.
@@ -24,6 +25,7 @@ public class GrapplingScript : MonoBehaviour
     private int numRotations=-1; //Keeps track of the number of full rotations the player has gone through.
     private PlayerScript ps;
     private bool beingAlerted=false; //Temporary way of showing a rotation
+    private float timeAttached=0f; //How long the player has been attached to the post 
 
     // Use this for initialization
     void Start()
@@ -52,6 +54,11 @@ public class GrapplingScript : MonoBehaviour
         Vector3 direction = mousePos - arrowPos;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         arrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (lassoConnected)
+        {
+            timeAttached += Time.deltaTime;
+        }
+        else timeAttached = 0f;
     }
 
     void FixedUpdate()
@@ -75,17 +82,26 @@ public class GrapplingScript : MonoBehaviour
         }
     }
 
+    //Currently not being used, but can be helpful with detecting multiple rotations.
     private IEnumerator speedUp()
     {
         numRotations++;
-        if (numRotations != 0)
+        if (numRotations > 0)
         {
-            gc.sendAlert("Nice Rotation!", Color.white);
-            s.addPoints(5);
-            ps.currentSpeed += speedUpStep;
-            myLine.startColor = Color.yellow;
-            myLine.endColor = Color.yellow;
-            disconnectLasso(false);
+            if (postAttached.tag == "Post")
+            {
+                gc.sendAlert("Rotation! +5", Color.green);
+                s.addPoints(5);
+                disconnectLasso(false);
+            }
+            else if (postAttached.tag == "Cattle")
+            {
+                gc.sendAlert("Cow Wrangled! +20", Color.white);
+                s.addPoints(20);
+                disconnectLasso(false);
+                GameObject.Destroy(postAttached);
+                postAttached = null;
+            }
         }
         yield return new WaitForSeconds(0.5f);
         myLine.startColor = Color.green;
@@ -184,7 +200,10 @@ public class GrapplingScript : MonoBehaviour
 
     public void disconnectLasso(bool didItSnap)
     {
-        if (didItSnap) gc.playSound("snap");
+        if (didItSnap)
+        {
+            gc.playSound("snap");
+        }
         else gc.playSound("detach");
         if (postAttached.GetComponent<CattleScript>())
             postAttached.GetComponent<CattleScript>().calmDown();
@@ -192,11 +211,12 @@ public class GrapplingScript : MonoBehaviour
         myLine.enabled = false;
         canLasso = true;
         lassoConnected = false;
-        if (postAttached.gameObject.tag == "Post")
+        if (postAttached.gameObject.tag == "Post" && timeAttached>=secondsAttatchedBeforePostDelete)
         {
             GameObject.Destroy(postAttached);
         }
         arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+        timeAttached = 0f;
     }
 
     public bool isLassoConnected()
