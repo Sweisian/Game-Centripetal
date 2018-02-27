@@ -117,4 +117,9 @@ public class PlayerScript : MonoBehaviour {
 	    //    gc.BroadcastMessage ("restartGame");
 	    //}
     }
+
+    void OnBecameInvisible()
+    {
+        gc.BroadcastMessage("gameOver");
+    }
 }

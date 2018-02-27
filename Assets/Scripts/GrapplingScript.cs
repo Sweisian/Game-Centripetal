@@ -68,17 +68,18 @@ public class GrapplingScript : MonoBehaviour
         {
             Debug.DrawRay(postAttached.transform.position,rotationLine, Color.yellow);
             RaycastHit2D hit = Physics2D.Raycast(postAttached.transform.position, rotationLine, Mathf.Infinity, 1<<LayerMask.NameToLayer("Player"));
-            if (hit.transform.gameObject.tag == "Player")
+            if (hit)
             {
-                if (!beingAlerted)
+                if (hit.transform.gameObject.tag == "Player")
                 {
-                    beingAlerted = true;
-                    StartCoroutine(speedUp());
+                    if (!beingAlerted)
+                    {
+                        beingAlerted = true;
+                        StartCoroutine(speedUp());
+                    }
                 }
             }
-            this.joint.distance = Mathf.Min(joint.distance,
-                Vector3.Distance(joint.connectedBody.position, transform.position)
-                );
+            this.joint.distance = Mathf.Min(joint.distance, Vector3.Distance(joint.connectedBody.position, transform.position));
         }
     }
 

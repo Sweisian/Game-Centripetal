@@ -4,17 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Post
-  - Lasso
-  - Lasso Line
-  - DustStorm
-  - Cattle
-<<<<<<< HEAD
-  - Missile
-  - Chaser
-=======
   - Zone
->>>>>>> 0e1b47a42a63f040c29957b24c214fb348d166bc
+  - Post
+  - Chaser
+  - Lasso Line
+  - Lasso
+  - Cattle
+  - DustStorm
   layers:
   - Default
   - TransparentFX
@@ -24,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - Player
+  - 
   - 
   - 
   - 
@@ -50,11 +46,8 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Background
-    uniqueID: 3120266367
+    uniqueID: 1984087213
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Player
-    uniqueID: 102398885
     locked: 0

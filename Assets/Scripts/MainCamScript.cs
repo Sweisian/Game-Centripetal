@@ -43,10 +43,10 @@ public class MainCamScript : MonoBehaviour
             {
                 Vector3 shakyShake = Random.insideUnitSphere;
                 shakyShake = new Vector3(shakyShake.x, shakyShake.y, 0f);
-                transform.position = new Vector3(target.position.x, target.position.y, transform.position.z) + shakyShake * shakeAmount;
+                transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z) + shakyShake * shakeAmount;
                 currentShakeTimeLeft -= Time.deltaTime * decreaseFactor;
             }
-            else transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+            else transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z);
         }
     }
 
