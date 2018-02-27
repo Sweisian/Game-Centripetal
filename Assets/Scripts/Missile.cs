@@ -78,12 +78,15 @@ public class Missile : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D c)
     {
         //need to make this so the player detaches first or something
-        if (c.gameObject.tag != "Post")
+        if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle")
         {
+            GrapplingScript g = playerTarget.GetComponent<GrapplingScript>();
+            if (g.isLassoConnectedTo(c.gameObject))
+                g.disconnectLasso(true);
             Destroy(c.gameObject);
         }
 
-        if (c.gameObject.tag != "Player")
+        if (c.gameObject.tag == "Player")
         {
             Destroy(c.gameObject);
         }

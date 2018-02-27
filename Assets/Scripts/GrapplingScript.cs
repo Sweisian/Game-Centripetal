@@ -64,7 +64,7 @@ public class GrapplingScript : MonoBehaviour
     void FixedUpdate()
     {
         //makes sure the lasso distance can get smaller but not bigger
-        if (lassoConnected)
+        if (lassoConnected && postAttached!=null)
         {
             Debug.DrawRay(postAttached.transform.position,rotationLine, Color.yellow);
             RaycastHit2D hit = Physics2D.Raycast(postAttached.transform.position, rotationLine, Mathf.Infinity, 1<<LayerMask.NameToLayer("Player"));
@@ -86,6 +86,7 @@ public class GrapplingScript : MonoBehaviour
     //Currently not being used, but can be helpful with detecting multiple rotations.
     private IEnumerator speedUp()
     {
+        Debug.Log("Rotation");
         numRotations++;
         if (numRotations > 0)
         {
@@ -190,6 +191,24 @@ public class GrapplingScript : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns true if Lasso is connected
+    /// </summary>
+    /// <returns><c>true</c>, if connected is connected, <c>false</c> otherwise.</returns>
+    public bool isLassoConnected()
+    {
+        return lassoConnected;
+    }
+
+    /// <summary>
+    /// Returns true if Lasso is connected to GameObject g
+    /// </summary>
+    /// <returns><c>true</c>, if lasso is connected to g, <c>false</c> otherwise.</returns>
+    public bool isLassoConnectedTo(GameObject g)
+    {
+        return (g == postAttached) ? true : false;
+    }
+
+    /// <summary>
     /// Resets the lasso throwing process. Called externally by an instance of LassoScript.
     /// </summary>
     public void resetLasso()
@@ -218,11 +237,5 @@ public class GrapplingScript : MonoBehaviour
         }
         arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
         timeAttached = 0f;
-    }
-
-    public bool isLassoConnected()
-    {
-        return lassoConnected;
-    }
-		
+    }	
 }

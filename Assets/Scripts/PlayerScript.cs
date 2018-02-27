@@ -88,7 +88,6 @@ public class PlayerScript : MonoBehaviour {
 	{
 	    if (c.gameObject.tag == "Chaser")
 	    {
-	        Debug.Log("Ouch! You hit " + c.gameObject.name);
 	        gc.BroadcastMessage("gameOver");
 	        Destroy(gameObject);
         }
@@ -99,14 +98,13 @@ public class PlayerScript : MonoBehaviour {
             s.addPoints(-2);
             if (grappleScript.isLassoConnected())
             {
-                Debug.Log("Rope has snapped");
                 grappleScript.disconnectLasso(true);
             }
         }
 
+
         if (c.gameObject.tag != "Lasso" && c.gameObject.tag != "Post" && c.gameObject.tag != "Cattle") 
 		{
-			Debug.Log ("Ouch! You hit " + c.gameObject.name);
 			gc.BroadcastMessage ("gameOver");
             Destroy(gameObject);
 		}
@@ -116,6 +114,16 @@ public class PlayerScript : MonoBehaviour {
 	    //    Debug.Log("You were consumed by the dust storm ");
 	    //    gc.BroadcastMessage ("restartGame");
 	    //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D c)
+    {
+        if (c.gameObject.tag == "Coin")
+        {
+            s.addPoints(10);
+            gc.playSound("collectCoin");
+            GameObject.Destroy(c.gameObject);
+        }
     }
 
     void OnBecameInvisible()
