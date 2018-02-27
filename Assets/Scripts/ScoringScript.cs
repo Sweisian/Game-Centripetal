@@ -43,9 +43,10 @@ public class ScoringScript : MonoBehaviour
     {
         for (int i = 0; i < timesToFlash; i++)
         {
+            bonus = "";
+            yield return new WaitForSeconds(flashSpeed);
             bonus = bonusText;
             yield return new WaitForSeconds(flashSpeed);
-            bonus = "";
         }
         bonus = "";
     }
