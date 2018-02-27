@@ -95,7 +95,7 @@ public class PlayerScript : MonoBehaviour {
         if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle")
         {
             m.shake();
-            s.addPoints(-2);
+            s.addPoints(-2, "(-2)");
             if (grappleScript.isLassoConnected())
             {
                 grappleScript.disconnectLasso(true);
@@ -120,7 +120,7 @@ public class PlayerScript : MonoBehaviour {
     {
         if (c.gameObject.tag == "Coin")
         {
-            s.addPoints(10);
+            s.addPoints(10, "(+10 Coin Collected)");
             gc.playSound("collectCoin");
             GameObject.Destroy(c.gameObject);
         }

@@ -93,13 +93,13 @@ public class GrapplingScript : MonoBehaviour
             if (postAttached.tag == "Post")
             {
                 gc.sendAlert("Rotation! +5", Color.green);
-                s.addPoints(5);
+                s.addPoints(5, "(+5 Rotation)");
                 disconnectLasso(false);
             }
             else if (postAttached.tag == "Cattle")
             {
                 gc.sendAlert("Cow Wrangled! +20", Color.white);
-                s.addPoints(20);
+                s.addPoints(20, "(+20 Cow Wrangled!)");
                 disconnectLasso(false);
                 GameObject.Destroy(postAttached);
                 postAttached = null;
