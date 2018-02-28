@@ -56,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 687dcec43b2f746efa5a1ceaf3ba0276, type: 3}
+  - {fileID: 2100000, guid: b7a8196bfeb738f4eb7048f29e9bcbc5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,7 +87,7 @@ TextMesh:
 
 '
   m_OffsetZ: 0
-  m_CharacterSize: 5
+  m_CharacterSize: 6
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
@@ -95,7 +95,7 @@ TextMesh:
   m_FontSize: 0
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 687dcec43b2f746efa5a1ceaf3ba0276, type: 3}
+  m_Font: {fileID: 12800000, guid: b7a8196bfeb738f4eb7048f29e9bcbc5, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278255476
@@ -111,6 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToAppear: 4
-  speedMovingUp: 75
+  speedMovingUp: 100
   message: '...'
   c: {r: 1, g: 0, b: 0, a: 1}
