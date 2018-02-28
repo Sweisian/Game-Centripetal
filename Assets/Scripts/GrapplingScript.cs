@@ -12,18 +12,20 @@ public class GrapplingScript : MonoBehaviour
     [SerializeField] private LineRenderer myLine;
     [SerializeField] private GameObject lassoPrefab;
     [SerializeField] private GameObject arrow;
-    [SerializeField] private GameObject alert;
     [SerializeField] private Text chargeDisplay; //UI Element for Displaying Charge
     [SerializeField] private float speedUpStep; //Approximately how much to speed up by per rotation on post
+    [SerializeField] private float secondsAttatchedBeforePostDelete; //How long the player must be attached to a post before detaching deletes it.
     private GameObject postAttached; //Used in drawing the line. We can probably find a better method.
     private bool canLasso; //Whether we can throw a lasso or not
     private bool lassoConnected; //Whether the lasso is connected or not.
     private float chargePercent; //Current charge
     private GameController gc;
+    private ScoringScript s;
     private Vector3 rotationLine; //Line drawn to detect if player has completed a rotation
     private int numRotations=-1; //Keeps track of the number of full rotations the player has gone through.
     private PlayerScript ps;
     private bool beingAlerted=false; //Temporary way of showing a rotation
+    private float timeAttached=0f; //How long the player has been attached to the post 
 
     // Use this for initialization
     void Start()
@@ -34,8 +36,9 @@ public class GrapplingScript : MonoBehaviour
         canLasso = true;
         lassoConnected = false;
         chargePercent = 0f;
-        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.3f);
+        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
         ps = this.GetComponent<PlayerScript>();
     }
 
@@ -51,38 +54,56 @@ public class GrapplingScript : MonoBehaviour
         Vector3 direction = mousePos - arrowPos;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         arrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (lassoConnected)
+        {
+            timeAttached += Time.deltaTime;
+        }
+        else timeAttached = 0f;
     }
 
     void FixedUpdate()
     {
         //makes sure the lasso distance can get smaller but not bigger
-        if (lassoConnected)
+        if (lassoConnected && postAttached!=null)
         {
             Debug.DrawRay(postAttached.transform.position,rotationLine, Color.yellow);
             RaycastHit2D hit = Physics2D.Raycast(postAttached.transform.position, rotationLine, Mathf.Infinity, 1<<LayerMask.NameToLayer("Player"));
             if (hit)
             {
-                if (!beingAlerted)
+                if (hit.transform.gameObject.tag == "Player")
                 {
-                    beingAlerted = true;
-                    StartCoroutine(speedUp());
+                    if (!beingAlerted)
+                    {
+                        beingAlerted = true;
+                        StartCoroutine(speedUp());
+                    }
                 }
             }
-            this.joint.distance = Mathf.Min(joint.distance,
-                Vector3.Distance(joint.connectedBody.position, transform.position)
-                );
+            this.joint.distance = Mathf.Min(joint.distance, Vector3.Distance(joint.connectedBody.position, transform.position));
         }
     }
 
+    //Currently not being used, but can be helpful with detecting multiple rotations.
     private IEnumerator speedUp()
     {
+        Debug.Log("Rotation");
         numRotations++;
-        if (numRotations != 0)
+        if (numRotations > 0)
         {
-            gc.sendAlert("Speed Up!", Color.white);
-            ps.maxSpeed += speedUpStep;
-            myLine.startColor = Color.yellow;
-            myLine.endColor = Color.yellow;
+            if (postAttached.tag == "Post")
+            {
+                gc.sendAlert("Rotation! +5", Color.green);
+                s.addPoints(5, "(+5 Rotation)");
+                disconnectLasso(false);
+            }
+            else if (postAttached.tag == "Cattle")
+            {
+                gc.sendAlert("Cow Wrangled! +20", Color.white);
+                s.addPoints(20, "(+20 Cow Wrangled!)");
+                disconnectLasso(false);
+                GameObject.Destroy(postAttached);
+                postAttached = null;
+            }
         }
         yield return new WaitForSeconds(0.5f);
         myLine.startColor = Color.green;
@@ -170,18 +191,39 @@ public class GrapplingScript : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns true if Lasso is connected
+    /// </summary>
+    /// <returns><c>true</c>, if connected is connected, <c>false</c> otherwise.</returns>
+    public bool isLassoConnected()
+    {
+        return lassoConnected;
+    }
+
+    /// <summary>
+    /// Returns true if Lasso is connected to GameObject g
+    /// </summary>
+    /// <returns><c>true</c>, if lasso is connected to g, <c>false</c> otherwise.</returns>
+    public bool isLassoConnectedTo(GameObject g)
+    {
+        return (g == postAttached) ? true : false;
+    }
+
+    /// <summary>
     /// Resets the lasso throwing process. Called externally by an instance of LassoScript.
     /// </summary>
     public void resetLasso()
     {
         canLasso = true;
         myLine.enabled = false;
-        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.3f);
+        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
     }
 
     public void disconnectLasso(bool didItSnap)
     {
-        if (didItSnap) gc.playSound("snap");
+        if (didItSnap)
+        {
+            gc.playSound("snap");
+        }
         else gc.playSound("detach");
         if (postAttached.GetComponent<CattleScript>())
             postAttached.GetComponent<CattleScript>().calmDown();
@@ -189,12 +231,11 @@ public class GrapplingScript : MonoBehaviour
         myLine.enabled = false;
         canLasso = true;
         lassoConnected = false;
-        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.3f);
-    }
-
-    public bool isLassoConnected()
-    {
-        return lassoConnected;
-    }
-		
+        if (postAttached.gameObject.tag == "Post" && timeAttached>=secondsAttatchedBeforePostDelete)
+        {
+            GameObject.Destroy(postAttached);
+        }
+        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+        timeAttached = 0f;
+    }	
 }

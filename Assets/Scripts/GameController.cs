@@ -54,6 +54,8 @@ public class GameController : MonoBehaviour
         sounds.Add("snap", clips[3]);
         sounds.Add("gameOver", clips[4]);
         sounds.Add("moo", clips[5]);
+        sounds.Add("backgroundMusic", clips[6]);
+        sounds.Add("collectCoin",clips[7]);
         gameoverText.SetActive(false);
 	}
 

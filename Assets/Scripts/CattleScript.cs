@@ -20,6 +20,9 @@ public class CattleScript : MonoBehaviour {
         int multiplier = 1;
         if (lassoed) multiplier = 2;
         transform.Translate(direction*multiplier*speed*Time.deltaTime);
+        //Solution adapted from https://answers.unity.com/questions/757118/rotate-towards-velocity-2d.html
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 
     public void run(){

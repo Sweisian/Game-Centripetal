@@ -189,11 +189,15 @@ public class ProceduralGenManager : MonoBehaviour {
 
         for (int x = -columnsSize; x < columnsSize; x += itemSize) //start at negative coordinate so that grid is centered
         {
-            for (float y = zone.location.y; y < zone.location.y + rowsSize; y += itemSize)
-            {
-                // creates a position for each grid position that are itemSize distance apart
-                zone.gridPositions.Add(new Tile(x, y));
-            }
+            
+            
+                for (float y = zone.location.y; y < zone.location.y + rowsSize; y += itemSize)
+                {
+                    // creates a position for each grid position that are itemSize distance apart
+                    zone.gridPositions.Add(new Tile(x, y));
+                }
+            
+            
         }
 
         // set up new zone
@@ -228,6 +232,7 @@ public class ProceduralGenManager : MonoBehaviour {
         {
 
             Vector3 randomPosition = RandomPosition(zone.gridPositions);
+            
             GameObject obstacleChoice = obstacleArray[Random.Range(0, obstacleArray.Length)];
             Instantiate(obstacleChoice, randomPosition, Quaternion.identity);
 
@@ -240,6 +245,19 @@ public class ProceduralGenManager : MonoBehaviour {
         for (int i = 0; i < postCountValue; i++)
         {
             Vector3 randomPosition = RandomPosition(zone.gridPositions);
+            if (randomPosition.x > -5 & randomPosition.x < 5)
+            {
+                randomPosition = RandomPosition(zone.gridPositions);
+            }
+            
+            if(randomPosition.x > -5 & randomPosition.x < 5)
+            {
+                randomPosition = RandomPosition(zone.gridPositions);
+            }
+            if(randomPosition.x > -5 & randomPosition.x < 5)
+            {
+                randomPosition = RandomPosition(zone.gridPositions);
+            }
             //GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
             Instantiate(post, randomPosition, Quaternion.identity);
         }

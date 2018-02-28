@@ -8,11 +8,15 @@ public class ScoringScript : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     private float score;
+    private string bonus;
     [SerializeField] private float scoreIncreaseRate;
+    [SerializeField] private float flashSpeed=0.5f;
+    [SerializeField] private int timesToFlash=4;
 
     // Use this for initialization
     void Start () {
-		scoreText.SetText("SCORE: 0");
+        bonus = "";
+        scoreText.SetText("SCORE: 0");
 	}
 	
 	// Update is called once per frame
@@ -25,11 +29,25 @@ public class ScoringScript : MonoBehaviour
     {
         //Debug.Log(score);
         score = score + Time.deltaTime;
-        scoreText.SetText("SCORE: " + (int) score);
+        scoreText.SetText("SCORE: " + (int) score+"    "+bonus);
     }
 
-    public void addPoints(int points)
+    public void addPoints(int points, string bonusText)
     {
         score += points;
+        bonus = bonusText;
+        StartCoroutine(flash(bonusText));
+    }
+
+    private IEnumerator flash(string bonusText)
+    {
+        for (int i = 0; i < timesToFlash; i++)
+        {
+            bonus = "";
+            yield return new WaitForSeconds(flashSpeed);
+            bonus = bonusText;
+            yield return new WaitForSeconds(flashSpeed);
+        }
+        bonus = "";
     }
 }
