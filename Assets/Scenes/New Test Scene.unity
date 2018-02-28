@@ -6722,8 +6722,8 @@ MonoBehaviour:
   ZonePrefab: {fileID: 1908182893010420, guid: 60801a7109efb7a4886c61914db40376, type: 2}
   startPosition: {x: 0, y: 0, z: 0}
   postCount:
-    minimum: 30
-    maximum: 75
+    minimum: 50
+    maximum: 100
   obstacles:
   - {fileID: 1411833080708982, guid: 4ceac09e72cc8402eb7802d06a01acb3, type: 2}
   - {fileID: 1411833080708982, guid: 4ceac09e72cc8402eb7802d06a01acb3, type: 2}

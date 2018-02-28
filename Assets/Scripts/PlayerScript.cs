@@ -124,6 +124,7 @@ public class PlayerScript : MonoBehaviour {
         if (c.gameObject.tag == "Coin")
         {
             s.addPoints(10, "(+10 Coin Collected)");
+            gc.sendAlert("Struck Gold! +10", Color.yellow);
             gc.playSound("collectCoin");
             GameObject.Destroy(c.gameObject);
         }
