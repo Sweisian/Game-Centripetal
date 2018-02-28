@@ -139,10 +139,10 @@ public class PlayerScript : MonoBehaviour {
     private void updateMaxYValue()
     {
         maxYvalue = Mathf.Max(maxYvalue, transform.position.y);
-        if (maxYvalue > PlayerPrefs.GetFloat("maxYvalue"))
+        if (maxYvalue > PlayerPrefs.GetFloat("bestDistance"))
         {
-            PlayerPrefs.SetFloat("maxYvalue", maxYvalue);
-            Debug.Log("the max y is " + PlayerPrefs.GetFloat("maxYvalue"));
+            PlayerPrefs.SetFloat("bestDistance", maxYvalue);
+            Debug.Log("the best distance is " + PlayerPrefs.GetFloat("bestDistance"));
         }
     }
 

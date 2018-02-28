@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//maybe should move tracking of best distance to this script instead of inside player script
 public class ScoringScript : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI bestScoreText;
+    [SerializeField] private TextMeshProUGUI bestDistanceText;
 
     //the scale to alter the distance traveled by into score
     [SerializeField] private float distanceScoreScaler;
@@ -42,6 +45,14 @@ public class ScoringScript : MonoBehaviour
         distanceScore = myPlayer.GetComponent<PlayerScript>().maxYvalue / distanceScoreScaler;
         totalScore = bonusScore + distanceScore;
         scoreText.SetText("SCORE: " + (int) totalScore + "    " + bonus);
+        if (totalScore > PlayerPrefs.GetFloat("bestScore"))
+        {
+            PlayerPrefs.SetFloat("bestScore", totalScore);
+        }
+
+        //we don't need to update the max score and distance on every frame, but I'm not concerned wit performance so I don't really care
+        bestDistanceText.SetText("Best Distance: " + (int)PlayerPrefs.GetFloat("bestDistance"));
+        bestScoreText.SetText("Best Score: " + (int)PlayerPrefs.GetFloat("bestScore"));
     }
 
     public void addPoints(int points, string bonusText)
