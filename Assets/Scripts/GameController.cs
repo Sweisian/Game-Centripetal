@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     private Collider2D[] colliders = new Collider2D[3];
     private Collider2D playerCollider;
     public static ProceduralGenManager.Zone currZone;
+
+    [SerializeField] private GameObject maxDistPrefab;
     
     void Awake()
     {
@@ -22,6 +24,9 @@ public class GameController : MonoBehaviour
         InitGame();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider2D>();
+
+        //puts a new max distance prefab at the highest completed distance
+        Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("maxYvalue"), 0), Quaternion.identity);
     }
 
     void InitGame()
@@ -66,6 +71,12 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.R)) {
 			restartGame ();
 		}
+
+        //temp code for reseting max distance 
+	    if (Input.GetKeyDown(KeyCode.P))
+	    {
+	        PlayerPrefs.DeleteKey("maxYvalue");
+	    }
     }
 
 

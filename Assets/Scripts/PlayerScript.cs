@@ -139,6 +139,11 @@ public class PlayerScript : MonoBehaviour {
     private void updateMaxYValue()
     {
         maxYvalue = Mathf.Max(maxYvalue, transform.position.y);
+        if (maxYvalue > PlayerPrefs.GetFloat("maxYvalue"))
+        {
+            PlayerPrefs.SetFloat("maxYvalue", maxYvalue);
+            Debug.Log("the max y is " + PlayerPrefs.GetFloat("maxYvalue"));
+        }
     }
 
 
