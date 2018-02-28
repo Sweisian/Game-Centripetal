@@ -103,7 +103,10 @@ public class PlayerScript : MonoBehaviour {
         }
 
 
-        if (c.gameObject.tag != "Lasso" && c.gameObject.tag != "Post" && c.gameObject.tag != "Cattle") 
+        if (c.gameObject.tag != "Lasso" 
+            && c.gameObject.tag != "Post" 
+            && c.gameObject.tag != "Cattle" 
+            && c.gameObject.tag != "Wall") 
 		{
 			gc.BroadcastMessage ("gameOver");
             Destroy(gameObject);

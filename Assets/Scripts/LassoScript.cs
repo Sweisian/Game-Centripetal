@@ -83,7 +83,9 @@ public class LassoScript : MonoBehaviour
 		}
         else if (flying && c.gameObject.tag!="Player")
         {
+            Debug.Log("Lasso hit a " + c.name);
             flying = false;
+            
         }
 	}
 }
