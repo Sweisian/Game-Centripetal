@@ -15,6 +15,9 @@ public class PlayerScript : MonoBehaviour {
     private ScoringScript s;
     private Vector2 direction;
 
+    //stores max y value achieved by the player this run so far
+    public float maxYvalue;
+
     private Rigidbody2D rb;
     //private Camera playerCamera = Camera.main;
 
@@ -38,7 +41,10 @@ public class PlayerScript : MonoBehaviour {
 		Vector2 dir = rb.velocity;
 		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg-90f;
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
+
+        //updates max y value of player
+	    updateMaxYValue();
+	}
 
 	/// <summary>
 	/// Applies force to the player when necessary.
@@ -129,6 +135,12 @@ public class PlayerScript : MonoBehaviour {
             GameObject.Destroy(c.gameObject);
         }
     }
+
+    private void updateMaxYValue()
+    {
+        maxYvalue = Mathf.Max(maxYvalue, transform.position.y);
+    }
+
 
     void OnBecameInvisible()
     {

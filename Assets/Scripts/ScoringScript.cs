@@ -7,8 +7,16 @@ public class ScoringScript : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI scoreText;
-    private float score;
+
+    //the scale to alter the distance traveled by into score
+    [SerializeField] private float distanceScoreScaler;
+
+    private float distanceScore;
+    private float bonusScore;
+    private float totalScore;
     private string bonus;
+
+    private GameObject myPlayer;
     [SerializeField] private float scoreIncreaseRate;
     [SerializeField] private float flashSpeed=0.5f;
     [SerializeField] private int timesToFlash=4;
@@ -17,7 +25,8 @@ public class ScoringScript : MonoBehaviour
     void Start () {
         bonus = "";
         scoreText.SetText("SCORE: 0");
-	}
+        myPlayer = GameObject.FindGameObjectWithTag("Player");
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -28,13 +37,16 @@ public class ScoringScript : MonoBehaviour
     public void updateScore ()
     {
         //Debug.Log(score);
-        score = score + Time.deltaTime;
-        scoreText.SetText("SCORE: " + (int) score+"    "+bonus);
+
+        //updates score to be the score plus the change in max value of y
+        distanceScore = myPlayer.GetComponent<PlayerScript>().maxYvalue / distanceScoreScaler;
+        totalScore = bonusScore + distanceScore;
+        scoreText.SetText("SCORE: " + (int) totalScore + "    " + bonus);
     }
 
     public void addPoints(int points, string bonusText)
     {
-        score += points;
+        bonusScore += points;
         bonus = bonusText;
         StartCoroutine(flash(bonusText));
     }

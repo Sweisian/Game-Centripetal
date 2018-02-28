@@ -863,8 +863,9 @@ MonoBehaviour:
   appliedForce: 1000
   forcePerFrame: 1
   currentSpeed: 30
-  maxSpeed: 50
+  maxSpeed: 60
   speedIncreasePerSecond: 0.25
+  maxYvalue: 0
 --- !u!212 &415104544
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1396,11 +1397,11 @@ Prefab:
     - target: {fileID: 114410227862986840, guid: 22dfbd1d61b62f74f8527d48ec74b630,
         type: 2}
       propertyPath: ACCELERATION
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1111131323028046, guid: 22dfbd1d61b62f74f8527d48ec74b630, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22dfbd1d61b62f74f8527d48ec74b630, type: 2}
@@ -6033,7 +6034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proceduralGenScript: {fileID: 1568214511}
-  difficulty: 400
+  difficulty: 2147483647
   gameover: 0
   gameoverText: {fileID: 1291802824}
   alertPrefab: {fileID: 1229083029075374, guid: b5ebfe146a7914b1f9a7587621908b78,
@@ -6383,6 +6384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 970938091}
+  distanceScoreScaler: 10
   scoreIncreaseRate: 0
   flashSpeed: 0.33
   timesToFlash: 3
@@ -7365,7 +7367,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 60
+  orthographic size: 70
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
