@@ -17,6 +17,7 @@ TagManager:
   - InvulnText
   - Star
   - AlertText
+  - AudioManager
   layers:
   - Default
   - TransparentFX
