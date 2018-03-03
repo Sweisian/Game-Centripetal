@@ -16,6 +16,7 @@ TagManager:
   - InvulnBar
   - InvulnText
   - Star
+  - AlertText
   layers:
   - Default
   - TransparentFX
