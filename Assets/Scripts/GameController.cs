@@ -10,7 +10,8 @@ public class GameController : MonoBehaviour
 {
 
     public ProceduralGenManager proceduralGenScript;
-    public int difficulty = 15;
+    public float difficulty = 15;
+    public float difficultyModifier = 1;
     private Collider2D[] colliders = new Collider2D[3];
     private Collider2D playerCollider;
     public static ProceduralGenManager.Zone currZone;
@@ -66,8 +67,14 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.R)) {
 			restartGame ();
 		}
-    }
+	    increaseDifficulty();
+	}
 
+
+    public void increaseDifficulty()
+    {
+        difficulty += Time.deltaTime * difficultyModifier;
+    }
 
     public void gameOver()
     {

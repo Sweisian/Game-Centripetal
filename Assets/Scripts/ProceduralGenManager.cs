@@ -47,7 +47,7 @@ public class ProceduralGenManager : MonoBehaviour {
         public GameObject zoneObject;
         public List<Tile> gridPositions;
         public Vector3 location;
-        public int difficulty;
+        public float difficulty;
         public Vector2 size;
         public BoxCollider2D collider;
         public int ID; //0, 1, or 2
@@ -162,8 +162,8 @@ public class ProceduralGenManager : MonoBehaviour {
         // given a zone and a difficulty, will reset it to be in front of the player
         // currently just makes a new zone
         gameControllerScript = GetComponent<GameController>();
-        int difficulty = gameControllerScript.difficulty;  //calculate the difficulty
-        int obstacleCount = (int)Mathf.Log(difficulty, 2f); //add more obstables when difficulty is higher 
+        int obstacleCount = (int)Mathf.Log(gameControllerScript.difficulty, 2f); //add more obstables when difficulty is higher 
+        Debug.Log(gameControllerScript.difficulty);
         Vector3 newZoneLocation;
         if (nextZoneID == 0)
         {
@@ -250,11 +250,11 @@ public class ProceduralGenManager : MonoBehaviour {
                 randomPosition = RandomPosition(zone.gridPositions);
             }
             
-            if(randomPosition.x > -5 & randomPosition.x < 5)
+            if (randomPosition.x > -5 & randomPosition.x < 5)
             {
                 randomPosition = RandomPosition(zone.gridPositions);
             }
-            if(randomPosition.x > -5 & randomPosition.x < 5)
+            if (randomPosition.x > -5 & randomPosition.x < 5)
             {
                 randomPosition = RandomPosition(zone.gridPositions);
             }
@@ -263,7 +263,7 @@ public class ProceduralGenManager : MonoBehaviour {
         }
     }
 
-    public void SetupScene(int difficulty)
+    public void SetupScene(float difficulty)
     {
         //BoardSetup();
         InitalizeList();
