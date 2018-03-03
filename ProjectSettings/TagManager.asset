@@ -13,6 +13,10 @@ TagManager:
   - DustStorm
   - Coin
   - Wall
+  - InvulnBar
+  - InvulnText
+  - Star
+  - AlertText
   layers:
   - Default
   - TransparentFX

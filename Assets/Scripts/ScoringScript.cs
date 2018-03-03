@@ -58,8 +58,8 @@ public class ScoringScript : MonoBehaviour
     public void addPoints(int points, string bonusText)
     {
         bonusScore += points;
-        bonus = bonusText;
-        StartCoroutine(flash(bonusText));
+        //bonus = bonusText;
+        //StartCoroutine(flash(bonusText));
     }
 
     private IEnumerator flash(string bonusText)

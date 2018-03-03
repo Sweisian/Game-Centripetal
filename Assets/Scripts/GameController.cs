@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -19,9 +20,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject maxDistPrefab;
 
     private Dictionary<string, AudioSource> sounds;
+    private Text alertText;
     public bool gameover = false;
     public GameObject gameoverText;
-    [SerializeField] private GameObject alertPrefab;
+    [SerializeField] private int numTimesToFlashAlert;
+    [SerializeField] private float secondsPerAlertFlash;
 
     void Awake()
     {
@@ -33,6 +36,10 @@ public class GameController : MonoBehaviour
 
         //puts a new max distance prefab at the highest completed distance
         Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
+        alertText = GameObject.FindGameObjectWithTag("AlertText").GetComponent<Text>();
+        Color c = alertText.color;
+        c.a = 0f;
+        alertText.color = c;
     }
 
     void InitGame()
@@ -128,10 +135,33 @@ public class GameController : MonoBehaviour
 
     public void sendAlert(string wannaSay, Color col)
     {
-        GameObject alertMessage = GameObject.Instantiate(alertPrefab, GameObject.FindGameObjectWithTag("MainCamera").transform);
-        AlertScript alertMessageScript = alertMessage.GetComponent<AlertScript>();
-        alertMessageScript.message = wannaSay;
-        alertMessageScript.c = col;
+        Color c = col;
+        c.a = 0f;
+        alertText.color = c;
+        alertText.text = wannaSay;
+        StartCoroutine(fadeIn(secondsPerAlertFlash / 2));
+    }
+
+    /* Following two functions adapted from https://forum.unity.com/threads/fading-in-out-gui-text-with-c-solved.380822/*/
+    private IEnumerator fadeIn(float seconds)
+    {
+        while (alertText.color.a<1.0f)
+        {
+            alertText.color = 
+                new Color(alertText.color.r, alertText.color.g, alertText.color.b, alertText.color.a + (Time.deltaTime / seconds));
+            yield return null;
+        }
+        StartCoroutine(fadeOut(secondsPerAlertFlash/2));
+    }
+
+    private IEnumerator fadeOut(float seconds)
+    {
+        while (alertText.color.a > 0f)
+        {
+            alertText.color =
+                new Color(alertText.color.r, alertText.color.g, alertText.color.b, alertText.color.a - (Time.deltaTime / secondsPerAlertFlash));
+            yield return null;
+        }
     }
 		
 }
