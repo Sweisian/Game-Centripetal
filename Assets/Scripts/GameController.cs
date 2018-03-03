@@ -15,7 +15,14 @@ public class GameController : MonoBehaviour
     private Collider2D[] colliders = new Collider2D[3];
     private Collider2D playerCollider;
     public static ProceduralGenManager.Zone currZone;
-    
+
+    [SerializeField] private GameObject maxDistPrefab;
+
+    private Dictionary<string, AudioSource> sounds;
+    public bool gameover = false;
+    public GameObject gameoverText;
+    [SerializeField] private GameObject alertPrefab;
+
     void Awake()
     {
         //colliders = new Collider2D[proceduralGenScript.Zones.Length];
@@ -23,6 +30,9 @@ public class GameController : MonoBehaviour
         InitGame();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider2D>();
+
+        //puts a new max distance prefab at the highest completed distance
+        Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
     }
 
     void InitGame()
@@ -40,10 +50,7 @@ public class GameController : MonoBehaviour
     /* Unity is stupid and won't serialize dictionaries
      * So we'll just have to add the things manually to here.
     */
-    private Dictionary<string, AudioSource> sounds;
-    public bool gameover = false;
-    public GameObject gameoverText;
-    [SerializeField] private GameObject alertPrefab;
+
 
 	// Use this for initialization
 	void Start () {
@@ -67,8 +74,16 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.R)) {
 			restartGame ();
 		}
+        
 	    increaseDifficulty();
-	}
+
+        //temp code for reseting max distance and max score
+	    if (Input.GetKeyDown(KeyCode.P))
+	    {
+	        PlayerPrefs.DeleteKey("bestDistance");
+	        PlayerPrefs.DeleteKey("bestScore");
+        }
+    }
 
 
     public void increaseDifficulty()

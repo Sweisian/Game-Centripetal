@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 1449903243838954, guid: 7c6fc4bbadc804044b95a65e425c9c25, type: 2}
-  maxShootDistance: 100
-  shootingRate: 1
+  maxShootDistance: 50
+  shootingRate: 1.5
 --- !u!212 &212162181014402718
 SpriteRenderer:
   m_ObjectHideFlags: 1

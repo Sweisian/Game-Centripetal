@@ -16,7 +16,7 @@ public class AlertScript : MonoBehaviour {
         messageText = this.GetComponent<TextMesh>();
         currentTime = 0f;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        this.transform.position = mainCamera.transform.position-new Vector3(150f, 50f, -1f);
+        this.transform.position = mainCamera.transform.position-new Vector3(200f, 0f, -1f);
 	}
 	
 	// Update is called once per frame

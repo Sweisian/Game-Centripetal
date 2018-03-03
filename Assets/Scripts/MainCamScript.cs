@@ -19,6 +19,9 @@ public class MainCamScript : MonoBehaviour
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
 
+    //stores the max y coord that has been achieved. Used to player can't move the camera down
+    public float maxYcoord;
+
     Vector3 originalPos;
 
     void Awake()
@@ -37,16 +40,19 @@ public class MainCamScript : MonoBehaviour
 
     void Update()
     {
+        //updates the max y coord of the camera so far
+        maxYcoord = Mathf.Max(target.position.y, maxYcoord);
+
         if (target != null)
         {
             if (currentShakeTimeLeft > 0)
             {
                 Vector3 shakyShake = Random.insideUnitSphere;
                 shakyShake = new Vector3(shakyShake.x, shakyShake.y, 0f);
-                transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z) + shakyShake * shakeAmount;
+                transform.position = new Vector3(target.position.x, maxYcoord, transform.position.z) + shakyShake * shakeAmount;
                 currentShakeTimeLeft -= Time.deltaTime * decreaseFactor;
             }
-            else transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z);
+            else transform.position = new Vector3(target.position.x, maxYcoord, transform.position.z);
         }
     }
 

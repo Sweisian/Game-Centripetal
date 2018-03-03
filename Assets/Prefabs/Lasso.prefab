@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212685616757108466}
   - component: {fileID: 114067454693353624}
   - component: {fileID: 58645570486061942}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lasso
   m_TagString: Lasso
   m_Icon: {fileID: 0}

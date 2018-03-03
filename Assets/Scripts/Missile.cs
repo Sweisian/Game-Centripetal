@@ -46,7 +46,7 @@ public class Missile : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (playerTarget != null) {
 			m_currentTarget = playerTarget.transform.position;
 			if (Vector3.Distance (m_currentTarget, transform.position) < PURSUE_DISTANCE) {
