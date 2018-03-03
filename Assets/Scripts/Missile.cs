@@ -86,10 +86,12 @@ public class Missile : MonoBehaviour {
             Destroy(c.gameObject);
         }
 
+        /*
         if (c.gameObject.tag == "Player")
         {
             Destroy(c.gameObject);
         }
+        */
     }
 
     void OnBecameInvisible()

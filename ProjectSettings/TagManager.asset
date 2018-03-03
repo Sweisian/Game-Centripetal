@@ -13,6 +13,9 @@ TagManager:
   - DustStorm
   - Coin
   - Wall
+  - InvulnBar
+  - InvulnText
+  - Star
   layers:
   - Default
   - TransparentFX
