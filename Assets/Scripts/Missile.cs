@@ -103,4 +103,10 @@ public class Missile : MonoBehaviour {
     {
         tempACCELERATION = ACCELERATION;
     }
+
+    void IncreaseEnemyDifficulty()
+    {
+        GameController gameControlScript = GetComponent<GameController>();
+
+    }
 }
