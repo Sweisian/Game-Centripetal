@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] public float timePerInvulnerability = 5f;
 	private GameController gc;
     private MainCamScript m;
+    private AudioManager a;
     private GrapplingScript grappleScript;
     private ScoringScript s;
     private Vector2 direction;
@@ -199,7 +200,7 @@ public class PlayerScript : MonoBehaviour {
         {
             s.addPoints(10, "(+10 Coin Collected)");
             gc.sendAlert("Struck Gold! +10", Color.yellow);
-            gc.playSound("collectCoin");
+            a.Play("coinCollect");
             GameObject.Destroy(c.gameObject);
         }
         else if (c.gameObject.tag=="Star")

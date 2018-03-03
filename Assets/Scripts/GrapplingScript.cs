@@ -21,6 +21,7 @@ public class GrapplingScript : MonoBehaviour
     private float chargePercent; //Current charge
     private GameController gc;
     private ScoringScript s;
+    private AudioManager a;
     private Vector3 rotationLine; //Line drawn to detect if player has completed a rotation
     private int numRotations=-1; //Keeps track of the number of full rotations the player has gone through.
     private PlayerScript ps;
@@ -40,6 +41,7 @@ public class GrapplingScript : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
         ps = this.GetComponent<PlayerScript>();
+        a = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -151,7 +153,7 @@ public class GrapplingScript : MonoBehaviour
                 chargePercent = 20f;
 
             GameObject lasso = GameObject.Instantiate(lassoPrefab);
-            gc.playSound("throw");
+            a.Play("chain_throw");
             Vector3 directionToHead = targetPos - this.transform.position;
             lasso.GetComponent<LassoScript>().Initialize(this.transform.position, Vector3.Normalize(directionToHead), maxDistance);
             canLasso = false;
@@ -222,9 +224,10 @@ public class GrapplingScript : MonoBehaviour
     {
         if (didItSnap)
         {
-            gc.playSound("snap");
+            a.Play("snap");
         }
-        else gc.playSound("detach");
+        else 
+            a.Play("detatch");
         if (postAttached.GetComponent<CattleScript>())
             postAttached.GetComponent<CattleScript>().calmDown();
         joint.enabled = false;

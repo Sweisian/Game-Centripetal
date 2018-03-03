@@ -10,6 +10,7 @@ public class LassoScript : MonoBehaviour
     private GameObject player; //Reference to the player
     private GameController gc;
     private ScoringScript s;
+    private AudioManager a;
     [SerializeField] private float flySpeed; //How fast the lasso flies midair
     [SerializeField] private float returnSpeed; //How fast the lasso returns to the player
     [SerializeField] private LineRenderer lassoLine; //The visual representation of the lasso
@@ -23,6 +24,7 @@ public class LassoScript : MonoBehaviour
         lassoLine.enabled = true;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
+        a = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     /// <summary>
@@ -66,7 +68,7 @@ public class LassoScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D c)
     {
         if (c.gameObject.tag == "Post" || c.gameObject.tag=="Cattle") {
-            gc.playSound("attach");
+            a.Play("chain_connect");
             if (c.gameObject.GetComponent<CattleScript>())
             {
                 c.gameObject.GetComponent<CattleScript>().run();

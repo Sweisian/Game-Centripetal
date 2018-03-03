@@ -19,8 +19,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GameObject maxDistPrefab;
 
-    private Dictionary<string, AudioSource> sounds;
     private Text alertText;
+    private AudioManager a;
     public bool gameover = false;
     public GameObject gameoverText;
     [SerializeField] private int numTimesToFlashAlert;
@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
         InitGame();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider2D>();
-
+        a = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         //puts a new max distance prefab at the highest completed distance
         Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
         alertText = GameObject.FindGameObjectWithTag("AlertText").GetComponent<Text>();
@@ -61,16 +61,6 @@ public class GameController : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        sounds = new Dictionary<string, AudioSource>();
-        AudioSource[] clips = GetComponents<AudioSource>();
-        sounds.Add("attach", clips[0]);
-        sounds.Add("detach", clips[1]);
-        sounds.Add("throw", clips[2]);
-        sounds.Add("snap", clips[3]);
-        sounds.Add("gameOver", clips[4]);
-        sounds.Add("moo", clips[5]);
-        sounds.Add("backgroundMusic", clips[6]);
-        sounds.Add("collectCoin",clips[7]);
         gameoverText.SetActive(false);
 	}
 
@@ -103,7 +93,7 @@ public class GameController : MonoBehaviour
         //Debug.Log("Game over state is true");
             gameover = true;
             gameoverText.SetActive(true);
-            playSound("gameOver");
+            a.Play("gameOver");
             Time.timeScale = 0f;
 
             if (Input.GetKey(KeyCode.R))
@@ -124,14 +114,6 @@ public class GameController : MonoBehaviour
         Debug.Log ("Game Reset");
 	}
 
-    public void playSound(string key)
-    {
-        AudioSource a = sounds[key];
-        if (a!=null)
-        {
-            a.Play();
-        }
-    }
 
     public void sendAlert(string wannaSay, Color col)
     {
