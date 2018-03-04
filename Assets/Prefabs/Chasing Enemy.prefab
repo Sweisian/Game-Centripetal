@@ -30,7 +30,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1786152199558038
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111131323028046}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -15.021353, y: -51.207985, z: 0}
+  m_LocalPosition: {x: 0, y: -48.08, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4628272470835604}
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c31fcff504c97d44bf81a9d58b43493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ACCELERATION: 0.3
+  ACCELERATION: 0.45
   CHASE_TOLERANCE: 0.2
   PURSUE_DISTANCE: 1000
   m_spawnSpeed: 0
