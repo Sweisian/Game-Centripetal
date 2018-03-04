@@ -19,18 +19,18 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4175829093369740}
-  - component: {fileID: 61522565520074982}
   - component: {fileID: 212034252847226564}
   - component: {fileID: 114410227862986840}
   - component: {fileID: 96373518479053332}
   - component: {fileID: 50761124006361226}
+  - component: {fileID: 70700202239773362}
   m_Layer: 8
   m_Name: Chasing Enemy
   m_TagString: Chaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1786152199558038
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,14 +54,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111131323028046}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -48.08, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -38.9, y: -47.4, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 2}
   m_Children:
   - {fileID: 4628272470835604}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!4 &4628272470835604
 Transform:
   m_ObjectHideFlags: 1
@@ -95,8 +95,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61522565520074982
-BoxCollider2D:
+--- !u!70 &70700202239773362
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -107,19 +107,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
-    newSize: {x: 10.666667, y: 5.3333335}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.63, y: 1.79}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.014386535, y: 0.05035293}
+  m_Size: {x: 1.1834972, y: 3.419294}
+  m_Direction: 0
 --- !u!96 &96373518479053332
 TrailRenderer:
   serializedVersion: 2
@@ -218,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c31fcff504c97d44bf81a9d58b43493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ACCELERATION: 0.45
+  ACCELERATION: 0.4
   CHASE_TOLERANCE: 0.2
   PURSUE_DISTANCE: 1000
   m_spawnSpeed: 0
@@ -3671,10 +3661,10 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 5340990be34ed4df196fa8ebabbdac9c, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 131534eb5ce5a364ab6f4bd6d9b9a636, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 10.666667, y: 5.3333335}
   m_AdaptiveModeThreshold: 0.5

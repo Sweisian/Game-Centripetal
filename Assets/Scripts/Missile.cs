@@ -72,7 +72,8 @@ public class Missile : MonoBehaviour {
 	}
 
 	void orientToSpeed(Vector2 speed) {
-		m_sprite.transform.rotation = Quaternion.Euler (new Vector3(0f,0f,Mathf.Rad2Deg * Mathf.Atan2 (speed.y, speed.x)));
+        //the plus 90 is to orient the ship in the right direction
+		m_sprite.transform.rotation = Quaternion.Euler (new Vector3(0f,0f,Mathf.Rad2Deg * Mathf.Atan2 (speed.y, speed.x) + 90));
 	}
 
     void OnCollisionEnter2D(Collision2D c)
