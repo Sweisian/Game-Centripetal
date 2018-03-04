@@ -7,14 +7,12 @@ public class CattleScript : MonoBehaviour {
     private GameController myGameController;
     private Vector3 direction;
     private bool lassoed;
-    private AudioManager a;
 
 	// Use this for initialization
 	void Start () {
         //Pick a random direction
         myGameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         direction = Vector3.Normalize(new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-0.8f, 0.8f), 0f));
-        a = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 	}
 	
 	// Update is called once per frame
