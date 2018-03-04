@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    //using singleton instance
+    //public static GameController myGameController;
 
     public ProceduralGenManager proceduralGenScript;
     public float difficulty = 15;
@@ -27,6 +29,21 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        ////Singleton instance of this object
+        //if (myGameController == null)
+        //{
+        //    myGameController = this;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
+
+        //main cam is no longer destoryed on load
+        //may cause problems with moving to a new scene later
+        //DontDestroyOnLoad(gameObject);
+
         //colliders = new Collider2D[proceduralGenScript.Zones.Length];
         proceduralGenScript = GetComponent<ProceduralGenManager>();
         InitGame();
@@ -72,7 +89,8 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		//Reset the game when the player presses R
-		if (Input.GetKeyDown (KeyCode.R)) {
+		if (gameover == true && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
+		{
 			restartGame ();
 		}
         
@@ -98,14 +116,9 @@ public class GameController : MonoBehaviour
             gameover = true;
             gameoverText.SetActive(true);
             playSound("game_over");
-            Time.timeScale = 0f;
 
-            if (Input.GetKey(KeyCode.R))
-            {
-                Debug.Log("Game over state is true and R is pressed");
-                gameover = false;
-                restartGame();
-            }
+            //slow game down upon player death
+            Time.timeScale = .50f;
     }
 
 	/// <summary>

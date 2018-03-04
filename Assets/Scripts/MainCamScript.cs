@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainCamScript : MonoBehaviour
 {
+
     [SerializeField] Transform target;
     //The following code has been adapted from https://gist.github.com/ftvs/5822103
 
@@ -26,6 +27,7 @@ public class MainCamScript : MonoBehaviour
 
     void Awake()
     {
+
         if (camTransform == null)
         {
             camTransform = GetComponent(typeof(Transform)) as Transform;
