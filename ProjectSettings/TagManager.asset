@@ -18,6 +18,7 @@ TagManager:
   - Star
   - AlertText
   - AudioManager
+  - Grid
   layers:
   - Default
   - TransparentFX

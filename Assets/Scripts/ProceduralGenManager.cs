@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -26,6 +27,7 @@ public class ProceduralGenManager : MonoBehaviour {
     public int rows = 25;
     private static int rowsSize;
     private static int nextZoneID = 0;
+    [SerializeField] private GameObject backgroundObj;
 
     public class Tile
     {
@@ -47,6 +49,7 @@ public class ProceduralGenManager : MonoBehaviour {
         public GameObject zoneObject;
         public List<Tile> gridPositions;
         public Vector3 location;
+        public GameObject background;
         public float difficulty;
         public Vector2 size;
         public BoxCollider2D collider;
@@ -72,7 +75,7 @@ public class ProceduralGenManager : MonoBehaviour {
             collider.isTrigger = true;
         }
 
-        public void setupZone(GameObject zonePrefab)
+        public void setupZone(GameObject zonePrefab, GameObject backgroundObj)
         {
             // zone should already have been created using the Zone constructor
             GameObject newZoneObj = Instantiate(zonePrefab, this.location, Quaternion.identity);
@@ -81,6 +84,9 @@ public class ProceduralGenManager : MonoBehaviour {
 
             this.gridPositions.Clear();
 
+            this.background = backgroundObj;
+            GameObject bg = Instantiate(backgroundObj, this.location, Quaternion.identity);
+            bg.transform.parent = GameObject.FindGameObjectWithTag("Grid").transform;
         }
 
 
@@ -144,7 +150,7 @@ public class ProceduralGenManager : MonoBehaviour {
                 Debug.Log(Zones[i].location);
                 prevZoneLocation = newZoneLocation;
             }
-            Zones[i].setupZone(ZonePrefab);
+            Zones[i].setupZone(ZonePrefab, backgroundObj);
             //GameObject newZone = Instantiate(ZonePrefab, Zones[i].location, Quaternion.identity);
             //Zones[i].zoneObject = newZone; //set the zone class's zoneObject to be equal to the zone prefab
             //Zones[i].setCollider(); //sets up the collider
@@ -199,7 +205,7 @@ public class ProceduralGenManager : MonoBehaviour {
         }
 
         Zone newZone = new Zone(zone.gridPositions, newZoneLocation, gameControllerScript.difficulty);
-        newZone.setupZone(ZonePrefab);
+        newZone.setupZone(ZonePrefab, backgroundObj);
         //Zones.Add(newZone);
         
         for (int x = -columnsSize; x < columnsSize; x += itemSize) //start at negative coordinate so that grid is centered
