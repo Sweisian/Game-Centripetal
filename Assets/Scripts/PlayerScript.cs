@@ -224,11 +224,11 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-
-    void OnBecameInvisible()
-    {
-        gc.BroadcastMessage("gameOver");
-    }
+    //Previously killed player when they went offscreen
+    //void OnBecameInvisible()
+    //{
+    //    gc.BroadcastMessage("gameOver");
+    //}
 
     public void triggerInvulnerability()
     {
