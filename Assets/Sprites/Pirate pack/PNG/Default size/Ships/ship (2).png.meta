@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 637e24c00ccdc64438c7590117d8ebc7
-timeCreated: 1520117889
-licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -36,7 +34,7 @@ TextureImporter:
     mipBias: -1
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -46,7 +44,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -79,37 +77,8 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: 13, y: 50.5}
-      - {x: 5, y: 56.5}
-      - {x: -12, y: 56.5}
-      - {x: -33, y: 41.5}
-      - {x: -33, y: -25.5}
-      - {x: -27, y: -46.5}
-      - {x: -10, y: -56.5}
-      - {x: 14, y: -56.5}
-      - {x: 33, y: -15.5}
-      - {x: 33, y: 32.5}
-    physicsShape:
-    - - {x: 33, y: 25.5}
-      - {x: 32, y: 32.5}
-      - {x: 18, y: 45.5}
-      - {x: 5, y: 56.5}
-      - {x: -5, y: 56.5}
-      - {x: -12, y: 51.5}
-      - {x: -20, y: 40.5}
-      - {x: -30, y: 32.5}
-      - {x: -33, y: 19.5}
-      - {x: -33, y: -8.5}
-      - {x: -32, y: -13.5}
-      - {x: -26, y: -20.5}
-      - {x: -20, y: -33.5}
-      - {x: -10, y: -50.5}
-      - {x: -5, y: -56.5}
-      - {x: 6, y: -56.5}
-      - {x: 19, y: -38.5}
-      - {x: 19, y: -32.5}
-      - {x: 33, y: -14.5}
+    outline: []
+    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

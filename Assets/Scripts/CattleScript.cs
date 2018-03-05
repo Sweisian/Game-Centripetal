@@ -26,7 +26,6 @@ public class CattleScript : MonoBehaviour {
 	}
 
     public void run(){
-        myGameController.playSound("moo");
         lassoed = true;
     }
 

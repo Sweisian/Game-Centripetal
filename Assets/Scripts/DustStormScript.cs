@@ -38,7 +38,6 @@ public class DustStormScript : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            myGameController.playSound("gameOver");
             myGameController.BroadcastMessage("gameOver");
         }
     }
