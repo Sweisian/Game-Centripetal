@@ -57,7 +57,7 @@ public class Missile : MonoBehaviour {
 				chaseTarget ();
 			}
 		}
-        //IncreaseEnemyDifficulty();
+        IncreaseEnemyDifficulty();
 	}
 
 	void chaseTarget() {
@@ -118,9 +118,16 @@ public class Missile : MonoBehaviour {
         GameController gameControlScript = GetComponent<GameController>();
         PlayerScript ps = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
         float distance = ps.maxYvalue;
-        float minAccel = 0.2f;
-        float newAccel = distance * accelModifier;
-        if (newAccel > minAccel)
-            ACCELERATION = newAccel;
+        float minAccel = 0.37f;
+        float mediumAccel = 0.4f;
+        float maxAccel = 0.5f;
+        //float newAccel = distance * accelModifier;
+        if (distance < 1000)
+            ACCELERATION = minAccel;
+        else if (distance < 2000)
+            ACCELERATION = mediumAccel;
+        else
+            ACCELERATION = maxAccel;
+        Debug.Log(distance);
     }
 }
