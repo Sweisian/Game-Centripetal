@@ -85,7 +85,6 @@ public class PlayerScript : MonoBehaviour {
             {
                 invulnerableStarter = false;
                 SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
-                Color c = sprite.color;
                 while (invulnerable)
                 {
                     sprite.color = Color.blue;
@@ -93,7 +92,7 @@ public class PlayerScript : MonoBehaviour {
                     sprite.color = Color.yellow;
                     yield return new WaitForSeconds(0.25f);
                 }
-                sprite.color = c;
+                sprite.color = Color.blue;
             }
     }
 
@@ -200,7 +199,7 @@ public class PlayerScript : MonoBehaviour {
         {
             s.addPoints(10, "(+10 Coin Collected)");
             gc.sendAlert("Struck Gold! +10", Color.yellow);
-            gc.playSound("coinCollect");
+            gc.playSound("collectCoin");
             GameObject.Destroy(c.gameObject);
         }
         else if (c.gameObject.tag=="Star")

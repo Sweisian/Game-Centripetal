@@ -9,17 +9,15 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    //using singleton instance
-    //public static GameController myGameController;
 
     public ProceduralGenManager proceduralGenScript;
-    public float difficulty = 15;
-    public float difficultyModifier = 1;
+    public int difficulty = 15;
     private Collider2D[] colliders = new Collider2D[3];
     private Collider2D playerCollider;
     public static ProceduralGenManager.Zone currZone;
 
     [SerializeField] private GameObject maxDistPrefab;
+
     private Dictionary<string, AudioSource> sounds;
     private Text alertText;
     public bool gameover = false;
@@ -29,49 +27,18 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        ////Singleton instance of this object
-        //if (myGameController == null)
-        //{
-        //    myGameController = this;
-        //}
-        //else
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
-        //main cam is no longer destoryed on load
-        //may cause problems with moving to a new scene later
-        //DontDestroyOnLoad(gameObject);
-
         //colliders = new Collider2D[proceduralGenScript.Zones.Length];
         proceduralGenScript = GetComponent<ProceduralGenManager>();
         InitGame();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider2D>();
+
         //puts a new max distance prefab at the highest completed distance
         Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
         alertText = GameObject.FindGameObjectWithTag("AlertText").GetComponent<Text>();
         Color c = alertText.color;
         c.a = 0f;
         alertText.color = c;
-    }
-
-    /* Unity is stupid and won't serialize dictionaries
-    * So we'll just have to add the things manually to here.
-    */
-    void Start()
-    {
-        gameoverText.SetActive(false);
-        sounds = new Dictionary<string, AudioSource>();
-        AudioSource[] clips = GetComponents<AudioSource>();
-        sounds.Add("cannonFire", clips[1]);
-        sounds.Add("attach", clips[2]);
-        sounds.Add("throw", clips[3]);
-        sounds.Add("coinCollect", clips[4]);
-        sounds.Add("detatch", clips[5]);
-        sounds.Add("game_over", clips[6]);
-        sounds.Add("snap", clips[7]);
     }
 
     void InitGame()
@@ -85,16 +52,34 @@ public class GameController : MonoBehaviour
 
         currZone = proceduralGenScript.Zones[0]; //player must always start in the first zone
     }
+
+    /* Unity is stupid and won't serialize dictionaries
+     * So we'll just have to add the things manually to here.
+    */
+
+
+	// Use this for initialization
+	void Start () {
+        sounds = new Dictionary<string, AudioSource>();
+        AudioSource[] clips = GetComponents<AudioSource>();
+        sounds.Add("attach", clips[0]);
+        sounds.Add("detach", clips[1]);
+        sounds.Add("throw", clips[2]);
+        sounds.Add("snap", clips[3]);
+        sounds.Add("gameOver", clips[4]);
+        sounds.Add("moo", clips[5]);
+        sounds.Add("backgroundMusic", clips[6]);
+        sounds.Add("collectCoin",clips[7]);
+        gameoverText.SetActive(false);
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
 		//Reset the game when the player presses R
-		if (gameover == true && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
-		{
+		if (Input.GetKeyDown (KeyCode.R)) {
 			restartGame ();
 		}
-        
-	    increaseDifficulty();
 
         //temp code for reseting max distance and max score
 	    if (Input.GetKeyDown(KeyCode.P))
@@ -105,20 +90,20 @@ public class GameController : MonoBehaviour
     }
 
 
-    public void increaseDifficulty()
-    {
-        difficulty += Time.deltaTime * difficultyModifier;
-    }
-
     public void gameOver()
     {
         //Debug.Log("Game over state is true");
             gameover = true;
             gameoverText.SetActive(true);
-            playSound("game_over");
+            playSound("gameOver");
+            Time.timeScale = 0f;
 
-            //slow game down upon player death
-            Time.timeScale = .50f;
+            if (Input.GetKey(KeyCode.R))
+            {
+                Debug.Log("Game over state is true and R is pressed");
+                gameover = false;
+                restartGame();
+            }
     }
 
 	/// <summary>
@@ -131,17 +116,13 @@ public class GameController : MonoBehaviour
         Debug.Log ("Game Reset");
 	}
 
-
     public void playSound(string key)
     {
         AudioSource a = sounds[key];
-        Debug.Log("Trying to play " + key);
-        if (a != null)
+        if (a!=null)
         {
-            Debug.Log("Playing "+key);
             a.Play();
         }
-        else Debug.Log(key + " not found!");
     }
 
     public void sendAlert(string wannaSay, Color col)

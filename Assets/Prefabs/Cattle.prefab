@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4072194251300568}
   - component: {fileID: 212614893167362586}
   - component: {fileID: 50775271607081966}
+  - component: {fileID: 61315653351507464}
   - component: {fileID: 114058165430679566}
-  - component: {fileID: 70625289336516284}
   m_Layer: 0
   m_Name: Cattle
   m_TagString: Cattle
@@ -36,13 +36,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356737157218598}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.2433, y: 7.313217, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -300.1948, y: 633.41656, z: 0}
+  m_LocalScale: {x: 4.5752273, y: 4.8858566, z: 4.8858566}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!50 &50775271607081966
 Rigidbody2D:
   serializedVersion: 4
@@ -63,21 +63,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &70625289336516284
-CapsuleCollider2D:
+--- !u!61 &61315653351507464
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356737157218598}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8dca1ec6dd4f12545b8c9b6b645c31d4, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.013288021, y: -0.073082685}
-  m_Size: {x: 1.2386618, y: 3.3850846}
-  m_Direction: 0
+  m_Offset: {x: -0.00026220083, y: -0.02708286}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.1333334, y: 2.1333334}
+    newSize: {x: 2.1333334, y: 2.1333334}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.0544448, y: 1.1453985}
+  m_EdgeRadius: 0
 --- !u!114 &114058165430679566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,10 +134,10 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ebd4c19d0a695494f9b814b5b995ef00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dcca21217606443799a5b4972df57b03, type: 3}
   m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
-  m_FlipX: 0
-  m_FlipY: 1
+  m_FlipX: 1
+  m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2.1333334, y: 2.1333334}
   m_AdaptiveModeThreshold: 0.5

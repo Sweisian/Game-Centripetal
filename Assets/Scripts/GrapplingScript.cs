@@ -98,8 +98,8 @@ public class GrapplingScript : MonoBehaviour
             }
             else if (postAttached.tag == "Cattle")
             {
-                gc.sendAlert("Ship Plundered! +20", Color.white);
-                s.addPoints(20, "(+20 Ship Plundered!)");
+                gc.sendAlert("Cow Wrangled! +20", Color.white);
+                s.addPoints(20, "(+20 Cow Wrangled!)");
                 disconnectLasso(false);
                 GameObject.Destroy(postAttached);
                 postAttached = null;
@@ -224,8 +224,7 @@ public class GrapplingScript : MonoBehaviour
         {
             gc.playSound("snap");
         }
-        else
-            gc.playSound("detatch");
+        else gc.playSound("detach");
         if (postAttached.GetComponent<CattleScript>())
             postAttached.GetComponent<CattleScript>().calmDown();
         joint.enabled = false;

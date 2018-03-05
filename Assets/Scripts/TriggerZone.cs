@@ -32,12 +32,14 @@ public class TriggerZone : MonoBehaviour
             {
                 Debug.Log("Entered new zone");
                 thisZone.beenEntered = true;
-
-                proceduralGenScript.AddZone(thisZone); //refresh the previous zone
-                //proceduralGenScript.AddZone(GameController.currZone); //refresh the previous zone
-
+                //if (isFirstZone == true)
+                  //  isFirstZone = false;
+                //else {
+                    //makes it not call refreshZone if player is entering the very first zone
+                    proceduralGenScript.AddZone(GameController.currZone); //refresh the previous zone
+                   
                 //}
-                //GameController.currZone = thisZone; //update the current zone to be the one that was just entered
+                GameController.currZone = thisZone; //update the current zone to be the one that was just entered
             }
             else
             { 
@@ -46,7 +48,7 @@ public class TriggerZone : MonoBehaviour
                 if (thisZone != null)
                 {
                     
-                    //GameController.currZone = thisZone;
+                    GameController.currZone = thisZone;
                 }
             }
             //set curZone to the zone related to this (other) collider

@@ -14,7 +14,6 @@ public class ShootingEnemy : MonoBehaviour
 
     private GameObject playerTarget;
     private Transform m_currentTarget;
-    private GameController gc;
     [SerializeField] private float maxShootDistance = 100f;
 
     /// <summary>
@@ -29,8 +28,6 @@ public class ShootingEnemy : MonoBehaviour
 
     void Start()
     {
-        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        gc.playSound("cannonFire");
         shootCooldown = 0f;
         if (GameObject.FindWithTag("Player"))
         {
@@ -61,6 +58,8 @@ public class ShootingEnemy : MonoBehaviour
     {
         if(true)
         {
+            
+
             shootCooldown = shootingRate;
             Vector3 shotDirection = (transform.position - m_currentTarget.position);
             Instantiate(shotPrefab, shotDirection, transform.rotation);

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Sound {
+public class Sound : MonoBehaviour {
 
     public string name;
 
@@ -13,6 +13,6 @@ public class Sound {
 
     public bool loop;
 
-     public AudioSource source;
+    [HideInInspector] public AudioSource source;
 
 }
