@@ -15,6 +15,7 @@ public class ShootingScript : MonoBehaviour
 
     private GameObject playerTarget;
     private Transform m_currentTarget;
+    private GameController gc;
     [SerializeField] private float maxShootDistance = 100f;
 
     /// <summary>
@@ -30,6 +31,7 @@ public class ShootingScript : MonoBehaviour
     void Start()
     {
         shootCooldown = 0f;
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         if (GameObject.FindWithTag("Player"))
         {
             playerTarget = GameObject.FindWithTag("Player").gameObject;
@@ -64,6 +66,7 @@ public class ShootingScript : MonoBehaviour
    
             shootCooldown = shootingRate;
             //Vector3 shotDirection = (transform.position - m_currentTarget.position).normalized;
+            gc.playSound("cannonFire");
             Instantiate(shotPrefab, transform.position, transform.rotation);
         }
     }

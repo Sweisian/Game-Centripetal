@@ -17,6 +17,9 @@ public class Missile : MonoBehaviour {
     [SerializeField] private float ACCELERATION = 0.5f;
     [SerializeField] private float CHASE_TOLERANCE = 0.2f;
     [SerializeField] private float PURSUE_DISTANCE = 200f;
+
+    //Speed penalty for colliding with objects
+    [SerializeField] private float collisionPenalty = 0;
     //this extra variable is declared to allow return to original acceleration
     private float tempACCELERATION;
 
@@ -72,7 +75,8 @@ public class Missile : MonoBehaviour {
 	}
 
 	void orientToSpeed(Vector2 speed) {
-		m_sprite.transform.rotation = Quaternion.Euler (new Vector3(0f,0f,Mathf.Rad2Deg * Mathf.Atan2 (speed.y, speed.x)));
+        //the plus 90 is to orient the ship in the right direction
+		m_sprite.transform.rotation = Quaternion.Euler (new Vector3(0f,0f,Mathf.Rad2Deg * Mathf.Atan2 (speed.y, speed.x) + 90));
 	}
 
     void OnCollisionEnter2D(Collision2D c)
@@ -85,6 +89,9 @@ public class Missile : MonoBehaviour {
                 g.disconnectLasso(true);
             Destroy(c.gameObject);
         }
+
+        //Supposed to provide a speed penalty on collisions. Doesn't work
+        //m_speed = m_speed.normalized * (m_speed.magnitude - collisionPenalty);
 
         /*
         if (c.gameObject.tag == "Player")
