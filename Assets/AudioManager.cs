@@ -8,10 +8,21 @@ public class AudioManager : MonoBehaviour {
 
     public Sound[] sounds;
 
-   // public static AudioManager instance;
+    public static AudioManager instance;
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -20,17 +31,12 @@ public class AudioManager : MonoBehaviour {
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-
-            s.source.playOnAwake = true;
-            s.source.rolloffMode = AudioRolloffMode.Linear;
-
-            Debug.Log(s.source);
         }
     }
 
     void Start()
     {
-        Play("coinCollect");
+        
     }
 
     public void Play(string name)

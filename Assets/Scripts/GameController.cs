@@ -21,7 +21,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GameObject maxDistPrefab;
     private Dictionary<string, AudioSource> sounds;
-    private Text alertText;
+
+    //alert text here
+    private TextMeshProUGUI alertText;
     public bool gameover = false;
     public GameObject gameoverText;
     [SerializeField] private int numTimesToFlashAlert;
@@ -51,7 +53,9 @@ public class GameController : MonoBehaviour
         playerCollider = player.GetComponent<Collider2D>();
         //puts a new max distance prefab at the highest completed distance
         Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
-        alertText = GameObject.FindGameObjectWithTag("AlertText").GetComponent<Text>();
+
+        //grabs the alert text from the UI
+        alertText = GameObject.FindGameObjectWithTag("AlertText").GetComponent<TextMeshProUGUI>();
         Color c = alertText.color;
         c.a = 0f;
         alertText.color = c;
