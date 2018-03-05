@@ -93,7 +93,7 @@ public class PlayerScript : MonoBehaviour {
                     sprite.color = Color.yellow;
                     yield return new WaitForSeconds(0.25f);
                 }
-            sprite.color = c;
+                sprite.color = c;
             }
     }
 

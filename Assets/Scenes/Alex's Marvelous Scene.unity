@@ -1125,18 +1125,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0033845007, y: 0.12320596}
+  m_Offset: {x: -0.003385067, y: 0.04603386}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.32, y: 2.26}
+    oldSize: {x: 4.4, y: 7.5333333}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5058967, y: 0.7535881}
+  m_Size: {x: 4.437212, y: 7.626465}
   m_EdgeRadius: 0
 --- !u!114 &415104543
 MonoBehaviour:
@@ -1194,7 +1194,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300000, guid: 637e24c00ccdc64438c7590117d8ebc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -2400,7 +2400,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1628083938
+  randomSeed: -2445886
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6634,7 +6634,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proceduralGenScript: {fileID: 1568214511}
-  difficulty: 2147483647
+  difficulty: 2.1474836e+9
+  difficultyModifier: 1
   maxDistPrefab: {fileID: 1152740054480568, guid: 169512756b82b7b49a0f52a3e2157992,
     type: 2}
   gameover: 0
@@ -7163,7 +7164,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8da4a980e2f02436d8cb3b8bd116fe94, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.33
   m_Pitch: 1
   Loop: 0
   Mute: 0

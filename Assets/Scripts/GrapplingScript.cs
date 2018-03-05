@@ -98,8 +98,8 @@ public class GrapplingScript : MonoBehaviour
             }
             else if (postAttached.tag == "Cattle")
             {
-                gc.sendAlert("Cow Wrangled! +20", Color.white);
-                s.addPoints(20, "(+20 Cow Wrangled!)");
+                gc.sendAlert("Ship Plundered! +20", Color.white);
+                s.addPoints(20, "(+20 Ship Plundered!)");
                 disconnectLasso(false);
                 GameObject.Destroy(postAttached);
                 postAttached = null;
