@@ -14,9 +14,10 @@ public class Missile : MonoBehaviour {
 
 
 
-    [SerializeField] private float ACCELERATION = 0.5f;
+    [SerializeField] private float ACCELERATION = 0.2f;
     [SerializeField] private float CHASE_TOLERANCE = 0.2f;
     [SerializeField] private float PURSUE_DISTANCE = 200f;
+    [SerializeField] private float accelModifier = 0.2f;
 
     //Speed penalty for colliding with objects
     [SerializeField] private float collisionPenalty = 0;
@@ -56,6 +57,7 @@ public class Missile : MonoBehaviour {
 				chaseTarget ();
 			}
 		}
+        //IncreaseEnemyDifficulty();
 	}
 
 	void chaseTarget() {
@@ -114,6 +116,11 @@ public class Missile : MonoBehaviour {
     void IncreaseEnemyDifficulty()
     {
         GameController gameControlScript = GetComponent<GameController>();
-
+        PlayerScript ps = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
+        float distance = ps.maxYvalue;
+        float minAccel = 0.2f;
+        float newAccel = distance * accelModifier;
+        if (newAccel > minAccel)
+            ACCELERATION = newAccel;
     }
 }

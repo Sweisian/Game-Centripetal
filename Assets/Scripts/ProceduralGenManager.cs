@@ -72,7 +72,18 @@ public class ProceduralGenManager : MonoBehaviour {
             collider.isTrigger = true;
         }
 
-        
+        public void setupZone(GameObject zonePrefab)
+        {
+            // zone should already have been created using the Zone constructor
+            GameObject newZoneObj = Instantiate(zonePrefab, this.location, Quaternion.identity);
+            this.zoneObject = newZoneObj; //set the zone class's zoneObject to be the zone that was just instatiated
+            this.setCollider(); //sets up the collider
+
+            this.gridPositions.Clear();
+
+        }
+
+
     }
 
     
@@ -127,16 +138,18 @@ public class ProceduralGenManager : MonoBehaviour {
             {
                 //gridPositions[i] = new List<Tile>();
                 Vector3 newZoneLocation = new Vector3(prevZoneLocation.x, prevZoneLocation.y + rowsSize);
-                Zones.Add(new Zone(gridPositionsNew, newZoneLocation, 0));
+                Zone zone = new Zone(gridPositionsNew, newZoneLocation, 0);
+                Zones.Add(zone);
                 IncrementNextZoneId();
                 Debug.Log(Zones[i].location);
                 prevZoneLocation = newZoneLocation;
             }
-            GameObject newZone = Instantiate(ZonePrefab, Zones[i].location, Quaternion.identity);
-            Zones[i].zoneObject = newZone; //set the zone class's zoneObject to be equal to the zone prefab
-            Zones[i].setCollider(); //sets up the collider
+            Zones[i].setupZone(ZonePrefab);
+            //GameObject newZone = Instantiate(ZonePrefab, Zones[i].location, Quaternion.identity);
+            //Zones[i].zoneObject = newZone; //set the zone class's zoneObject to be equal to the zone prefab
+            //Zones[i].setCollider(); //sets up the collider
             
-            Zones[i].gridPositions.Clear(); // clear each list gridPositions
+            //Zones[i].gridPositions.Clear(); // clear each list gridPositions
         }
     
         //base gridPositions on zone location
@@ -186,25 +199,16 @@ public class ProceduralGenManager : MonoBehaviour {
         }
 
         Zone newZone = new Zone(zone.gridPositions, newZoneLocation, gameControllerScript.difficulty);
-        //zone.location = newZoneLocation; //put new zone in the correct location
-
-        GameObject newZoneObj = Instantiate(ZonePrefab, newZone.location, Quaternion.identity);
-        newZone.zoneObject = newZoneObj; //set the zone class's zoneObject to be the zone that was just instatiated
-        newZone.setCollider(); //sets up the collider
-
-        newZone.gridPositions.Clear();
-
+        newZone.setupZone(ZonePrefab);
+        //Zones.Add(newZone);
+        
         for (int x = -columnsSize; x < columnsSize; x += itemSize) //start at negative coordinate so that grid is centered
-        {
-            
-            
+        { 
                 for (float y = newZone.location.y; y < newZone.location.y + rowsSize; y += itemSize)
                 {
                     // creates a position for each grid position that are itemSize distance apart
                     newZone.gridPositions.Add(new Tile(x, y));
                 }
-            
-            
         }
 
         // set up new zone
@@ -239,14 +243,14 @@ public class ProceduralGenManager : MonoBehaviour {
         {
 
             Vector3 randomPosition = RandomPosition(zone.gridPositions);
-            if (nextZoneID < 7)
-            {
+            //if (nextZoneID < 7)
+            
                 // if the player is in the first 3 zones, ensure that no obstacles spawn on the y axis
-                while (randomPosition.x > -5 & randomPosition.x < 5)
-                {
-                    randomPosition = RandomPosition(zone.gridPositions);
-                }
+            while (randomPosition.x > -5 & randomPosition.x < 5)
+            {
+                randomPosition = RandomPosition(zone.gridPositions);
             }
+
 
             GameObject obstacleChoice = obstacleArray[Random.Range(0, obstacleArray.Length)];
             Instantiate(obstacleChoice, randomPosition, Quaternion.identity);
@@ -260,15 +264,15 @@ public class ProceduralGenManager : MonoBehaviour {
         for (int i = 0; i < postCountValue; i++)
         {
             Vector3 randomPosition = RandomPosition(zone.gridPositions);
-            if (nextZoneID < 7)
-            {
-                // if the player is in the first 3 zones, ensure that no posts spawn on the y axis
-                while (randomPosition.x > -5 & randomPosition.x < 5)
-                {
-                    randomPosition = RandomPosition(zone.gridPositions);
-                }
-            }
+            //if (nextZoneID < 7)
             
+                // if the player is in the first 3 zones, ensure that no posts spawn on the y axis
+            while (randomPosition.x > -5 & randomPosition.x < 5)
+            {
+                randomPosition = RandomPosition(zone.gridPositions);
+            }
+
+
 
             //GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
             Instantiate(post, randomPosition, Quaternion.identity);
