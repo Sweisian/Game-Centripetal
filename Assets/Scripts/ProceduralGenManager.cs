@@ -88,8 +88,6 @@ public class ProceduralGenManager : MonoBehaviour {
             GameObject bg = Instantiate(backgroundObj, this.location, Quaternion.identity);
             bg.transform.parent = GameObject.FindGameObjectWithTag("Grid").transform;
         }
-
-
     }
 
     
