@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212400282440968382}
   - component: {fileID: 50503138081952404}
   - component: {fileID: 70266594908325310}
+  - component: {fileID: 114516981995187408}
   m_Layer: 0
   m_Name: Post
   m_TagString: Post
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1038272242216896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 121.6078, y: -205.35341, z: 0}
+  m_LocalPosition: {x: 24.357544, y: 39.402397, z: 0}
   m_LocalScale: {x: 3.3637476, y: 4.6244135, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,6 +78,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0000011340617, y: -0.09917233}
   m_Size: {x: 0.9637551, y: 1.4016553}
   m_Direction: 0
+--- !u!114 &114516981995187408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038272242216896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116cc65951406e741a81beb4208b7e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 1335382110519822, guid: 3940711855f2fc1409f3ec4fadac5e96, type: 2}
 --- !u!212 &212400282440968382
 SpriteRenderer:
   m_ObjectHideFlags: 1

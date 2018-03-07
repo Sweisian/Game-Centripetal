@@ -234,7 +234,11 @@ public class GrapplingScript : MonoBehaviour
         lassoConnected = false;
         if (postAttached.gameObject.tag == "Post" && timeAttached>=secondsAttatchedBeforePostDelete)
         {
-            GameObject.Destroy(postAttached);
+            Destroyable d = postAttached.GetComponent<Destroyable>();
+            if (d != null)
+                d.DestroySelf();
+            else
+                Destroy(postAttached);
         }
         arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
         timeAttached = 0f;

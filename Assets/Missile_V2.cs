@@ -51,7 +51,18 @@ public class Missile_V2 : MonoBehaviour
         {
             GrapplingScript g = target.GetComponent<GrapplingScript>();
             if (g.isLassoConnectedTo(c.gameObject))
-                g.disconnectLasso(true);
+                g.disconnectLasso(true);  
+        }
+
+        Destroyable d = c.gameObject.GetComponent<Destroyable>();
+        if (d != null)
+        {
+            //if the destroyable thing exsists, call the destroy self function
+            //this will make an exploooosion
+            d.DestroySelf();
+        }
+        else
+        {
             Destroy(c.gameObject);
         }
     }

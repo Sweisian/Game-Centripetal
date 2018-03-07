@@ -17,12 +17,12 @@ public class Destroyable : MonoBehaviour {
     }
 
     public virtual void DestroySelf()
-    {
-            
+    { 
+            Debug.Log("Played explosion for " + gameObject);
             GameObject expl = Instantiate(explosion, transform.position, Quaternion.identity);
+            //Destroy(expl, 3);
             Destroy(this.gameObject);
-            Destroy(expl, 3);
-            // play sound on destruction of asteroids
-            //FindObjectOfType<AudioScript>().DestroyAsteroidSource.Play();
+        // play sound on destruction of asteroids
+        //FindObjectOfType<AudioScript>().DestroyAsteroidSource.Play();
     }
 }

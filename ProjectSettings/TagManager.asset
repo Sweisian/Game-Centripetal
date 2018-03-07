@@ -21,6 +21,7 @@ TagManager:
   - Grid
   - Camera Confiner
   - Dingy
+  - Post Explosion
   layers:
   - Default
   - TransparentFX

@@ -99,6 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  camTransform: {fileID: 0}
+  shakeDuration: 0
+  shakeAmount: 0.7
+  decreaseFactor: 1
+  maxYcoord: 0
+  yMaxDistFromCenter: 0
 --- !u!120 &120879720140441624
 LineRenderer:
   m_ObjectHideFlags: 1

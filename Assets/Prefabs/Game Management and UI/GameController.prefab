@@ -741,11 +741,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 10
   rows: 25
+  backgroundObj: {fileID: 0}
   ZonePrefab: {fileID: 1908182893010420, guid: 60801a7109efb7a4886c61914db40376, type: 2}
   startPosition: {x: 0, y: 0, z: 0}
   postCount:
     minimum: 50
     maximum: 100
+  superEasyObstacles: []
+  easyObstacles: []
   obstacles:
   - {fileID: 1411833080708982, guid: 4ceac09e72cc8402eb7802d06a01acb3, type: 2}
   - {fileID: 1411833080708982, guid: 4ceac09e72cc8402eb7802d06a01acb3, type: 2}
@@ -756,7 +759,7 @@ MonoBehaviour:
   - {fileID: 1575883275462072, guid: 73bcaacdaf74a4b4da7bffea46ac59ad, type: 2}
   - {fileID: 1575883275462072, guid: 73bcaacdaf74a4b4da7bffea46ac59ad, type: 2}
   - {fileID: 1575883275462072, guid: 73bcaacdaf74a4b4da7bffea46ac59ad, type: 2}
-  - {fileID: 1078091877835194, guid: ef331dc2c8dccac41978380d766de244, type: 2}
+  - {fileID: 0}
   - {fileID: 1512862442957740, guid: c11c2e3e060c849ae920276c9b9e0de9, type: 2}
   - {fileID: 1512862442957740, guid: c11c2e3e060c849ae920276c9b9e0de9, type: 2}
   post: {fileID: 1038272242216896, guid: 53406e2eebe48aa4da54e241fcb53c0c, type: 2}
