@@ -33,7 +33,7 @@ public class TriggerZone : MonoBehaviour
                 Debug.Log("Entered new zone");
                 thisZone.beenEntered = true;
 
-                proceduralGenScript.AddZone(thisZone); //refresh the previous zone
+                proceduralGenScript.AddZone(); //refresh the previous zone
                 //proceduralGenScript.AddZone(GameController.currZone); //refresh the previous zone
 
                 //}

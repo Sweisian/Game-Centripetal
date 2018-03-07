@@ -46,8 +46,8 @@ public class GameController : MonoBehaviour
         //may cause problems with moving to a new scene later
         //DontDestroyOnLoad(gameObject);
 
-        //colliders = new Collider2D[proceduralGenScript.Zones.Length];
         proceduralGenScript = GetComponent<ProceduralGenManager>();
+        ProceduralGenManager.zoneID = 0; // reset the zone ID each time the game resets
         InitGame();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider2D>();
