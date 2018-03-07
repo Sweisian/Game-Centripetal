@@ -199,26 +199,29 @@ public class PlayerScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.gameObject.tag == "Coin")
+        if (c.gameObject.tag != "Camera Confiner")
         {
-            s.addPoints(10, "(+10 Coin Collected)");
-            gc.sendAlert("Struck Gold! +10", Color.yellow);
-            gc.playSound("coinCollect");
-            GameObject.Destroy(c.gameObject);
-        }
-        else if (c.gameObject.tag=="Star")
-        {
-            numCharges++;
-            GameObject.Destroy(c.gameObject);
-        }
-        else if (invulnerable && c.gameObject.tag == "Chaser")
-        {
-            Destroy(c.gameObject);
-            //StartCoroutine(spawnChaser());
-        }
-        else if (invulnerable && c.gameObject.tag!="Lasso")
-        {
-            Destroy(c.gameObject);
+            if (c.gameObject.tag == "Coin")
+            {
+                s.addPoints(10, "(+10 Coin Collected)");
+                gc.sendAlert("Struck Gold! +10", Color.yellow);
+                gc.playSound("coinCollect");
+                GameObject.Destroy(c.gameObject);
+            }
+            else if (c.gameObject.tag == "Star")
+            {
+                numCharges++;
+                GameObject.Destroy(c.gameObject);
+            }
+            else if (invulnerable && c.gameObject.tag == "Chaser")
+            {
+                Destroy(c.gameObject);
+                //StartCoroutine(spawnChaser());
+            }
+            else if (invulnerable && c.gameObject.tag != "Lasso")
+            {
+                Destroy(c.gameObject);
+            }
         }
     }
 

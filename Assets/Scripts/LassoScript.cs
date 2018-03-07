@@ -65,27 +65,30 @@ public class LassoScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.gameObject.tag == "Post" || c.gameObject.tag=="Cattle") {
-            gc.playSound("attach");
-            if (c.gameObject.GetComponent<CattleScript>())
-            {
-                c.gameObject.GetComponent<CattleScript>().run();
-            }
-			player.GetComponent<GrapplingScript> ().connectLasso (c.gameObject);
-			lassoLine.enabled = false;
-			GameObject.Destroy (this.gameObject);
-		}
-		else if (!flying && c.gameObject.tag=="Player")
-		{
-			lassoLine.enabled = false;
-			GameObject.Destroy (this.gameObject);
-			player.GetComponent<GrapplingScript> ().resetLasso ();
-		}
-        else if (flying && c.gameObject.tag!="Player")
+        if (c.gameObject.tag != "Camera Confiner")
         {
-            Debug.Log("Lasso hit a " + c.name);
-            flying = false;
-            
+            if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle")
+            {
+                gc.playSound("attach");
+                if (c.gameObject.GetComponent<CattleScript>())
+                {
+                    c.gameObject.GetComponent<CattleScript>().run();
+                }
+                player.GetComponent<GrapplingScript>().connectLasso(c.gameObject);
+                lassoLine.enabled = false;
+                GameObject.Destroy(this.gameObject);
+            }
+            else if (!flying && c.gameObject.tag == "Player")
+            {
+                lassoLine.enabled = false;
+                GameObject.Destroy(this.gameObject);
+                player.GetComponent<GrapplingScript>().resetLasso();
+            }
+            else if (flying && c.gameObject.tag != "Player")
+            {
+                Debug.Log("Lasso hit a " + c.name);
+                flying = false;
+            }
         }
-	}
+    }
 }

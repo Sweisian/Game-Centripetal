@@ -19,6 +19,7 @@ TagManager:
   - AlertText
   - AudioManager
   - Grid
+  - Camera Confiner
   layers:
   - Default
   - TransparentFX

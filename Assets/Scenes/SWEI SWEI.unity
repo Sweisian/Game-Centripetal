@@ -1766,7 +1766,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1247970407013504, guid: c4303d45513c87247a9514cbc32cb02c, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4303d45513c87247a9514cbc32cb02c, type: 2}
@@ -6225,14 +6225,6 @@ Prefab:
     - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1740196527120044, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_Name
-      value: Tile Parent V2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1740196527120044, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e0b343714603194098a767289a73bcf, type: 2}
