@@ -97,6 +97,11 @@ public class GameController : MonoBehaviour
 		{
 			restartGame ();
 		}
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            restartGame();
+        }
         
 	    increaseDifficulty();
 

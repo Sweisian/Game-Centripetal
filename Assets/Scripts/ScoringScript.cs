@@ -34,7 +34,10 @@ public class ScoringScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    updateScore();
+        if (myPlayer != null)
+        {
+            updateScore();
+        }
 	}
 
     public void updateScore ()

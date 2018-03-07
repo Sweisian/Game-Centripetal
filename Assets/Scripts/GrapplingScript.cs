@@ -83,7 +83,6 @@ public class GrapplingScript : MonoBehaviour
         }
     }
 
-    //Currently not being used, but can be helpful with detecting multiple rotations.
     private IEnumerator speedUp()
     {
         Debug.Log("Rotation");
@@ -94,6 +93,8 @@ public class GrapplingScript : MonoBehaviour
             {
                 gc.sendAlert("Rotation! +5", Color.green);
                 s.addPoints(5, "(+5 Rotation)");
+                ps.currentSpeed += 5;
+                ps.maxSpeed += 5;
                 disconnectLasso(false);
             }
             else if (postAttached.tag == "Cattle")

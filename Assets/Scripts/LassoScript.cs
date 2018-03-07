@@ -41,6 +41,10 @@ public class LassoScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector2 dir = direction;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 270f;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
         lassoLine.SetPosition(0, player.transform.position);
         lassoLine.SetPosition(1, this.transform.position);
         if (flying)

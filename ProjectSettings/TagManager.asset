@@ -21,6 +21,8 @@ TagManager:
   - Grid
   - Camera Confiner
   - Dingy
+  - Shooting
+  - Shipwreck
   layers:
   - Default
   - TransparentFX
