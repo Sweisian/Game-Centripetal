@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour {
         StartCoroutine(invulnerabilityHandler());
         invulnText.text = ": " + numCharges;
 
-        if (!invulnerable && numCharges>0 && Input.GetKeyDown(KeyCode.LeftShift))
+        if (!invulnerable && numCharges > 0 && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(1)))
         {
             currentInvulnTimeLeft = timePerInvulnerability;
             numCharges--;
@@ -91,6 +91,8 @@ public class PlayerScript : MonoBehaviour {
                 invulnerableStarter = false;
                 SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
                 Color c = sprite.color;
+                currentSpeed += 8;
+                maxSpeed += 8;
                 while (invulnerable)
                 {
                     sprite.color = Color.blue;
@@ -99,6 +101,8 @@ public class PlayerScript : MonoBehaviour {
                     yield return new WaitForSeconds(0.25f);
                 }
                 sprite.color = c;
+                currentSpeed -= 8;
+                maxSpeed -= 8;
             }
     }
 
@@ -240,7 +244,7 @@ public class PlayerScript : MonoBehaviour {
         //Transform myTransform = transform;
         //myTransform.position -= (new Vector3(0f, 50f, 0f));
         yield return new WaitForSeconds(davyJonesRespawnTime);
-        Vector3 v = transform.position - (new Vector3(0f, 50f, 0f));
+        Vector3 v = transform.position - (new Vector3(0f, 30f, 0f));
         gc.sendAlert("Davy Jones Reappeared!", Color.grey);
         Instantiate(chaserPrefab, v, transform.rotation);
     }

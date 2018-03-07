@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4175829093369740}
   - component: {fileID: 212034252847226564}
-  - component: {fileID: 114410227862986840}
   - component: {fileID: 96373518479053332}
   - component: {fileID: 50761124006361226}
   - component: {fileID: 70700202239773362}
   - component: {fileID: 61563837816018018}
+  - component: {fileID: 114013916517899992}
   m_Layer: 8
   m_Name: Chasing Enemy
   m_TagString: Chaser
@@ -223,7 +223,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114410227862986840
+--- !u!114 &114013916517899992
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -231,15 +231,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1111131323028046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c31fcff504c97d44bf81a9d58b43493, type: 3}
+  m_Script: {fileID: 11500000, guid: 12c78a3f47d5c1f418a29c842b390fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ACCELERATION: 0.4
-  CHASE_TOLERANCE: 0.2
-  PURSUE_DISTANCE: 1000
-  accelModifier: 0.2
-  collisionPenalty: 0
-  m_spawnSpeed: 0
+  target: {fileID: 0}
+  speed: 36
+  rotateSpeed: 70
 --- !u!198 &198199905650848154
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3692,7 +3689,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300000, guid: 131534eb5ce5a364ab6f4bd6d9b9a636, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 10.666667, y: 5.3333335}
   m_AdaptiveModeThreshold: 0.5

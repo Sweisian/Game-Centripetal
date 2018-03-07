@@ -50,6 +50,8 @@ public class MainCamScript : MonoBehaviour
 
     void LateUpdate()
     {
+        if (target != null)
+        {
         //updates the max y coord of the camera so far
         maxYcoord = Mathf.Max(target.position.y, maxYcoord);
 
@@ -58,8 +60,6 @@ public class MainCamScript : MonoBehaviour
         Vector3 camToPlayerVec = Camera.main.WorldToScreenPoint(thePlayer.transform.position) - screenPos;
         
 
-        if (target != null)
-        {
             transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
 
             if (currentShakeTimeLeft > 0)

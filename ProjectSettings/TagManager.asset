@@ -22,6 +22,8 @@ TagManager:
   - Camera Confiner
   - Dingy
   - Post Explosion
+  - Shooting
+  - Shipwreck
   layers:
   - Default
   - TransparentFX
