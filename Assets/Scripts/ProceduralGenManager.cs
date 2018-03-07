@@ -84,9 +84,9 @@ public class ProceduralGenManager : MonoBehaviour {
 
             this.gridPositions.Clear();
 
-            this.background = backgroundObj;
-            GameObject bg = Instantiate(backgroundObj, this.location, Quaternion.identity);
-            bg.transform.parent = GameObject.FindGameObjectWithTag("Grid").transform;
+            //this.background = backgroundObj;
+            //GameObject bg = Instantiate(backgroundObj, this.location, Quaternion.identity);
+           // bg.transform.parent = GameObject.FindGameObjectWithTag("Grid").transform;
         }
 
 

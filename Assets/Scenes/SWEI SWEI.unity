@@ -3637,6 +3637,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1224539469092730, guid: aa24c6c0d1f15614ca6027618300612f,
         type: 2}
+    - target: {fileID: 114687952942493216, guid: 50e3e95f168489d42a45891724681c60,
+        type: 2}
+      propertyPath: backgroundObj
+      value: 
+      objectReference: {fileID: 1434246548602258, guid: 86fe73c1dff1b61489faf57ea274e11b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50e3e95f168489d42a45891724681c60, type: 2}
   m_IsPrefabParent: 0
@@ -15679,8 +15685,9 @@ MonoBehaviour:
   forcePerFrame: 1
   currentSpeed: 30
   maxSpeed: 70
-  speedIncreasePerSecond: 0.25
+  speedIncreasePerSecond: 0.5
   timePerInvulnerability: 3
+  chaserPrefab: {fileID: 0}
   maxYvalue: 0
 --- !u!212 &415104544
 SpriteRenderer:
@@ -29041,13 +29048,22 @@ Prefab:
     - target: {fileID: 212034252847226564, guid: 22dfbd1d61b62f74f8527d48ec74b630,
         type: 2}
       propertyPath: m_FlipY
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4175829093369740, guid: 22dfbd1d61b62f74f8527d48ec74b630, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1111131323028046, guid: 22dfbd1d61b62f74f8527d48ec74b630, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114410227862986840, guid: 22dfbd1d61b62f74f8527d48ec74b630,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1786152199558038, guid: 22dfbd1d61b62f74f8527d48ec74b630, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -44426,7 +44442,7 @@ GameObject:
   - component: {fileID: 1112856099}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54607,6 +54623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 10
   rows: 25
+  backgroundObj: {fileID: 0}
   ZonePrefab: {fileID: 1908182893010420, guid: 60801a7109efb7a4886c61914db40376, type: 2}
   startPosition: {x: 0, y: 0, z: 0}
   postCount:
@@ -61428,6 +61445,25 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2093068543}
+--- !u!1 &2096669517 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1111131323028046, guid: 22dfbd1d61b62f74f8527d48ec74b630,
+    type: 2}
+  m_PrefabInternal: {fileID: 815872964}
+--- !u!114 &2096669525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2096669517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c78a3f47d5c1f418a29c842b390fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 36
+  rotateSpeed: 70
 --- !u!1 &2107735106
 GameObject:
   m_ObjectHideFlags: 0
