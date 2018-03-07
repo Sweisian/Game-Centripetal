@@ -22,7 +22,7 @@ public class ProceduralGenManager : MonoBehaviour {
 
     public static int itemSize = 20;
     // set size of game board (10x25)
-    public int columns = 10;
+    public int columns = 7;
     private static int columnsSize;
     public int rows = 25;
     private static int rowsSize;
