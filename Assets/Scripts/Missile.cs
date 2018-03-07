@@ -118,7 +118,7 @@ public class Missile : MonoBehaviour {
         GameController gameControlScript = GetComponent<GameController>();
         PlayerScript ps = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
         float distance = ps.maxYvalue;
-        float minAccel = 0.37f;
+        float minAccel = 0.34f;
         float mediumAccel = 0.4f;
         float maxAccel = 0.5f;
         //float newAccel = distance * accelModifier;
@@ -128,6 +128,5 @@ public class Missile : MonoBehaviour {
             ACCELERATION = mediumAccel;
         else
             ACCELERATION = maxAccel;
-        Debug.Log(distance);
     }
 }

@@ -84,6 +84,9 @@ public class ProceduralGenManager : MonoBehaviour {
 
             this.gridPositions.Clear();
 
+            //this code puts in the background image and makes them children of the grid
+
+            Debug.Log("Putting in background image");
             this.background = backgroundObj;
             GameObject bg = Instantiate(backgroundObj, this.location, Quaternion.identity);
             bg.transform.parent = GameObject.FindGameObjectWithTag("Grid").transform;

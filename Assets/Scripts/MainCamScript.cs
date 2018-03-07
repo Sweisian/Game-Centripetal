@@ -86,7 +86,6 @@ public class MainCamScript : MonoBehaviour
             //    transform.position = (new Vector3(target.position.x, target.position.y + yMaxDistFromCenter, transform.position.z)) + Camera.main.ScreenToWorldPoint(new Vector3(0, yMaxDistFromCenter, 0));
             //}
 
-            Debug.Log(camToPlayerVec.y);
             //Debug.Log("Camera Position: " + transform.position);
             //Debug.Log("Player Position: " + thePlayer.transform.position);
         }

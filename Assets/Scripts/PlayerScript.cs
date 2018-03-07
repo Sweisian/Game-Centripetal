@@ -11,7 +11,10 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] public float maxSpeed;
     [SerializeField] public float speedIncreasePerSecond;
     [SerializeField] public float timePerInvulnerability = 5f;
-	private GameController gc;
+
+    [SerializeField] public GameObject chaserPrefab;
+
+    private GameController gc;
     private MainCamScript m;
     private GrapplingScript grappleScript;
     private ScoringScript s;
@@ -208,10 +211,25 @@ public class PlayerScript : MonoBehaviour {
             numCharges++;
             GameObject.Destroy(c.gameObject);
         }
+        else if (invulnerable && c.gameObject.tag == "Chaser")
+        {
+            Destroy(c.gameObject);
+            //StartCoroutine(spawnChaser());
+        }
         else if (invulnerable && c.gameObject.tag!="Lasso")
         {
             Destroy(c.gameObject);
         }
+    }
+
+    //spawns a new chaser. Called if previous chaser is destroyed
+    IEnumerator spawnChaser()
+    {
+        Transform myTransform = transform;
+        myTransform.position -= (new Vector3(0f, 50f, 0f));
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Spawned");
+        Instantiate(chaserPrefab, myTransform);
     }
 
     private void updateMaxYValue()
