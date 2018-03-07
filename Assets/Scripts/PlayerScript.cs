@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] public float maxSpeed;
     [SerializeField] public float speedIncreasePerSecond;
     [SerializeField] public float timePerInvulnerability = 5f;
+    [SerializeField] public float slowDownFraction;
+    [SerializeField] public float davyJonesRespawnTime;
 
     [SerializeField] public GameObject chaserPrefab;
 
@@ -169,6 +171,7 @@ public class PlayerScript : MonoBehaviour {
                 Destroy(gameObject);
             }
 
+
             if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle" || c.gameObject.tag == "Wall")
             {
                 m.shake();
@@ -204,7 +207,7 @@ public class PlayerScript : MonoBehaviour {
             if (c.gameObject.tag == "Coin")
             {
                 s.addPoints(10, "(+10 Coin Collected)");
-                gc.sendAlert("Struck Gold! +10", Color.yellow);
+                gc.sendAlert("Treasure Stolen! +10", Color.yellow);
                 gc.playSound("coinCollect");
                 GameObject.Destroy(c.gameObject);
             }
@@ -213,10 +216,16 @@ public class PlayerScript : MonoBehaviour {
                 numCharges++;
                 GameObject.Destroy(c.gameObject);
             }
+            else if (c.gameObject.tag == "Dingy")
+            {
+                gc.sendAlert("Slowed Down!", Color.red);
+                currentSpeed = this.currentSpeed * slowDownFraction;
+            }
             else if (invulnerable && c.gameObject.tag == "Chaser")
             {
                 Destroy(c.gameObject);
-                //StartCoroutine(spawnChaser());
+                gc.sendAlert("Davy Jones Vanished!", Color.green);
+                StartCoroutine(spawnChaser());
             }
             else if (invulnerable && c.gameObject.tag != "Lasso")
             {
@@ -228,11 +237,12 @@ public class PlayerScript : MonoBehaviour {
     //spawns a new chaser. Called if previous chaser is destroyed
     IEnumerator spawnChaser()
     {
-        Transform myTransform = transform;
-        myTransform.position -= (new Vector3(0f, 50f, 0f));
-        yield return new WaitForSeconds(1f);
-        Debug.Log("Spawned");
-        Instantiate(chaserPrefab, myTransform);
+        //Transform myTransform = transform;
+        //myTransform.position -= (new Vector3(0f, 50f, 0f));
+        yield return new WaitForSeconds(davyJonesRespawnTime);
+        Vector3 v = transform.position - (new Vector3(0f, 50f, 0f));
+        gc.sendAlert("Davy Jones Reappeared!", Color.grey);
+        Instantiate(chaserPrefab, v, transform.rotation);
     }
 
     private void updateMaxYValue()
