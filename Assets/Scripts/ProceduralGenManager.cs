@@ -100,7 +100,7 @@ public class ProceduralGenManager : MonoBehaviour {
 
     public List<Zone> Zones = new List<Zone>();
     public Vector3 startPosition = new Vector3(0,0,0);
-    public Count postCount = new Count(90, 120);
+    public Count postCount = new Count(70, 100);
     public GameObject[] superEasyObstacles;
     public GameObject[] easyObstacles;
     public GameObject[] obstacles;
