@@ -89,7 +89,10 @@ public class ProceduralGenManager : MonoBehaviour {
             Debug.Log("Putting in background image");
             this.background = backgroundObj;
             GameObject bg = Instantiate(backgroundObj, this.location, Quaternion.identity);
+            
+            bg.SetActive(true);
             bg.transform.parent = GameObject.FindGameObjectWithTag("Grid").transform;
+            bg.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
