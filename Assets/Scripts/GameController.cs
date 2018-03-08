@@ -101,6 +101,10 @@ public class GameController : MonoBehaviour
         sounds.Add("detatch", clips[5]);
         sounds.Add("game_over", clips[6]);
         sounds.Add("snap", clips[7]);
+        sounds.Add("smallPoints", clips[8]);
+        sounds.Add("mediumPoints", clips[9]);
+        sounds.Add("bigPoints", clips[10]);
+
     }
 
     void InitGame()
