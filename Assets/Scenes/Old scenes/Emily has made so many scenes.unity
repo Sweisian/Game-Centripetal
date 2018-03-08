@@ -3651,7 +3651,7 @@ Prefab:
         type: 2}
       propertyPath: backgroundObj
       value: 
-      objectReference: {fileID: 1434246548602258, guid: 86fe73c1dff1b61489faf57ea274e11b,
+      objectReference: {fileID: 1740196527120044, guid: 3e0b343714603194098a767289a73bcf,
         type: 2}
     - target: {fileID: 114687952942493216, guid: 50e3e95f168489d42a45891724681c60,
         type: 2}
@@ -3752,12 +3752,17 @@ Prefab:
     - target: {fileID: 114687952942493216, guid: 50e3e95f168489d42a45891724681c60,
         type: 2}
       propertyPath: postCount.minimum
-      value: 90
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 114687952942493216, guid: 50e3e95f168489d42a45891724681c60,
         type: 2}
       propertyPath: postCount.maximum
-      value: 120
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114687952942493216, guid: 50e3e95f168489d42a45891724681c60,
+        type: 2}
+      propertyPath: columns
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50e3e95f168489d42a45891724681c60, type: 2}
@@ -15845,6 +15850,7 @@ MonoBehaviour:
   maxSpeed: 70
   speedIncreasePerSecond: 0.25
   timePerInvulnerability: 3
+  chaserPrefab: {fileID: 0}
   maxYvalue: 0
 --- !u!212 &415104544
 SpriteRenderer:
@@ -54789,7 +54795,7 @@ MonoBehaviour:
   - {fileID: 1575883275462072, guid: 73bcaacdaf74a4b4da7bffea46ac59ad, type: 2}
   - {fileID: 1575883275462072, guid: 73bcaacdaf74a4b4da7bffea46ac59ad, type: 2}
   - {fileID: 1575883275462072, guid: 73bcaacdaf74a4b4da7bffea46ac59ad, type: 2}
-  - {fileID: 1078091877835194, guid: ef331dc2c8dccac41978380d766de244, type: 2}
+  - {fileID: 0}
   - {fileID: 1512862442957740, guid: c11c2e3e060c849ae920276c9b9e0de9, type: 2}
   - {fileID: 1512862442957740, guid: c11c2e3e060c849ae920276c9b9e0de9, type: 2}
   post: {fileID: 1038272242216896, guid: 53406e2eebe48aa4da54e241fcb53c0c, type: 2}

@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private float appliedForce;
     [SerializeField] private float forcePerFrame;
     [SerializeField] public float currentSpeed;
-    [SerializeField] public float maxSpeed;
+    [SerializeField] public float maxSpeed = 32f;
     [SerializeField] public float speedIncreasePerSecond;
     [SerializeField] public float timePerInvulnerability = 5f;
     [SerializeField] public float slowDownFraction;
@@ -145,6 +145,8 @@ public class PlayerScript : MonoBehaviour {
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentSpeed);
         }
+        Debug.Log(currentSpeed);
+        //Debug.Log(rb.velocity.magnitude);
     }
 
     IEnumerator speedUp()

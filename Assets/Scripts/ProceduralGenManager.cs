@@ -86,7 +86,7 @@ public class ProceduralGenManager : MonoBehaviour {
 
             //this code puts in the background image and makes them children of the grid
 
-            Debug.Log("Putting in background image");
+            //Debug.Log("Putting in background image");
             this.background = backgroundObj;
             GameObject bg = Instantiate(backgroundObj, this.location, Quaternion.identity);
             
@@ -138,17 +138,16 @@ public class ProceduralGenManager : MonoBehaviour {
         }
         AddZone();
         AddZone();
-       
     }
 
     public void AddZone()
     {
         
-        Debug.Log("RefreshZone");
+        //Debug.Log("RefreshZone");
         // makes a new zone in front of the most recently generated one
         gameControllerScript = GetComponent<GameController>();
         int obstacleCount = (int)Mathf.Log(gameControllerScript.difficulty, 2f); //add more obstables when difficulty is higher 
-        Debug.Log(gameControllerScript.difficulty);
+        //Debug.Log(gameControllerScript.difficulty);
         Vector3 newZoneLocation;
         
         if (zoneID == 1)
