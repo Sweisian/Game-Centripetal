@@ -19,8 +19,21 @@ public class GameController : MonoBehaviour
     private Collider2D playerCollider;
     public static ProceduralGenManager.Zone currZone;
 
+    private PlayerScript myPlayerScript;
+
+    //game objects for best distance and prev best distance
     [SerializeField] private GameObject maxDistPrefab;
+    [SerializeField] private GameObject prevBestPrefab;
+
+    //previous run best distance stored here
+    //private float previousBestDist;
+
+
+    //min distance required to spawn a prev best prefab
+    [SerializeField] private float prevBestMinThreshold = 10;
+
     private Dictionary<string, AudioSource> sounds;
+
 
     //alert text here
     private TextMeshProUGUI alertText;
@@ -49,8 +62,12 @@ public class GameController : MonoBehaviour
         proceduralGenScript = GetComponent<ProceduralGenManager>();
         ProceduralGenManager.zoneID = 0; // reset the zone ID each time the game resets
         InitGame();
+
+        //Gets player stuff
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        myPlayerScript = player.GetComponent<PlayerScript>();
         playerCollider = player.GetComponent<Collider2D>();
+
         //puts a new max distance prefab at the highest completed distance
         Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
 
@@ -59,7 +76,15 @@ public class GameController : MonoBehaviour
         Color c = alertText.color;
         c.a = 0f;
         alertText.color = c;
-    }
+
+        if (PlayerPrefs.HasKey("prevBestDistance"))
+        { 
+            Instantiate(prevBestPrefab, new Vector3(0, PlayerPrefs.GetFloat("prevBestDistance"), 0),Quaternion.identity);
+            Debug.Log("Instantiating a new prev distance prefab");
+
+            PlayerPrefs.DeleteKey("prevBestDistance");
+        }
+}
 
     /* Unity is stupid and won't serialize dictionaries
     * So we'll just have to add the things manually to here.
@@ -110,7 +135,15 @@ public class GameController : MonoBehaviour
 	    {
 	        PlayerPrefs.DeleteKey("bestDistance");
 	        PlayerPrefs.DeleteKey("bestScore");
+	        PlayerPrefs.DeleteKey("prevBestDistance");
         }
+
+        //updates prev best distance. Will get reset in nest game
+	    if (myPlayerScript.maxYvalue > PlayerPrefs.GetFloat("prevBestDistance"))
+	    {
+	        PlayerPrefs.SetFloat("prevBestDistance", myPlayerScript.maxYvalue);
+	        //Debug.Log("Prev best distance is currently: " + previousBestDist);
+	    }
     }
 
 
@@ -126,8 +159,10 @@ public class GameController : MonoBehaviour
             gameoverText.SetActive(true);
             playSound("game_over");
 
+
+
             //slow game down upon player death
-            Time.timeScale = .50f;
+            Time.timeScale = .0f;
     }
 
 	/// <summary>

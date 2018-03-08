@@ -244,7 +244,7 @@ public class PlayerScript : MonoBehaviour {
         //Transform myTransform = transform;
         //myTransform.position -= (new Vector3(0f, 50f, 0f));
         yield return new WaitForSeconds(davyJonesRespawnTime);
-        Vector3 v = transform.position - (new Vector3(0f, 30f, 0f));
+        Vector3 v = transform.position - (new Vector3(0f, 50f, 0f));
         gc.sendAlert("Davy Jones Reappeared!", Color.grey);
         Instantiate(chaserPrefab, v, transform.rotation);
     }

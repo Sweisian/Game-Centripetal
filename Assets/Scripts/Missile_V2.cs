@@ -57,6 +57,11 @@ public class Missile_V2 : MonoBehaviour
                 g.disconnectLasso(true);  
         }
 
+        if (target != null && (c.gameObject.tag == "Wall"))
+        {
+            return;
+        }
+
         Destroyable d = c.gameObject.GetComponent<Destroyable>();
         if (d != null)
         {
