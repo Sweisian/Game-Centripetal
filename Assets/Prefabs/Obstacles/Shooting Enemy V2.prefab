@@ -364,7 +364,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1224539469092730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9, y: 65.1, z: -10}
+  m_LocalPosition: {x: -50.06501, y: -74.656555, z: -10}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4926845570650564}
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 1449903243838954, guid: 7c6fc4bbadc804044b95a65e425c9c25, type: 2}
-  maxShootDistance: 50
+  maxShootDistance: 35
   shootingRate: 1.5
 --- !u!212 &212152055130549104
 SpriteRenderer:

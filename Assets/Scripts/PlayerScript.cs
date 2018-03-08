@@ -96,6 +96,7 @@ public class PlayerScript : MonoBehaviour {
         {
             s.addPoints(10, "(+10 Close Call!)");
             gc.sendAlert("Close Call! +10", Color.blue);
+            gc.playSound("mediumPoints");
             waitingOnACloseCall = false;
         }
 
@@ -145,7 +146,6 @@ public class PlayerScript : MonoBehaviour {
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentSpeed);
         }
-        Debug.Log(currentSpeed);
         //Debug.Log(rb.velocity.magnitude);
     }
 
@@ -198,7 +198,6 @@ public class PlayerScript : MonoBehaviour {
             if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle" || c.gameObject.tag == "Wall")
             {
                 m.shake();
-                s.addPoints(-2, "(-2)");
                 if (grappleScript.isLassoConnected())
                 {
                     grappleScript.disconnectLasso(true);

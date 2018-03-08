@@ -104,6 +104,7 @@ public class GrapplingScript : MonoBehaviour
             {
                 gc.sendAlert("Rotation! +5", Color.green);
                 s.addPoints(5, "(+5 Rotation)");
+                gc.playSound("smallPoints");
                 ps.currentSpeed += 1;
                 ps.maxSpeed += 1;
                 if (numRotations>1) disconnectLasso(false);
@@ -112,6 +113,7 @@ public class GrapplingScript : MonoBehaviour
             {
                 gc.sendAlert("Ship Plundered! +20", Color.white);
                 s.addPoints(20, "(+20 Ship Plundered!)");
+                gc.playSound("bigPoints");
                 if (numRotations > 1) disconnectLasso(false);
             }
         }
@@ -154,6 +156,7 @@ public class GrapplingScript : MonoBehaviour
 
         if (canLasso && Input.GetMouseButtonDown(0))
         {
+            numRotations = 0;
             Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
 
@@ -241,6 +244,7 @@ public class GrapplingScript : MonoBehaviour
         joint.enabled = false;
         myLine.enabled = false;
         numRotations = 0;
+        rotationFactor = -1;
         canLasso = true;
         lassoConnected = false;
         if (postAttached.gameObject.tag == "Post" && timeAttached>=secondsAttatchedBeforePostDelete)
