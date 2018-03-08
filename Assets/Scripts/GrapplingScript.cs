@@ -22,10 +22,11 @@ public class GrapplingScript : MonoBehaviour
     private GameController gc;
     private ScoringScript s;
     private Vector3 rotationLine; //Line drawn to detect if player has completed a rotation
-    private int numRotations=-1; //Keeps track of the number of full rotations the player has gone through.
+    private int numRotations=0; //Keeps track of the number of full rotations the player has gone through.
     private PlayerScript ps;
     private bool beingAlerted=false; //Temporary way of showing a rotation
     private float timeAttached=0f; //How long the player has been attached to the post 
+    private int rotationFactor;//Either -1 or 1. Used in the FixedUpdate function to more accurately determine rotations.
 
     // Use this for initialization
     void Start()
@@ -40,6 +41,7 @@ public class GrapplingScript : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
         ps = this.GetComponent<PlayerScript>();
+        rotationFactor = -1;
     }
 
     // Update is called once per frame
@@ -66,8 +68,8 @@ public class GrapplingScript : MonoBehaviour
         //makes sure the lasso distance can get smaller but not bigger
         if (lassoConnected && postAttached!=null)
         {
-            Debug.DrawRay(postAttached.transform.position,rotationLine, Color.yellow);
-            RaycastHit2D hit = Physics2D.Raycast(postAttached.transform.position, rotationLine, Mathf.Infinity, 1<<LayerMask.NameToLayer("Player"));
+            Debug.DrawRay(postAttached.transform.position,rotationFactor*rotationLine, Color.yellow);
+            RaycastHit2D hit = Physics2D.Raycast(postAttached.transform.position, rotationFactor*rotationLine, Mathf.Infinity, 1<<LayerMask.NameToLayer("Player"));
             if (hit)
             {
                 if (hit.transform.gameObject.tag == "Player")
@@ -85,28 +87,40 @@ public class GrapplingScript : MonoBehaviour
 
     private IEnumerator speedUp()
     {
-        Debug.Log("Rotation");
-        numRotations++;
+        if (rotationFactor==1)
+        {
+            numRotations++;
+            Debug.Log("Num Rotations is now " + numRotations);
+            rotationFactor = -1;
+        }
+        else
+        {
+            rotationFactor = 1;
+        }
         if (numRotations > 0)
         {
-            if (postAttached.tag == "Post")
+            Debug.Log(numRotations);
+            if (postAttached.tag == "Post" && rotationFactor==-1)
             {
                 gc.sendAlert("Rotation! +5", Color.green);
                 s.addPoints(5, "(+5 Rotation)");
-                ps.currentSpeed += 5;
-                ps.maxSpeed += 5;
-                disconnectLasso(false);
+                ps.currentSpeed += 1;
+                ps.maxSpeed += 1;
+                if (numRotations>1) disconnectLasso(false);
             }
-            else if (postAttached.tag == "Cattle")
+            else if (postAttached.tag == "Cattle" && rotationFactor == -1)
             {
                 gc.sendAlert("Ship Plundered! +20", Color.white);
                 s.addPoints(20, "(+20 Ship Plundered!)");
-                disconnectLasso(false);
-                GameObject.Destroy(postAttached);
+                if (numRotations > 1)
+                {
+                    disconnectLasso(false);
+                    GameObject.Destroy(postAttached);
+                }
                 postAttached = null;
             }
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0f);
         myLine.startColor = Color.green;
         myLine.endColor = Color.green;
         beingAlerted = false;
@@ -187,7 +201,7 @@ public class GrapplingScript : MonoBehaviour
         postAttached = postHit;
         myLine.enabled = true;
         rotationLine = this.transform.position - postAttached.transform.position;
-        numRotations = -1;
+        numRotations = 0;
 
     }
 
@@ -231,6 +245,7 @@ public class GrapplingScript : MonoBehaviour
             postAttached.GetComponent<CattleScript>().calmDown();
         joint.enabled = false;
         myLine.enabled = false;
+        numRotations = 0;
         canLasso = true;
         lassoConnected = false;
         if (postAttached.gameObject.tag == "Post" && timeAttached>=secondsAttatchedBeforePostDelete)
