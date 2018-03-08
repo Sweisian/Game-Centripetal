@@ -112,12 +112,7 @@ public class GrapplingScript : MonoBehaviour
             {
                 gc.sendAlert("Ship Plundered! +20", Color.white);
                 s.addPoints(20, "(+20 Ship Plundered!)");
-                if (numRotations > 1)
-                {
-                    disconnectLasso(false);
-                    GameObject.Destroy(postAttached);
-                }
-                postAttached = null;
+                if (numRotations > 1) disconnectLasso(false);
             }
         }
         yield return new WaitForSeconds(0f);
