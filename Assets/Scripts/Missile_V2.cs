@@ -14,15 +14,15 @@ public class Missile_V2 : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public float speed1 = 30f;
-    public float speed2 = 32f;
-    public float speed3 = 34f;
-    public float speed4 = 36f;
+    public float speed1 = 33f;
+    public float speed2 = 35f;
+    public float speed3 = 38f;
+    public float speed4 = 40f;
     //public float maxSpeed = 40f;
 
-    public float dist1 = 1000;
-    public float dist2 = 2000;
-    public float dist3 = 3000;
+    public float dist1 = 500;
+    public float dist2 = 1000;
+    public float dist3 = 2000;
 
     // Use this for initialization
     void Start()
@@ -98,6 +98,7 @@ public class Missile_V2 : MonoBehaviour
         }
         if (ps.maxYvalue > dist1 && ps.maxYvalue < dist2)
         {
+            Debug.Log("Speed 2 INCREASE");
             speed = speed2;
         }
         else if (ps.maxYvalue > dist2 && ps.maxYvalue < dist3)
