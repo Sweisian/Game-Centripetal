@@ -142,7 +142,6 @@ public class ProceduralGenManager : MonoBehaviour {
 
     public void AddZone()
     {
-        
         //Debug.Log("RefreshZone");
         // makes a new zone in front of the most recently generated one
         gameControllerScript = GetComponent<GameController>();
@@ -239,7 +238,7 @@ public class ProceduralGenManager : MonoBehaviour {
            
             
             // if the player is in the first 3 zones, ensure that no posts spawn on the y axis
-            if (zoneID <= 3)
+            if (zone.ID == 0)
             {
                 while (randomPosition.x > -5 & randomPosition.x < 5)
                 {

@@ -180,13 +180,13 @@ public class GameController : MonoBehaviour
     public void playSound(string key)
     {
         AudioSource a = sounds[key];
-        Debug.Log("Trying to play " + key);
+        //Debug.Log("Trying to play " + key);
         if (a != null)
         {
-            Debug.Log("Playing "+key);
+            //Debug.Log("Playing "+key);
             a.Play();
         }
-        else Debug.Log(key + " not found!");
+        //else Debug.Log(key + " not found!");
     }
 
     public void sendAlert(string wannaSay, Color col)
