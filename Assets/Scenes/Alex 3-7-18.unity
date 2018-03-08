@@ -1411,6 +1411,7 @@ MonoBehaviour:
   timePerInvulnerability: 3
   slowDownFraction: 0.8
   davyJonesRespawnTime: 10
+  closeCallDistance: 20
   chaserPrefab: {fileID: 1111131323028046, guid: 22dfbd1d61b62f74f8527d48ec74b630,
     type: 2}
   maxYvalue: 0

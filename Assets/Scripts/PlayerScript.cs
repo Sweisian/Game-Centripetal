@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] public float timePerInvulnerability = 5f;
     [SerializeField] public float slowDownFraction;
     [SerializeField] public float davyJonesRespawnTime;
+    [SerializeField] public float closeCallDistance;
 
     [SerializeField] public GameObject chaserPrefab;
 
@@ -27,6 +28,8 @@ public class PlayerScript : MonoBehaviour {
     private Image invulnBar;
     private Text invulnText;
     private int numCharges;
+    private GameObject chaser;
+    private bool waitingOnACloseCall = false; //Another hack for close call detection
 
     //stores max y value achieved by the player this run so far
     public float maxYvalue;
@@ -45,6 +48,7 @@ public class PlayerScript : MonoBehaviour {
         invulnBar = GameObject.FindGameObjectWithTag("InvulnBar").GetComponent<Image>();
         invulnText = GameObject.FindGameObjectWithTag("InvulnText").GetComponent<Text>();
         grappleScript = this.GetComponent<GrapplingScript>();
+        chaser = GameObject.FindGameObjectWithTag("Chaser");
         StartCoroutine(speedUp());
 
     }
@@ -80,6 +84,19 @@ public class PlayerScript : MonoBehaviour {
                 invulnerable = false;
 
             }
+        }
+        //Code for close calls
+        if (!waitingOnACloseCall && chaser != null && Vector3.Distance(this.transform.position, chaser.transform.position) < closeCallDistance)
+        {
+            waitingOnACloseCall = true;
+        }
+        if (chaser == null && waitingOnACloseCall)
+            waitingOnACloseCall = false;
+        if(waitingOnACloseCall && chaser!=null && Vector3.Distance(this.transform.position, chaser.transform.position) > closeCallDistance)
+        {
+            s.addPoints(10, "(+10 Close Call!)");
+            gc.sendAlert("Close Call! +10", Color.blue);
+            waitingOnACloseCall = false;
         }
 
 	}
@@ -246,7 +263,7 @@ public class PlayerScript : MonoBehaviour {
         yield return new WaitForSeconds(davyJonesRespawnTime);
         Vector3 v = transform.position - (new Vector3(0f, 30f, 0f));
         gc.sendAlert("Davy Jones Reappeared!", Color.grey);
-        Instantiate(chaserPrefab, v, transform.rotation);
+        chaser=Instantiate(chaserPrefab, v, transform.rotation);
     }
 
     private void updateMaxYValue()
