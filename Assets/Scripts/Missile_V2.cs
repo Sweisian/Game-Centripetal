@@ -5,18 +5,32 @@ using UnityEngine;
 public class Missile_V2 : MonoBehaviour
 {
 
+    public GameObject player;
     public Transform target;
+    private PlayerScript ps;
 
-    public float speed = 5f;
+    public float speed = 36f;
     public float rotateSpeed = 200f;
 
     private Rigidbody2D rb;
 
+    public float speed1 = 30f;
+    public float speed2 = 32f;
+    public float speed3 = 34f;
+    public float speed4 = 36f;
+    //public float maxSpeed = 40f;
+
+    public float dist1 = 1000;
+    public float dist2 = 2000;
+    public float dist3 = 3000;
+
     // Use this for initialization
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
+        target = player.transform;
         rb = GetComponent<Rigidbody2D>();
+        ps = player.GetComponent<PlayerScript>();
     }
 
     void FixedUpdate()
@@ -33,6 +47,7 @@ public class Missile_V2 : MonoBehaviour
 
             rb.velocity = transform.up * speed;
         }
+        increaseSpeed();
     }
 
     void OnBecameInvisible()
@@ -72,6 +87,26 @@ public class Missile_V2 : MonoBehaviour
         else
         {
             Destroy(c.gameObject);
+        }
+    }
+
+    public void increaseSpeed()
+    {
+        if (ps.maxYvalue < dist1)
+        {
+            speed = speed1;
+        }
+        if (ps.maxYvalue > dist1 && ps.maxYvalue < dist2)
+        {
+            speed = speed2;
+        }
+        else if (ps.maxYvalue > dist2 && ps.maxYvalue < dist3)
+        {
+            speed = speed3;
+        }
+        else if (ps.maxYvalue > dist3)
+        {
+            speed = speed4;
         }
     }
 

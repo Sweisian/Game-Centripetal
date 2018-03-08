@@ -149,7 +149,8 @@ public class GameController : MonoBehaviour
 
     public void increaseDifficulty()
     {
-        difficulty += Time.deltaTime * difficultyModifier;
+        //difficulty += Time.deltaTime * difficultyModifier;
+
     }
 
     public void gameOver()

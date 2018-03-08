@@ -27,21 +27,21 @@ public class TriggerZone : MonoBehaviour
             Collider2D thisCollider = this.GetComponent<BoxCollider2D>();
             thisZone = proceduralGenScript.getZone(thisCollider.gameObject);
 
-            Debug.Log("Zone entered!");
+            //Debug.Log("Zone entered!");
             if (thisZone.beenEntered == false)
             {
-                Debug.Log("Entered new zone");
+                //Debug.Log("Entered new zone");
                 thisZone.beenEntered = true;
 
                 proceduralGenScript.AddZone(); //refresh the previous zone
                 //proceduralGenScript.AddZone(GameController.currZone); //refresh the previous zone
 
                 //}
-                //GameController.currZone = thisZone; //update the current zone to be the one that was just entered
+                GameController.currZone = thisZone; //update the current zone to be the one that was just entered
             }
             else
             { 
-                Debug.Log("re-entered zone");
+                //Debug.Log("re-entered zone");
                 
                 if (thisZone != null)
                 {
