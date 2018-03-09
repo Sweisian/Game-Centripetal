@@ -224,8 +224,11 @@ public class ProceduralGenManager : MonoBehaviour {
                 obstacleChoice = obstacles[Random.Range(0, obstacles.Length)];
 
             }
-            Instantiate(obstacleChoice, randomPosition, Quaternion.identity);
-
+            //gives the shipwrecks a random rotation
+            if(obstacleChoice.tag == "Shipwreck")
+                Instantiate(obstacleChoice, randomPosition, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
+            else
+                Instantiate(obstacleChoice, randomPosition, Quaternion.identity);
         }
     }
 
