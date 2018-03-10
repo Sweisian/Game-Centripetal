@@ -11,7 +11,9 @@ public class GrapplingScript : MonoBehaviour
     [SerializeField] private float chargeRate; //How fast the lasso charges
     [SerializeField] private LineRenderer myLine;
     [SerializeField] private GameObject lassoPrefab;
-    [SerializeField] private GameObject arrow;
+
+    //[SerializeField] private GameObject arrow;
+
     [SerializeField] private Text chargeDisplay; //UI Element for Displaying Charge
     [SerializeField] private float speedUpStep; //Approximately how much to speed up by per rotation on post
     [SerializeField] private float secondsAttatchedBeforePostDelete; //How long the player must be attached to a post before detaching deletes it.
@@ -37,7 +39,9 @@ public class GrapplingScript : MonoBehaviour
         canLasso = true;
         lassoConnected = false;
         chargePercent = 0f;
-        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+
+        //arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
         ps = this.GetComponent<PlayerScript>();
@@ -52,10 +56,13 @@ public class GrapplingScript : MonoBehaviour
         //Update the arrow. Following solution adapted from 
         //https://answers.unity.com/questions/599271/rotating-a-sprite-to-face-mouse-target.html
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 arrowPos = arrow.transform.position;
-        Vector3 direction = mousePos - arrowPos;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        arrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        //not sure if I can doooo this
+        //Vector3 arrowPos = arrow.transform.position;
+        //Vector3 direction = mousePos - arrowPos;
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //arrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
         if (lassoConnected)
         {
             timeAttached += Time.deltaTime;
@@ -169,7 +176,8 @@ public class GrapplingScript : MonoBehaviour
             lasso.GetComponent<LassoScript>().Initialize(this.transform.position, Vector3.Normalize(directionToHead), maxDistance);
             canLasso = false;
             chargePercent = 0f;
-            arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.0f);
+
+            //arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.0f);
         }
 
 
@@ -228,7 +236,8 @@ public class GrapplingScript : MonoBehaviour
     {
         canLasso = true;
         myLine.enabled = false;
-        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+
+        //arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
     }
 
     public void disconnectLasso(bool didItSnap)
@@ -255,7 +264,9 @@ public class GrapplingScript : MonoBehaviour
             else
                 Destroy(postAttached);
         }
-        arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+
+        //arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+
         timeAttached = 0f;
     }	
 }
