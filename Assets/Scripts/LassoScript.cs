@@ -78,9 +78,14 @@ public class LassoScript : MonoBehaviour
                 {
                     c.gameObject.GetComponent<CattleScript>().run();
                 }
+                Rigidbody2D p = player.GetComponent<Rigidbody2D>();
+                float v = p.velocity.magnitude;
                 player.GetComponent<GrapplingScript>().connectLasso(c.gameObject);
+                //Add a force such that the ship maintains the velocity before the rotation
                 lassoLine.enabled = false;
                 GameObject.Destroy(this.gameObject);
+                Vector3 vel = p.velocity;
+                p.velocity = vel.normalized * v; 
             }
             else if (!flying && c.gameObject.tag == "Player")
             {

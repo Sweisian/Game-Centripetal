@@ -73,6 +73,7 @@ public class PlayerScript : MonoBehaviour {
         {
             currentInvulnTimeLeft = timePerInvulnerability;
             numCharges--;
+            gc.playSound("powerUpUse");
             triggerInvulnerability();
         }
         if (currentInvulnTimeLeft>0f)
@@ -121,6 +122,7 @@ public class PlayerScript : MonoBehaviour {
                 sprite.color = c;
                 currentSpeed -= 8;
                 maxSpeed -= 8;
+                gc.playSound("powerUpEnd");
             }
     }
 
@@ -189,6 +191,10 @@ public class PlayerScript : MonoBehaviour {
         {
             if (c.gameObject.tag == "Chaser")
             {
+                if (grappleScript.isLassoConnected())
+                {
+                    grappleScript.disconnectLasso(false);
+                }
                 gc.BroadcastMessage("gameOver");
                 Destroy(gameObject);
             }
@@ -235,6 +241,7 @@ public class PlayerScript : MonoBehaviour {
             else if (c.gameObject.tag == "Star")
             {
                 numCharges++;
+                gc.playSound("powerUpCollect");
                 GameObject.Destroy(c.gameObject);
             }
             else if (c.gameObject.tag == "Dingy")
@@ -246,6 +253,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 Destroy(c.gameObject);
                 gc.sendAlert("Davy Jones Vanished!", Color.green);
+                gc.playSound("powerUpUse");
                 StartCoroutine(spawnChaser());
             }
             else if (invulnerable && c.gameObject.tag != "Lasso")
@@ -263,6 +271,7 @@ public class PlayerScript : MonoBehaviour {
         yield return new WaitForSeconds(davyJonesRespawnTime);
         Vector3 v = transform.position - (new Vector3(0f, 50f, 0f));
         gc.sendAlert("Davy Jones Reappeared!", Color.grey);
+        gc.playSound("davyJonesAppear");
         chaser=Instantiate(chaserPrefab, v, transform.rotation);
     }
 
