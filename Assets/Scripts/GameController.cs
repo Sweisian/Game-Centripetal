@@ -104,7 +104,10 @@ public class GameController : MonoBehaviour
         sounds.Add("smallPoints", clips[8]);
         sounds.Add("mediumPoints", clips[9]);
         sounds.Add("bigPoints", clips[10]);
-
+        sounds.Add("powerUpEnd", clips[11]);
+        sounds.Add("powerUpUse", clips[12]);
+        sounds.Add("powerUpCollect", clips[13]);
+        sounds.Add("davyJonesAppear", clips[14]);
     }
 
     void InitGame()
@@ -183,13 +186,21 @@ public class GameController : MonoBehaviour
 
     public void playSound(string key)
     {
-        AudioSource a = sounds[key];
-        //Debug.Log("Trying to play " + key);
-        if (a != null)
+        try
         {
-            //Debug.Log("Playing "+key);
-            a.Play();
+            AudioSource a = sounds[key];
+            if (a != null)
+            {
+                //Debug.Log("Playing "+key);
+                a.Play();
+            }
         }
+        catch (Exception e)
+        {
+            Debug.Log("Sound not found. The error is: "+e.GetBaseException());
+        }
+        //Debug.Log("Trying to play " + key);
+
         //else Debug.Log(key + " not found!");
     }
 
