@@ -29,7 +29,9 @@ public class GrapplingScript : MonoBehaviour
     private bool beingAlerted=false; //Temporary way of showing a rotation
     private float timeAttached=0f; //How long the player has been attached to the post 
     private int rotationFactor;//Either -1 or 1. Used in the FixedUpdate function to more accurately determine rotations.
-    private float jointMaxDistance;//Used to lock the lasso to never being  
+    private float jointMaxDistance;//Used to lock the lasso to never extending or shortening with the lassoable ships
+    private bool flashingHelper;//Used to help with flashing function. Hacky but it works so ¯\_(ツ)_/¯
+    private bool isFlashing;//Hack used to not run the flashing infinitely
 
     // Use this for initialization
     void Start()
@@ -40,6 +42,8 @@ public class GrapplingScript : MonoBehaviour
         canLasso = true;
         lassoConnected = false;
         chargePercent = 0f;
+        flashingHelper = false;
+        isFlashing = false;
 
         //arrow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
 
@@ -69,6 +73,11 @@ public class GrapplingScript : MonoBehaviour
             timeAttached += Time.deltaTime;
         }
         else timeAttached = 0f;
+        while (flashingHelper && !isFlashing)
+        {
+            isFlashing = true;
+            StartCoroutine(flash());
+        }
     }
 
     void FixedUpdate()
@@ -126,10 +135,25 @@ public class GrapplingScript : MonoBehaviour
                 if (numRotations > 1) disconnectLasso(false);
             }
         }
+        if (numRotations==1)
+        {
+            if (!flashingHelper)
+            {
+                flashingHelper = true;
+            }
+        }
         yield return new WaitForSeconds(0f);
-        myLine.startColor = Color.green;
-        myLine.endColor = Color.green;
         beingAlerted = false;
+    }
+
+    private IEnumerator flash()
+    {
+        myLine.startColor = Color.red;
+        myLine.endColor = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        myLine.startColor = Color.red;
+        myLine.endColor = Color.red;
+        isFlashing = false;
     }
 
     /// <summary>
@@ -163,7 +187,7 @@ public class GrapplingScript : MonoBehaviour
         }
         */
 
-        if (canLasso && Input.GetMouseButtonDown(0))
+        if (canLasso && !PauseScript.isPaused && Input.GetMouseButtonDown(0))
         {
             numRotations = 0;
             Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -260,6 +284,9 @@ public class GrapplingScript : MonoBehaviour
         rotationFactor = -1;
         canLasso = true;
         lassoConnected = false;
+        flashingHelper = false;
+        myLine.startColor = Color.white;
+        myLine.endColor = Color.white;
         if (timeAttached>=secondsAttatchedBeforePostDelete)
         {
             Destroyable d = postAttached.GetComponent<Destroyable>();
