@@ -8,21 +8,22 @@ public class Missile_V2 : MonoBehaviour
     public GameObject player;
     public Transform target;
     private PlayerScript ps;
+    private GameController gs;
 
-    public float speed = 36f;
+    private float speed = 33f;
     public float rotateSpeed = 200f;
 
     private Rigidbody2D rb;
 
-    public float speed1 = 33f;
-    public float speed2 = 35f;
-    public float speed3 = 38f;
-    public float speed4 = 40f;
+    private float speed1 = 33f;
+    private float speed2 = 35f;
+    private float speed3 = 38f;
+    private float speed4 = 40f;
     //public float maxSpeed = 40f;
 
-    public float dist1 = 500;
-    public float dist2 = 1000;
-    public float dist3 = 2000;
+    private float time1 = 20;
+    private float time2 = 40;
+    private float time3 = 60;
 
     // Use this for initialization
     void Start()
@@ -31,6 +32,7 @@ public class Missile_V2 : MonoBehaviour
         target = player.transform;
         rb = GetComponent<Rigidbody2D>();
         ps = player.GetComponent<PlayerScript>();
+        gs = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     void FixedUpdate()
@@ -92,22 +94,31 @@ public class Missile_V2 : MonoBehaviour
 
     public void increaseSpeed()
     {
-        if (ps.maxYvalue < dist1)
+        if (Time.timeSinceLevelLoad < time1)
         {
             speed = speed1;
         }
-        if (ps.maxYvalue > dist1 && ps.maxYvalue < dist2)
+        else if (Time.timeSinceLevelLoad > time1 && Time.timeSinceLevelLoad < time2 && speed < speed2)
         {
             Debug.Log("Speed 2 INCREASE");
             speed = speed2;
+            gs.sendAlert("Davy Jones is faster!", Color.black);
         }
-        else if (ps.maxYvalue > dist2 && ps.maxYvalue < dist3)
+        else if (Time.timeSinceLevelLoad > time2 && Time.timeSinceLevelLoad < time3 && speed < speed3)
         {
             speed = speed3;
+            Debug.Log("Speed 3 INCREASE");
+            gs.sendAlert("Davy Jones is faster!", Color.black);
         }
-        else if (ps.maxYvalue > dist3)
+        else if (Time.timeSinceLevelLoad > time3 && speed < speed4)
         {
             speed = speed4;
+            Debug.Log("Speed 4 INCREASE");
+            gs.sendAlert("Davy Jones is faster!", Color.black);
+        }
+        else
+        {
+            speed = speed;
         }
     }
 

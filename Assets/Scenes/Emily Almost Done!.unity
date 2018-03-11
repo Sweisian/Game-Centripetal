@@ -2703,6 +2703,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1078903602218990, guid: 1aaa12a13783fab439b4d6298412d0e0,
         type: 2}
+    - target: {fileID: 114687952942493216, guid: 50e3e95f168489d42a45891724681c60,
+        type: 2}
+      propertyPath: columns
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50e3e95f168489d42a45891724681c60, type: 2}
   m_IsPrefabParent: 0
@@ -7681,7 +7686,6 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 2085059348}
-  - {fileID: 1549139849}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9070,57 +9074,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1544407526}
---- !u!1001 &1549139848
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1112856100}
-    m_Modifications:
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 28.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1740196527120044, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 3e0b343714603194098a767289a73bcf, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &1549139849 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4641520563408922, guid: 3e0b343714603194098a767289a73bcf,
-    type: 2}
-  m_PrefabInternal: {fileID: 1549139848}
 --- !u!1 &1573907256
 GameObject:
   m_ObjectHideFlags: 0
@@ -11024,7 +10977,6 @@ GameObject:
   - component: {fileID: 2096669520}
   - component: {fileID: 2096669519}
   - component: {fileID: 2096669518}
-  - component: {fileID: 2096669525}
   m_Layer: 8
   m_Name: Chasing Enemy
   m_TagString: Chaser
@@ -11052,9 +11004,9 @@ MonoBehaviour:
   speed2: 35
   speed3: 38
   speed4: 40
-  dist1: 500
-  dist2: 1000
-  dist3: 2000
+  time1: 10
+  time2: 20
+  time3: 30
 --- !u!61 &2096669519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11266,25 +11218,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2096669525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2096669517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c78a3f47d5c1f418a29c842b390fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  target: {fileID: 0}
-  speed: 36
-  rotateSpeed: 70
-  speed1: 30
-  speed2: 32
-  speed3: 34
-  speed4: 36
-  dist1: 1000
-  dist2: 2000
-  dist3: 3000
