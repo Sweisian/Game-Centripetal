@@ -94,8 +94,6 @@ public class Missile_V2 : MonoBehaviour
 
     public void increaseSpeed()
     {
-        Debug.Log(Time.timeSinceLevelLoad);
-        Debug.Log(speed);
         if (Time.timeSinceLevelLoad < time1)
         {
             speed = speed1;
