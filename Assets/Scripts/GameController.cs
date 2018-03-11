@@ -42,6 +42,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private int numTimesToFlashAlert;
     [SerializeField] private float secondsPerAlertFlash;
 
+    private float currTime;
+
     void Awake()
     {
         ////Singleton instance of this object
@@ -58,6 +60,7 @@ public class GameController : MonoBehaviour
         //main cam is no longer destoryed on load
         //may cause problems with moving to a new scene later
         //DontDestroyOnLoad(gameObject);
+        currTime = 0;
 
         proceduralGenScript = GetComponent<ProceduralGenManager>();
         ProceduralGenManager.zoneID = 0; // reset the zone ID each time the game resets
@@ -125,6 +128,9 @@ public class GameController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+
+        //currTime = currTime
+
 		//Reset the game when the player presses R
 		if (gameover == true && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
 		{
