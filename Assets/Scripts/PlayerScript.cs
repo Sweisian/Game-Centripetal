@@ -39,7 +39,7 @@ public class PlayerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        numCharges = 1;
+        numCharges = 10;
 	    rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * appliedForce);
 		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
@@ -210,8 +210,9 @@ public class PlayerScript : MonoBehaviour {
             }
 
             //Conditions where it is a gameover other than chaser
-            if (c.gameObject.tag == "Shipwreck" || c.gameObject.tag == "Projectile")
+            if (c.gameObject.tag == "Shipwreck" || c.gameObject.tag == "Projectile" )
             {
+                Debug.Log("Doing correct things");
                 gc.BroadcastMessage("gameOver");
                 Destroy(gameObject);
             }
@@ -264,6 +265,9 @@ public class PlayerScript : MonoBehaviour {
         gc.sendAlert("Davy Jones Reappeared!", Color.grey);
         gc.playSound("davyJonesAppear");
         chaser=Instantiate(chaserPrefab, v, transform.rotation);
+        //Missile_V2 chaserScript = chaser.GetComponent<Missile_V2>();
+        //Rigidbody2D chaserRB = chaser.GetComponent<Rigidbody2D>();
+        //chaserRB.velocity.magnitude = chaserScript.speed;
     }
 
     private void updateMaxYValue()
