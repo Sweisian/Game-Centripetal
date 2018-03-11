@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b7a8196bfeb738f4eb7048f29e9bcbc5
-timeCreated: 1518984901
+guid: daecbdc5fbff2554db668c6a5d8736c0
+timeCreated: 1520796224
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Pixel-Western
+  fontName: PiratesBay
   fontNames:
-  - Pixel-Western
+  - PiratesBay
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

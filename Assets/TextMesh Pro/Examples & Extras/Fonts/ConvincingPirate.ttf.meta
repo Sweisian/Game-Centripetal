@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 278a5dde541728f4bbb4649be042f80d
-timeCreated: 1520276354
+guid: 54c6e77c16e0eed49af2e44b82f810b8
+timeCreated: 1520796223
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Treasure Map Deadhand
+  fontName: Convincing Pirate
   fontNames:
-  - Treasure Map Deadhand
+  - Convincing Pirate
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b910c717eae434d4cb432f0d3acfb79e
-timeCreated: 1520276354
+guid: 8d6217b993dafd04aac90045e1bc2cc3
+timeCreated: 1520796224
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: BlackPearl
+  fontName: Pirate Ship
   fontNames:
-  - BlackPearl
+  - Pirate Ship
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
