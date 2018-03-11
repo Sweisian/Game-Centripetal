@@ -199,7 +199,6 @@ public class PlayerScript : MonoBehaviour {
                 Destroy(gameObject);
             }
 
-
             if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle" || c.gameObject.tag == "Wall")
             {
                 m.shake();
@@ -210,21 +209,12 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
 
-
-            if (c.gameObject.tag != "Lasso"
-                && c.gameObject.tag != "Post"
-                && c.gameObject.tag != "Cattle"
-                && c.gameObject.tag != "Wall")
+            //Conditions where it is a gameover other than chaser
+            if (c.gameObject.tag == "Shipwreck" || c.gameObject.tag == "Projectile")
             {
                 gc.BroadcastMessage("gameOver");
                 Destroy(gameObject);
             }
-
-            //if (c.gameObject.tag == "DustStorm")
-            //{
-            //    Debug.Log("You were consumed by the dust storm ");
-            //    gc.BroadcastMessage ("restartGame");
-            //}
         }
     }
 

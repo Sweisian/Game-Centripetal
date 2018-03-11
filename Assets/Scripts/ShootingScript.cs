@@ -40,7 +40,8 @@ public class ShootingScript : MonoBehaviour
 
     void Update()
     {
-
+        //debug to get ray of where shooter is facing
+        Debug.DrawRay(transform.position, transform.up  * 50, Color.blue);
 
         if (shootCooldown > 0)
         {
@@ -62,12 +63,19 @@ public class ShootingScript : MonoBehaviour
     {
         if (CanAttack)
         {
-            
    
             shootCooldown = shootingRate;
             //Vector3 shotDirection = (transform.position - m_currentTarget.position).normalized;
             gc.playSound("cannonFire");
             Instantiate(shotPrefab, transform.position, transform.rotation);
+
+            //GameObject clone = Instantiate(shotPrefab, transform.position, transform.rotation);
+            ////clone.velocity = transform.TransformDirection(Vector3(0, 1, speed));
+            ////clone.transform.parent = transform;
+            //clone.transform.localPosition = transform.up * 10;
+
+            //the y is offset 10 to avoid collision with self
+            Debug.Log("Shot at Player");
         }
     }
 

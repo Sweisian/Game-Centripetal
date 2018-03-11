@@ -24,6 +24,7 @@ TagManager:
   - Post Explosion
   - Shooting
   - Shipwreck
+  - Projectile
   layers:
   - Default
   - TransparentFX

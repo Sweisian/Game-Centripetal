@@ -18,14 +18,21 @@ public class ProjectileScript : MonoBehaviour
 
     void OnBecameInvisible()
     {
+        //Debug.Log("Destroyed Basic Projectile from invisibility");
         Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D c)
     {
-        if (c.gameObject.tag != "Player")
+        if (c.gameObject.tag != "Player" && c.gameObject.tag != "Shooting")
         {
+            //Debug.Log("Destroyed Basic Projectile from collision with: " + c.gameObject.name);
             Destroy(gameObject);
+        }
+
+        if (c.gameObject.tag == "Player")
+        {
+            Destroy(c.gameObject);
         }
     }
 }
