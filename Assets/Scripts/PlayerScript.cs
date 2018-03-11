@@ -210,8 +210,9 @@ public class PlayerScript : MonoBehaviour {
             }
 
             //Conditions where it is a gameover other than chaser
-            if (c.gameObject.tag == "Shipwreck" || c.gameObject.tag == "Projectile")
+            if (c.gameObject.tag == "Shipwreck" || c.gameObject.tag == "Projectile" )
             {
+                Debug.Log("Doing correct things");
                 gc.BroadcastMessage("gameOver");
                 Destroy(gameObject);
             }
