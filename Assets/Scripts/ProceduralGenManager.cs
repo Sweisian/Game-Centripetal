@@ -126,7 +126,7 @@ public class ProceduralGenManager : MonoBehaviour {
         Zones.Add(tempZone);
         tempZone.setupZone(ZonePrefab, backgroundObj);
         Vector3 prevZoneLocation = Zones[0].location;
-        for (int x = -columnsSize; x < columnsSize; x += itemSize) //start at negative coordinate so that grid is centered
+        for (int x = -columnsSize; x < columnsSize + itemSize; x += itemSize) //start at negative coordinate so that grid is centered
         {
             for (float y = tempZone.location.y; y < tempZone.location.y + rowsSize; y += itemSize)
             {
@@ -165,7 +165,7 @@ public class ProceduralGenManager : MonoBehaviour {
         Zone newZone = new Zone(newZoneLocation, gameControllerScript.difficulty);
         newZone.setupZone(ZonePrefab, backgroundObj);
         
-        for (int x = -columnsSize; x < columnsSize; x += itemSize) //start at negative coordinate so that grid is centered
+        for (int x = -columnsSize; x < columnsSize + itemSize; x += itemSize) //start at negative coordinate so that grid is centered
         { 
                 for (float y = newZone.location.y; y < newZone.location.y + rowsSize; y += itemSize)
                 {
