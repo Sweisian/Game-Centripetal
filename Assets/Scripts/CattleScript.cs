@@ -36,7 +36,7 @@ public class CattleScript : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Cattle Crash Called");
+        Debug.Log("Cattle Crash Called: Collided with "+collision.gameObject.name);
         speed = -1*speed;
     }
 }
