@@ -24,15 +24,11 @@ public class ProjectileScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D c)
     {
-        if (c.gameObject.tag != "Player" && c.gameObject.tag != "Shooting")
+        if (c.gameObject.tag != "Shooting")
         {
             //Debug.Log("Destroyed Basic Projectile from collision with: " + c.gameObject.name);
             Destroy(gameObject);
         }
 
-        if (c.gameObject.tag == "Player")
-        {
-            Destroy(c.gameObject);
-        }
     }
 }
