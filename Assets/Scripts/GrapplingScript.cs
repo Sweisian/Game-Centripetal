@@ -29,6 +29,7 @@ public class GrapplingScript : MonoBehaviour
     private bool beingAlerted=false; //Temporary way of showing a rotation
     private float timeAttached=0f; //How long the player has been attached to the post 
     private int rotationFactor;//Either -1 or 1. Used in the FixedUpdate function to more accurately determine rotations.
+    private float jointMaxDistance;//Used to lock the lasso to never being  
 
     // Use this for initialization
     void Start()
@@ -88,7 +89,8 @@ public class GrapplingScript : MonoBehaviour
                     }
                 }
             }
-            this.joint.distance = Mathf.Min(joint.distance, Vector3.Distance(joint.connectedBody.position, transform.position));
+            if (postAttached.tag=="Cattle") joint.distance = jointMaxDistance;
+            else this.joint.distance = Mathf.Min(joint.distance, Vector3.Distance(joint.connectedBody.position, transform.position));
         }
     }
 
@@ -204,6 +206,8 @@ public class GrapplingScript : MonoBehaviour
         lassoConnected = true;
         joint.enabled = true;
         joint.connectedBody = postHit.GetComponent<Rigidbody2D>();
+        joint.distance = Vector3.Distance(transform.position, postHit.transform.position);
+        jointMaxDistance = joint.distance;
         postAttached = postHit;
         myLine.enabled = true;
         rotationLine = this.transform.position - postAttached.transform.position;
@@ -256,7 +260,7 @@ public class GrapplingScript : MonoBehaviour
         rotationFactor = -1;
         canLasso = true;
         lassoConnected = false;
-        if (postAttached.gameObject.tag == "Post" && timeAttached>=secondsAttatchedBeforePostDelete)
+        if (timeAttached>=secondsAttatchedBeforePostDelete)
         {
             Destroyable d = postAttached.GetComponent<Destroyable>();
             if (d != null)

@@ -203,6 +203,7 @@ public class PlayerScript : MonoBehaviour {
             if (c.gameObject.tag == "Post" || c.gameObject.tag == "Cattle" || c.gameObject.tag == "Wall")
             {
                 m.shake();
+                gc.playSound("hit");
                 if (grappleScript.isLassoConnected())
                 {
                     grappleScript.disconnectLasso(true);

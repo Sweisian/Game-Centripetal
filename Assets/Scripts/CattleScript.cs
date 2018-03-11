@@ -33,4 +33,10 @@ public class CattleScript : MonoBehaviour {
     {
         lassoed = false;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Cattle Crash Called");
+        speed = -1*speed;
+    }
 }

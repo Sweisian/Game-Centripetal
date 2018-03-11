@@ -101,13 +101,14 @@ public class GameController : MonoBehaviour
         sounds.Add("detatch", clips[5]);
         sounds.Add("game_over", clips[6]);
         sounds.Add("snap", clips[7]);
-        sounds.Add("smallPoints", clips[8]);
+        sounds.Add("bigPoints", clips[8]);
         sounds.Add("mediumPoints", clips[9]);
-        sounds.Add("bigPoints", clips[10]);
-        sounds.Add("powerUpEnd", clips[11]);
-        sounds.Add("powerUpUse", clips[12]);
-        sounds.Add("powerUpCollect", clips[13]);
-        sounds.Add("davyJonesAppear", clips[14]);
+        sounds.Add("smallPoints", clips[10]);
+        sounds.Add("hit", clips[11]);
+        sounds.Add("powerUpEnd", clips[12]);
+        sounds.Add("powerUpUse", clips[13]);
+        sounds.Add("powerUpCollect", clips[14]);
+        sounds.Add("davyJonesAppear", clips[15]);
     }
 
     void InitGame()
