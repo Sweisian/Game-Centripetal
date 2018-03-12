@@ -131,7 +131,10 @@ public class ProceduralGenManager : MonoBehaviour {
             for (float y = tempZone.location.y; y < tempZone.location.y + rowsSize; y += itemSize)
             {
                 // creates a position for each grid position that are itemSize distance apart
-                tempZone.gridPositions.Add(new Tile(x, y));
+                Vector3 temp = new Vector3(x, y, 0);
+                temp += Random.insideUnitSphere * Random.Range(1, 5);
+                tempZone.gridPositions.Add(new Tile(temp.x, temp.y));
+                //tempZone.gridPositions.Add(new Tile(x, y));
             }
         }
         AddZone();
@@ -169,9 +172,12 @@ public class ProceduralGenManager : MonoBehaviour {
         { 
                 for (float y = newZone.location.y; y < newZone.location.y + rowsSize; y += itemSize)
                 {
-                    // creates a position for each grid position that are itemSize distance apart
-                    newZone.gridPositions.Add(new Tile(x, y));
-                }
+                // creates a position for each grid position that are itemSize distance apart
+                    Vector3 temp = new Vector3(x, y, 0);
+                    temp += Random.insideUnitSphere * Random.Range(1, 5);
+                    newZone.gridPositions.Add(new Tile(temp.x, temp.y));
+                //newZone.gridPositions.Add(new Tile(x, y));
+            }
         }
 
         // set up new zone
