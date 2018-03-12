@@ -209,7 +209,14 @@ public class PlayerScript : MonoBehaviour {
                 else
                 {
                     Vector3 vel = rb.velocity;
-                    Destroy(c.gameObject);
+
+                    var theirDestroyable = c.collider.GetComponent<Destroyable>();
+                    if (theirDestroyable != null)
+                        theirDestroyable.DestroySelf();
+                    else
+                    {
+                        Destroy(c.gameObject);
+                    }
                     rb.velocity = vel;
                 }
             }
