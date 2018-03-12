@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707171967406292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 23.2, z: -8.72}
+  m_LocalPosition: {x: 0, y: 40.33, z: -8.72}
   m_LocalScale: {x: 395.87, y: 1, z: 1}
   m_Children:
   - {fileID: 224524656845875820}
@@ -74,7 +74,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 21078628594909954, guid: 8a8566f559065de45a3d703e10d37179, type: 2}
+  - {fileID: 21829616612541214, guid: 3e047aac3fda2794fa9f84a0b04d75ca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Previous Best!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a8566f559065de45a3d703e10d37179, type: 2}
-  m_sharedMaterial: {fileID: 21078628594909954, guid: 8a8566f559065de45a3d703e10d37179,
+  m_fontAsset: {fileID: 11400000, guid: 3e047aac3fda2794fa9f84a0b04d75ca, type: 2}
+  m_sharedMaterial: {fileID: 21829616612541214, guid: 3e047aac3fda2794fa9f84a0b04d75ca,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -249,7 +249,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: d68c7adb9754eb549b19c3f56e21870b, type: 3}
-  m_Color: {r: 0.94482756, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.94482756, g: 1, b: 0, a: 0.659}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -279,6 +279,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 6.200001}
+  m_AnchoredPosition: {x: 0, y: -5.6}
   m_SizeDelta: {x: 87.84, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
