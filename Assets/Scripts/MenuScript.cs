@@ -8,13 +8,19 @@ public class MenuScript : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Trying to play game");
-        SceneManager.LoadScene("MainScene");
+        Debug.Log("Trying to play game. Going to Swei Main");
+        SceneManager.LoadScene("Swei Main");
+        //SceneManager.LoadScene("MainScene");
     }
 
     public void goToSettings()
     {
         SceneManager.LoadScene("Settings");
+    }
+
+    public void goToInstructions()
+    {
+        SceneManager.LoadScene("Instructions");
     }
 
     public void goToMenu()
