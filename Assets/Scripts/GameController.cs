@@ -74,7 +74,8 @@ public class GameController : MonoBehaviour
         playerCollider = player.GetComponent<Collider2D>();
 
         //puts a new max distance prefab at the highest completed distance
-        Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
+        if (SceneManager.GetActiveScene().name!="Swei Main")
+            Instantiate(maxDistPrefab, new Vector3(0, PlayerPrefs.GetFloat("bestDistance"), 0), Quaternion.identity);
 
         //grabs the alert text from the UI
         alertText = GameObject.FindGameObjectWithTag("AlertText").GetComponent<TextMeshProUGUI>();
