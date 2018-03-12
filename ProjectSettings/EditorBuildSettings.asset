@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start Menu.unity
+    guid: ba32f34ec37d7fb44b5aaf8c1143b56e
+  - enabled: 1
+    path: Assets/Scenes/Instructions.unity
+    guid: f98177ea07ad2fc45bd6deb46bbf051e
+  - enabled: 1
+    path: Assets/Scenes/Swei Main.unity
+    guid: e5e6e37b005af5242ace64f546a5ba35
