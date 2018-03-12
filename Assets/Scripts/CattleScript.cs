@@ -12,7 +12,7 @@ public class CattleScript : MonoBehaviour {
 	void Start () {
         //Pick a random direction
 
-        //HAVE TO PUT THIS BACK IN!!!
+
         if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>() != null)
             myGameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
@@ -71,5 +71,6 @@ public class CattleScript : MonoBehaviour {
     {
         //Debug.Log("Cattle Crash Called: Collided with "+collision.gameObject.name);
         speed = -1*speed;
+        gameObject.GetComponent<SpriteRenderer>().flipY = !gameObject.GetComponent<SpriteRenderer>().flipY;
     }
 }
