@@ -2427,6 +2427,9 @@ MonoBehaviour:
   chaserPrefab: {fileID: 1803599175295444, guid: 314fb1dc027e07447aafccfb85777183,
     type: 2}
   maxYvalue: 0
+  powerUpImages: []
+  maxCharges: 5
+  numCharges: 2
 --- !u!212 &415104544
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11967,6 +11970,9 @@ MonoBehaviour:
   chaserPrefab: {fileID: 1803599175295444, guid: 314fb1dc027e07447aafccfb85777183,
     type: 2}
   maxYvalue: 0
+  powerUpImages: []
+  maxCharges: 5
+  numCharges: 2
 --- !u!61 &2096669519
 BoxCollider2D:
   m_ObjectHideFlags: 0

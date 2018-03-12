@@ -45,11 +45,8 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-       
-
-
 	    rb = gameObject.GetComponent<Rigidbody2D>();
-        Debug.Log("On start, rb is :" + rb);
+       // Debug.Log("On start, rb is :" + rb);
         rb.AddForce(transform.up * appliedForce);
 
 		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
@@ -99,12 +96,13 @@ public class PlayerScript : MonoBehaviour {
         //This all should be its own function
         if (!invulnerable && canPowerUp() && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(1)))
         {
+            Debug.Log("Tried to use a powerup");
             subInvulnCharge();
             currentInvulnTimeLeft = timePerInvulnerability;
             gc.playSound("powerUpUse");
             triggerInvulnerability();
         }
-        if (currentInvulnTimeLeft>0f)
+        if (currentInvulnTimeLeft > 0f)
         {
             currentInvulnTimeLeft -= Time.deltaTime;
             if (currentInvulnTimeLeft<=0f)
@@ -159,7 +157,7 @@ public class PlayerScript : MonoBehaviour {
 	/// </summary>
     void applyMoarForce()
     {
-        Debug.Log("rb is: " + rb);
+        //Debug.Log("rb is: " + rb);
 
         if (currentSpeed>maxSpeed)
         {
@@ -326,14 +324,21 @@ public class PlayerScript : MonoBehaviour {
 
     public void addInvulnCharge()
     {
-        numCharges++;
-        powerUpImages[numCharges - 1].enabled = true; //subtracting one to get array index
+        if (numCharges < maxCharges)
+        {
+            numCharges++;
+            powerUpImages[numCharges - 1].enabled = true; //subtracting one to get array index
+        }
     }
 
     public void subInvulnCharge()
     {
-        powerUpImages[numCharges - 1].enabled = false; //subtracting one to get array index
-        numCharges--;
+        if (numCharges > 0)
+        {
+            powerUpImages[numCharges - 1].enabled = false; //subtracting one to get array index
+            numCharges--;
+        }
+
     }
 
     public bool canPowerUp()

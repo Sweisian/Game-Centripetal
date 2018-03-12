@@ -20,7 +20,6 @@ public class LassoScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         lassoLine = GameObject.FindGameObjectWithTag("Lasso Line").GetComponent<LineRenderer>();
-        lassoLine.enabled = true;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
     }
@@ -41,6 +40,7 @@ public class LassoScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        lassoLine.enabled = true;
         Vector2 dir = direction;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 270f;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
