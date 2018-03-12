@@ -11,9 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Instructions.unity
     guid: f98177ea07ad2fc45bd6deb46bbf051e
-  - enabled: 0
-    path: Assets/Scenes/Emily Main.unity
-    guid: 6294993b0ec08824d920c464ce9242e3
   - enabled: 1
     path: Assets/Scenes/Swei Main.unity
     guid: e5e6e37b005af5242ace64f546a5ba35

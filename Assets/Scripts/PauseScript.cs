@@ -45,6 +45,7 @@ public class PauseScript : MonoBehaviour {
     {
         Time.timeScale = 1f;
         Debug.Log("Loading Menu...");
+        isPaused = false;
         SceneManager.LoadScene("Start Menu"); //get rid of this hardcode
     }
 

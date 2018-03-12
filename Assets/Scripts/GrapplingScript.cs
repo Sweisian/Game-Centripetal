@@ -78,6 +78,7 @@ public class GrapplingScript : MonoBehaviour
             isFlashing = true;
             StartCoroutine(flash());
         }
+       
     }
 
     void FixedUpdate()

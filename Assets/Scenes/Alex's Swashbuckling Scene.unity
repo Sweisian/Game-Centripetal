@@ -2135,7 +2135,7 @@ MonoBehaviour:
   timePerInvulnerability: 3
   slowDownFraction: 0.8
   davyJonesRespawnTime: 10
-  closeCallDistance: 25
+  closeCallDistance: 15
   chaserPrefab: {fileID: 1803599175295444, guid: 314fb1dc027e07447aafccfb85777183,
     type: 2}
   maxYvalue: 0
@@ -2146,7 +2146,7 @@ MonoBehaviour:
   - {fileID: 579825946}
   - {fileID: 1512170526}
   maxCharges: 5
-  numCharges: 2
+  numCharges: 4
 --- !u!212 &415104544
 SpriteRenderer:
   m_ObjectHideFlags: 0
