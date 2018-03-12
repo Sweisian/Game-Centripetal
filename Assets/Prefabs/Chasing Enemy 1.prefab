@@ -236,15 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   target: {fileID: 0}
-  speed: 38
   rotateSpeed: 70
-  speed1: 33
-  speed2: 35
-  speed3: 38
-  speed4: 40
-  dist1: 500
-  dist2: 1000
-  dist3: 2000
 --- !u!198 &198276049940370250
 ParticleSystem:
   m_ObjectHideFlags: 1

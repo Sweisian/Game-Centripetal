@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Start Menu.unity
+    path: Assets/Scenes/Old Start Menu.unity
     guid: f98177ea07ad2fc45bd6deb46bbf051e
   - enabled: 0
     path: 
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: 3ab511ef8428093449ac05ea51541ce6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Alex Pre-Demo Day.unity
     guid: 2c7d22e2949b4488cb060db3452c08dc
+  - enabled: 1
+    path: Assets/Scenes/Emily Almost Done!.unity
+    guid: 285e8fb65d35a8a419bbdfedc6904d82

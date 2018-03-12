@@ -15,10 +15,10 @@ public class Missile_V2 : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private float speed1 = 33f;
-    private float speed2 = 35f;
-    private float speed3 = 38f;
-    private float speed4 = 40f;
+    private float speed1 = 31f;
+    private float speed2 = 33f;
+    private float speed3 = 35f;
+    private float speed4 = 38f;
     //public float maxSpeed = 40f;
 
     private float time1 = 20;
