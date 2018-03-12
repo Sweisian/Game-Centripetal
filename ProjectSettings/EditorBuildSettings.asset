@@ -4,35 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-<<<<<<< HEAD
-  - enabled: 0
-    path: Assets/Scenes/Old Start Menu.unity
-=======
-  - enabled: 1
-    path: Assets/Scenes/Instructions.unity
->>>>>>> 0f9d4143cea974eda70070405456931c303b02c2
-    guid: f98177ea07ad2fc45bd6deb46bbf051e
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/Old scenes/Old MainScene.unity
-    guid: 271e7080118530d49aa4e37462d168a8
-  - enabled: 0
-    path: Assets/Scenes/Old scenes/MainScene.unity
-    guid: 3ab511ef8428093449ac05ea51541ce6
-  - enabled: 0
-    path: Assets/Scenes/Alex Pre-Demo Day.unity
-    guid: 2c7d22e2949b4488cb060db3452c08dc
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/Emily Almost Done!.unity
-    guid: 285e8fb65d35a8a419bbdfedc6904d82
-=======
-    path: Assets/Scenes/Start Menu.unity
-    guid: ba32f34ec37d7fb44b5aaf8c1143b56e
-  - enabled: 1
-    path: Assets/Scenes/Swei Main.unity
-    guid: e5e6e37b005af5242ace64f546a5ba35
->>>>>>> 0f9d4143cea974eda70070405456931c303b02c2
+  m_Scenes: []
