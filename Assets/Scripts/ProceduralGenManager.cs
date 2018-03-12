@@ -68,7 +68,7 @@ public class ProceduralGenManager : MonoBehaviour {
         public void setCollider()
         {
             collider = zoneObject.GetComponent<BoxCollider2D>();
-            collider.size = size;
+            //collider.size = size;
             collider.offset = new Vector2(0, rowsSize / 2);
             collider.isTrigger = true;
         }
