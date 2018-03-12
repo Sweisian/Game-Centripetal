@@ -10,7 +10,7 @@ public class CollisionParticles : MonoBehaviour {
     {
        
 
-        if (collision.collider.tag == "Player")
+        if (collision.collider.tag != "Chaser")
         {
             Debug.Log("Trying to create a collsion prefab");
 
