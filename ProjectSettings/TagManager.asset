@@ -25,6 +25,7 @@ TagManager:
   - Shooting
   - Shipwreck
   - Projectile
+  - PowerUp
   layers:
   - Default
   - TransparentFX

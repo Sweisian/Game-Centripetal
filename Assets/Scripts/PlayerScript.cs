@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] public float currentSpeed;
     [SerializeField] public float maxSpeed = 35f;
     [SerializeField] public float speedIncreasePerSecond;
-    [SerializeField] public float timePerInvulnerability = 5f;
+    [SerializeField] public float timePerInvulnerability = 7f;
     [SerializeField] public float slowDownFraction;
     [SerializeField] public float davyJonesRespawnTime;
     [SerializeField] public float closeCallDistance;
@@ -25,9 +25,7 @@ public class PlayerScript : MonoBehaviour {
     private bool invulnerable=false;
     private bool invulnerableStarter = false; //A hack to have the co-routine run correctly
     private float currentInvulnTimeLeft = 0f;
-    private Image invulnBar;
-    private Text invulnText;
-    private int numCharges;
+
     private GameObject chaser;
     private bool waitingOnACloseCall = false; //Another hack for close call detection
 
@@ -37,16 +35,36 @@ public class PlayerScript : MonoBehaviour {
     private Rigidbody2D rb;
     //private Camera playerCamera = Camera.main;
 
-	// Use this for initialization
-	void Start () {
-        numCharges = 10;
+    //Power up UI stuff. This should go in game controller but w/e
+    [SerializeField] private Image[] powerUpImages ;
+    [SerializeField] private int maxCharges = 5;
+    [SerializeField] private int numCharges = 2;
+    //private Image invulnBar;
+    //private Text invulnText;
+
+    // Use this for initialization
+    void Start () {
+
+        //handles initialization of power up bar
+        for (int i = 0; i < maxCharges; i++)
+        {
+            powerUpImages[i].enabled = false;
+        }
+        for (int j = 0; j < numCharges; j++)
+        {
+            powerUpImages[j].enabled = true;
+        }
+
+
 	    rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * appliedForce);
 		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
         m = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamScript>();
         s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
-        invulnBar = GameObject.FindGameObjectWithTag("InvulnBar").GetComponent<Image>();
-        invulnText = GameObject.FindGameObjectWithTag("InvulnText").GetComponent<Text>();
+
+        //invulnBar = GameObject.FindGameObjectWithTag("InvulnBar").GetComponent<Image>();
+        //invulnText = GameObject.FindGameObjectWithTag("InvulnText").GetComponent<Text>();
+
         grappleScript = this.GetComponent<GrapplingScript>();
         chaser = GameObject.FindGameObjectWithTag("Chaser");
         StartCoroutine(speedUp());
@@ -63,17 +81,21 @@ public class PlayerScript : MonoBehaviour {
 		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg-90f;
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        invulnBar.fillAmount = (currentInvulnTimeLeft / timePerInvulnerability);
+        //invulnBar.fillAmount = (currentInvulnTimeLeft / timePerInvulnerability);
 
         //updates max y value of player
 	    updateMaxYValue();
         StartCoroutine(invulnerabilityHandler());
-        invulnText.text = ": " + numCharges;
 
-        if (!invulnerable && numCharges > 0 && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(1)))
+        //alters the  invulnText
+        //invulnText.text = ": " + numCharges;
+
+
+        //This all should be its own function
+        if (!invulnerable && canPowerUp() && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(1)))
         {
+            subInvulnCharge();
             currentInvulnTimeLeft = timePerInvulnerability;
-            numCharges--;
             gc.playSound("powerUpUse");
             triggerInvulnerability();
         }
@@ -237,9 +259,9 @@ public class PlayerScript : MonoBehaviour {
                 gc.playSound("coinCollect");
                 GameObject.Destroy(c.gameObject);
             }
-            else if (c.gameObject.tag == "Star")
+            else if (c.gameObject.tag == "PowerUp")
             {
-                numCharges++;
+                addInvulnCharge();
                 gc.playSound("powerUpCollect");
                 GameObject.Destroy(c.gameObject);
             }
@@ -297,6 +319,23 @@ public class PlayerScript : MonoBehaviour {
 
     public void addInvulnCharge()
     {
-        
+        numCharges++;
+        powerUpImages[numCharges - 1].enabled = true; //subtracting one to get array index
+    }
+
+    public void subInvulnCharge()
+    {
+        powerUpImages[numCharges - 1].enabled = false; //subtracting one to get array index
+        numCharges--;
+    }
+
+    public bool canPowerUp()
+    {
+        if (numCharges > 0)
+            return true;
+        else
+        {
+            return false;
+        }
     }
 }

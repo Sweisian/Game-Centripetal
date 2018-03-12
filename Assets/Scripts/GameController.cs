@@ -42,6 +42,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private int numTimesToFlashAlert;
     [SerializeField] private float secondsPerAlertFlash;
 
+
+
     private float currTime;
 
     void Awake()
