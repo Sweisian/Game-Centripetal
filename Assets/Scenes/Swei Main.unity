@@ -2135,7 +2135,7 @@ MonoBehaviour:
   timePerInvulnerability: 3
   slowDownFraction: 0.8
   davyJonesRespawnTime: 10
-  closeCallDistance: 25
+  closeCallDistance: 15
   chaserPrefab: {fileID: 1803599175295444, guid: 314fb1dc027e07447aafccfb85777183,
     type: 2}
   maxYvalue: 0
@@ -6948,7 +6948,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 85.38
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6971,7 +6971,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2010341348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.000017166138, y: 27.321604, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 651010748}
