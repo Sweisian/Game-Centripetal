@@ -45,19 +45,13 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        //handles initialization of power up bar
-        for (int i = 0; i < maxCharges; i++)
-        {
-            powerUpImages[i].enabled = false;
-        }
-        for (int j = 0; j < numCharges; j++)
-        {
-            powerUpImages[j].enabled = true;
-        }
+       
 
 
-	    rb = GetComponent<Rigidbody2D>();
+	    rb = gameObject.GetComponent<Rigidbody2D>();
+        Debug.Log("On start, rb is :" + rb);
         rb.AddForce(transform.up * appliedForce);
+
 		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
         m = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamScript>();
         s = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoringScript>();
@@ -68,6 +62,17 @@ public class PlayerScript : MonoBehaviour {
         grappleScript = this.GetComponent<GrapplingScript>();
         chaser = GameObject.FindGameObjectWithTag("Chaser");
         StartCoroutine(speedUp());
+
+        //handles initialization of power up bar
+        //Has to be down here cause its throwing null refernce errors
+        for (int i = 0; i < maxCharges; i++)
+        {
+            powerUpImages[i].enabled = false;
+        }
+        for (int j = 0; j < numCharges; j++)
+        {
+            powerUpImages[j].enabled = true;
+        }
 
     }
 	
@@ -154,6 +159,8 @@ public class PlayerScript : MonoBehaviour {
 	/// </summary>
     void applyMoarForce()
     {
+        Debug.Log("rb is: " + rb);
+
         if (currentSpeed>maxSpeed)
         {
             currentSpeed = maxSpeed;
