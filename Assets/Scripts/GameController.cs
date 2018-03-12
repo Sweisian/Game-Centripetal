@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
     //alert text here
     private TextMeshProUGUI alertText;
     public bool gameover = false;
-    public GameObject gameoverText;
+    public GameObject gameOverObject;
     [SerializeField] private int numTimesToFlashAlert;
     [SerializeField] private float secondsPerAlertFlash;
 
@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour
     */
     void Start()
     {
-        gameoverText.SetActive(false);
+        gameOverObject.SetActive(false);
         sounds = new Dictionary<string, AudioSource>();
         AudioSource[] clips = GetComponents<AudioSource>();
         sounds.Add("cannonFire", clips[1]);
@@ -171,7 +171,10 @@ public class GameController : MonoBehaviour
     {
         //Debug.Log("Game over state is true");
             gameover = true;
-            gameoverText.SetActive(true);
+            //gets rid of any lingering alert test
+            sendAlert("Swei is the best", Color.clear);
+
+            gameOverObject.SetActive(true);
             playSound("game_over");
 
 

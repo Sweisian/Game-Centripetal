@@ -210,6 +210,12 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
 
+            if (c.gameObject.tag == "Dingy")
+            {
+                gc.sendAlert("Slowed Down!", Color.red);
+                currentSpeed = this.currentSpeed * slowDownFraction;
+            }
+
             //Conditions where it is a gameover other than chaser
             if (c.gameObject.tag == "Shipwreck" || c.gameObject.tag == "Projectile" )
             {
@@ -237,11 +243,7 @@ public class PlayerScript : MonoBehaviour {
                 gc.playSound("powerUpCollect");
                 GameObject.Destroy(c.gameObject);
             }
-            else if (c.gameObject.tag == "Dingy")
-            {
-                gc.sendAlert("Slowed Down!", Color.red);
-                currentSpeed = this.currentSpeed * slowDownFraction;
-            }
+            
             else if (invulnerable && c.gameObject.tag == "Chaser")
             {
                 Destroy(c.gameObject);
